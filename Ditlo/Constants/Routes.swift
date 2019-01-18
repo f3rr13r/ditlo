@@ -19,3 +19,6 @@ let _TIMESTAMP = "timeStamp"
 
 // search fields -- friends
 let _FRIENDS = "friends"
+
+// jobs
+let _JOBS = "jobs"

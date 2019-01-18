@@ -110,6 +110,63 @@ class UserService {
         }
     }
     
+    func updateUserData<T>(withName name: String, andValue value: T, completion: @escaping (Bool) -> ()) {
+        guard let userId = UserDefaults.standard.object(forKey: "userId") as? String else { completion(false); return }
+        
+        if name == "profileImageUrl" {
+            storeProfileImageInStorageBucket(withUserId: userId, andProfileImage: value as! UIImage) { (storedSuccessfully, imageLocationString) in
+                if storedSuccessfully {
+                    print("image Location string stored successfully")
+                    self.db.collection(_USERS).document(userId).setData([
+                        name: imageLocationString!
+                        ], merge: true, completion: { (error) in
+                            if error != nil {
+                                completion(false)
+                            } else {
+                                completion(true)
+                            }
+                    })
+                } else {
+                    // put a default in the store and route to that
+                    print("Couldn't save image to storage")
+                }
+            }
+        } else {
+            db.collection(_USERS).document(userId).setData([
+                name: value
+            ], merge: true) { (error) in
+                if error != nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    
+    func storeProfileImageInStorageBucket(withUserId userId: String, andProfileImage image: UIImage, completion: @escaping (_ storageSuccessful: Bool, _ storageLocationUrl: String?) -> ()) {
+        guard let imageData = image.pngData() else { print("Failed to get representation"); completion(false, nil); return }
+        let profileImageStorageRef = storage.reference().child("profile-images/").child("\(userId)_profileImage")
+        profileImageStorageRef.putData(imageData, metadata: nil) { (metadata, error) in
+            if error != nil {
+                print("1. \(String(describing: error?.localizedDescription))")
+                completion(false, nil)
+            } else {
+                profileImageStorageRef.downloadURL(completion: { (locationUrl, error) in
+                    if error != nil {
+                        print("2. \(String(describing: error?.localizedDescription))")
+                        completion(false, nil)
+                    } else {
+                        completion(true, locationUrl?.absoluteString)
+                    }
+                })
+                
+            }
+        }
+    }
+    
+    
     func clearCurrentUser() {
         self.currentUser = ProfileUser()
     }

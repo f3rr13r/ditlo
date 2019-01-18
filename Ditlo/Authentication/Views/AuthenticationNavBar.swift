@@ -11,10 +11,13 @@ import UIKit
 protocol AuthentationNavBarDelegate {
     func redRoundedButtonPressed()
     func backButtonPressed()
+    func greyBorderRoundedButtonPressed()
 }
 
 extension AuthentationNavBarDelegate {
+    func redRoundedButtonPressed() { }
     func backButtonPressed() { }
+    func greyBorderRoundedButtonPressed() { }
 }
 
 class AuthenticationNavBar: BaseView {
@@ -30,9 +33,36 @@ class AuthenticationNavBar: BaseView {
         }
     }
     
+    var needsGreyBorderButton: Bool? = false {
+        didSet {
+            if let needsGreyBorderButton = self.needsGreyBorderButton {
+                greyBorderRoundedButton.isHidden = !needsGreyBorderButton
+            }
+        }
+    }
+    
+    var greyBorderRoundedButtonText: String? = "" {
+        didSet {
+            if let greyBorderRoundedButtonText = self.greyBorderRoundedButtonText {
+                let updatedGreyBorderRoundedButtonWidth: CGFloat = greyBorderRoundedButtonText.widthOfString(usingFont: redButtonFont) + 32.0
+                greyBorderRoundedButtonWidthConstraint?.constant = updatedGreyBorderRoundedButtonWidth
+                greyBorderRoundedButton.buttonText = greyBorderRoundedButtonText
+                self.layoutIfNeeded()
+            }
+        }
+    }
+    
+    var needsRedRoundedButton: Bool? = true {
+        didSet {
+            if let needsRedRoundedButton = self.needsRedRoundedButton {
+                redRoundedButton.isHidden = !needsRedRoundedButton
+            }
+        }
+    }
+    
     var redRoundedButtonText: String? = "" {
         didSet {
-            if let redRoundedButtonText: String = self.redRoundedButtonText {
+            if let redRoundedButtonText = self.redRoundedButtonText {
                 let updatedRedRoundedButtonWidth: CGFloat = redRoundedButtonText.widthOfString(usingFont: redButtonFont) + 32.0
                 redRoundedButtonWidthConstraint?.constant = updatedRedRoundedButtonWidth
                 redRoundedButton.buttonText = redRoundedButtonText
@@ -79,6 +109,9 @@ class AuthenticationNavBar: BaseView {
     let redRoundedButton = RedRoundedButton()
     var redRoundedButtonWidthConstraint: NSLayoutConstraint?
     
+    let greyBorderRoundedButton = GreyBorderRoundedButton()
+    var greyBorderRoundedButtonWidthConstraint: NSLayoutConstraint?
+    
     let bottomBorderView = PaddedBorderView()
     
     // delegate
@@ -96,6 +129,7 @@ class AuthenticationNavBar: BaseView {
     
     func setupChildDelegates() {
         redRoundedButton.delegate = self
+        greyBorderRoundedButton.delegate = self
     }
 
     func anchorSubviews() {
@@ -117,6 +151,13 @@ class AuthenticationNavBar: BaseView {
         redRoundedButtonWidthConstraint = NSLayoutConstraint(item: redRoundedButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0.1)
         self.addConstraint(redRoundedButtonWidthConstraint!)
         
+        // grey border rounded button
+        greyBorderRoundedButton.isHidden = true
+        self.addSubview(greyBorderRoundedButton)
+        greyBorderRoundedButton.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: ditloLogoImageView.centerYAnchor, widthAnchor: nil, heightAnchor: 28.0, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
+        greyBorderRoundedButtonWidthConstraint = NSLayoutConstraint(item: greyBorderRoundedButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0.1)
+        self.addConstraint(greyBorderRoundedButtonWidthConstraint!)
+        
         // logo label
         self.addSubview(ditloLogoLabel)
         ditloLogoLabel.anchor(withTopAnchor: nil, leadingAnchor: ditloLogoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: ditloLogoImageView.centerYAnchor, widthAnchor: 82.0, heightAnchor: 20.0, padding: .init(top: 0.0, left: 6.0, bottom: 0.0, right: 0.0))
@@ -128,13 +169,17 @@ class AuthenticationNavBar: BaseView {
 }
 
 // delegate and selector methods
-extension AuthenticationNavBar: RedRoundedButtonDelegate {
-    func redRoundedButtonTapped() {
+extension AuthenticationNavBar: RedRoundedButtonDelegate, GreyBorderRoundedButtonDelegate {
+    func redRoundedButtonTapped(withButtonType buttonType: RedRoundedButtonType?) {
         delegate?.redRoundedButtonPressed()
     }
     
     @objc func backButtonPressed() {
         print("Back button pressed")
         delegate?.backButtonPressed()
+    }
+    
+    func greyBorderRoundedButtonTapped() {
+        delegate?.greyBorderRoundedButtonPressed()
     }
 }

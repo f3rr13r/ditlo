@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Ditlo requires access to your device camera for you to take your profile picture</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Ditlo requires access to your photo library for you to select a profile picture</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Ditlo requires access to your device microphone to attach sound to your videos</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

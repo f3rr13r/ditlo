@@ -8,13 +8,22 @@
 
 import UIKit
 
+enum RedRoundedButtonType {
+    case unspecified
+    case takePhoto
+    case goToGallery
+    case saveProfilePicture
+}
+
 protocol RedRoundedButtonDelegate {
-    func redRoundedButtonTapped()
+    func redRoundedButtonTapped(withButtonType buttonType: RedRoundedButtonType?)
 }
 
 class RedRoundedButton: BaseView {
 
     // injector variables
+    var buttonType: RedRoundedButtonType?
+    
     var buttonText: String? = "LOADING..." {
         didSet {
             if let buttonText = buttonText {
@@ -66,8 +75,6 @@ class RedRoundedButton: BaseView {
     }
     
     @objc func handleTap() {
-        if let buttonText = self.buttonText {
-            delegate?.redRoundedButtonTapped()
-        }
+        delegate?.redRoundedButtonTapped(withButtonType: self.buttonType)
     }
 }

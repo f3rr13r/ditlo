@@ -44,6 +44,7 @@ class CustomModalOverlay: BaseView {
         invalidateIntrinsicContentSize()
         backgroundColor = ditloOffBlack.withAlphaComponent(0.75)
         alpha = 0.0
+        isUserInteractionEnabled = false
         
         anchorChildViews()
     }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+// anchoring
 extension UIView {
     
     /*-- GROUPED CONSTRAINT DECLARATION -- */
@@ -128,6 +130,24 @@ extension UIView {
     // Match size to exact size of superview
     func fillSuperview() {
         anchor(withTopAnchor: superview?.topAnchor, leadingAnchor: superview?.leadingAnchor, bottomAnchor: superview?.bottomAnchor, trailingAnchor: superview?.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+    }
+    
+}
+
+
+// drop shadow
+extension UIView {
+    
+    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize = CGSize(width: -1, height: 1), radius: CGFloat = 1, scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offSet
+        layer.shadowRadius = radius
+        
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
     
 }

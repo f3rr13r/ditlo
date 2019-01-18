@@ -149,10 +149,21 @@ class SignUpVC: UIViewController {
 // auth nav bar delegate methods
 extension SignUpVC: AuthentationNavBarDelegate {
     func redRoundedButtonPressed() {
-        self.navigationController?.showCustomOverlayModal(withMessage: "CREATING DITLO PROFILE")
+//        let selectProfilePictureVC = SelectProfilePictureVC()
+//        self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        self.view.isUserInteractionEnabled = false
+        self.navigationController?.showCustomOverlayModal(withMessage: "CREATING DITLO PROFILE")
+        AuthService.instance.signUpUser(with: self.signUpInfo) { (signUpResponse) in
             self.navigationController?.hideCustomOverlayModal()
+            self.view.isUserInteractionEnabled = true
+            if signUpResponse.success {
+                let selectProfilePictureVC = SelectProfilePictureVC()
+                self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
+            } else {
+                let errorMessageConfig = CustomErrorMessageConfig(title: "SIGN UP ERROR", body: signUpResponse.errorMessage!)
+                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
+            }
         }
     }
 }
@@ -170,7 +181,6 @@ extension SignUpVC: CustomInputViewDelegate {
             case .password:
                 self.signUpInfo.password = inputValue
                 break
-            default: return
         }
         
         updateSignUpButtonDisabledState(with: self.signUpInfo)

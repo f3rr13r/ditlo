@@ -37,6 +37,17 @@
 		4AD034A921F1E8CB00FDA967 /* UserServiceHelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034A821F1E8CB00FDA967 /* UserServiceHelperMethods.swift */; };
 		4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034AF21F1E9BA00FDA967 /* UserModels.swift */; };
 		4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034B121F1EA4100FDA967 /* Routes.swift */; };
+		4AD034B421F1F05F00FDA967 /* CustomErrorMessageModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034B321F1F05F00FDA967 /* CustomErrorMessageModal.swift */; };
+		4AD034B621F2041100FDA967 /* SelectProfilePictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034B521F2041100FDA967 /* SelectProfilePictureVC.swift */; };
+		4AD034B921F205AF00FDA967 /* MainAppNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034B821F205AF00FDA967 /* MainAppNavigationVC.swift */; };
+		4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034BF21F207C700FDA967 /* HomeVC.swift */; };
+		4AD034C321F2082000FDA967 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034C221F2082000FDA967 /* SearchVC.swift */; };
+		4AD034C621F2084F00FDA967 /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034C521F2084F00FDA967 /* CategoriesVC.swift */; };
+		4AD034C921F208B300FDA967 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034C821F208B300FDA967 /* CameraVC.swift */; };
+		4AD034CB21F2258000FDA967 /* SelectJobPositionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034CA21F2258000FDA967 /* SelectJobPositionVC.swift */; };
+		4AD034CD21F226B100FDA967 /* CustomInfoWindowModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034CC21F226B100FDA967 /* CustomInfoWindowModal.swift */; };
+		4AD034D121F251DB00FDA967 /* JobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034D021F251DB00FDA967 /* JobService.swift */; };
+		4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034D321F2523D00FDA967 /* JobModels.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +86,17 @@
 		4AD034A821F1E8CB00FDA967 /* UserServiceHelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceHelperMethods.swift; sourceTree = "<group>"; };
 		4AD034AF21F1E9BA00FDA967 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
 		4AD034B121F1EA4100FDA967 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		4AD034B321F1F05F00FDA967 /* CustomErrorMessageModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorMessageModal.swift; sourceTree = "<group>"; };
+		4AD034B521F2041100FDA967 /* SelectProfilePictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfilePictureVC.swift; sourceTree = "<group>"; };
+		4AD034B821F205AF00FDA967 /* MainAppNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppNavigationVC.swift; sourceTree = "<group>"; };
+		4AD034BF21F207C700FDA967 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		4AD034C221F2082000FDA967 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		4AD034C521F2084F00FDA967 /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesVC.swift; sourceTree = "<group>"; };
+		4AD034C821F208B300FDA967 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
+		4AD034CA21F2258000FDA967 /* SelectJobPositionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectJobPositionVC.swift; sourceTree = "<group>"; };
+		4AD034CC21F226B100FDA967 /* CustomInfoWindowModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoWindowModal.swift; sourceTree = "<group>"; };
+		4AD034D021F251DB00FDA967 /* JobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobService.swift; sourceTree = "<group>"; };
+		4AD034D321F2523D00FDA967 /* JobModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModels.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +133,7 @@
 		4AD0343321F0A43300FDA967 /* Ditlo */ = {
 			isa = PBXGroup;
 			children = (
+				4AD034B721F2056100FDA967 /* MainApp */,
 				4AD034A321F1E88100FDA967 /* Shared */,
 				4AD0349B21F1E3F700FDA967 /* Authentication */,
 				4AD0345C21F0AC1300FDA967 /* Constants */,
@@ -161,7 +184,6 @@
 		4AD0344A21F0A5E700FDA967 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4AD0349521F150A300FDA967 /* Modal */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -199,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				4AD0348921F0FF6700FDA967 /* SignUpVC.swift */,
+				4AD034B521F2041100FDA967 /* SelectProfilePictureVC.swift */,
+				4AD034CA21F2258000FDA967 /* SelectJobPositionVC.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -259,12 +283,14 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		4AD0349521F150A300FDA967 /* Modal */ = {
+		4AD0349521F150A300FDA967 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
 				4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */,
+				4AD034B321F1F05F00FDA967 /* CustomErrorMessageModal.swift */,
+				4AD034CC21F226B100FDA967 /* CustomInfoWindowModal.swift */,
 			);
-			path = Modal;
+			path = Modals;
 			sourceTree = "<group>";
 		};
 		4AD0349B21F1E3F700FDA967 /* Authentication */ = {
@@ -323,6 +349,8 @@
 		4AD034A321F1E88100FDA967 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4AD034CE21F2519F00FDA967 /* Jobs */,
+				4AD0349521F150A300FDA967 /* Modals */,
 				4AD034AB21F1E95E00FDA967 /* User */,
 				4AD034AA21F1E94400FDA967 /* Models */,
 			);
@@ -376,6 +404,107 @@
 				4AD034A821F1E8CB00FDA967 /* UserServiceHelperMethods.swift */,
 			);
 			path = HelperMethods;
+			sourceTree = "<group>";
+		};
+		4AD034B721F2056100FDA967 /* MainApp */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034BD21F2078D00FDA967 /* Camera */,
+				4AD034BC21F2078500FDA967 /* Categories */,
+				4AD034BB21F2076A00FDA967 /* Search */,
+				4AD034BA21F2076000FDA967 /* Home */,
+				4AD034B821F205AF00FDA967 /* MainAppNavigationVC.swift */,
+			);
+			path = MainApp;
+			sourceTree = "<group>";
+		};
+		4AD034BA21F2076000FDA967 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034BE21F207A800FDA967 /* Controllers */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4AD034BB21F2076A00FDA967 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034C121F2081200FDA967 /* Controllers */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		4AD034BC21F2078500FDA967 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034C421F2084000FDA967 /* Controllers */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		4AD034BD21F2078D00FDA967 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034C721F2089C00FDA967 /* Controllers */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		4AD034BE21F207A800FDA967 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034BF21F207C700FDA967 /* HomeVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD034C121F2081200FDA967 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034C221F2082000FDA967 /* SearchVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD034C421F2084000FDA967 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034C521F2084F00FDA967 /* CategoriesVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD034C721F2089C00FDA967 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034C821F208B300FDA967 /* CameraVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD034CE21F2519F00FDA967 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034D221F2522C00FDA967 /* Models */,
+				4AD034CF21F251B700FDA967 /* Services */,
+			);
+			path = Jobs;
+			sourceTree = "<group>";
+		};
+		4AD034CF21F251B700FDA967 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034D021F251DB00FDA967 /* JobService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4AD034D221F2522C00FDA967 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034D321F2523D00FDA967 /* JobModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A86E6858FE17E57995713E5A /* Pods */ = {
@@ -541,10 +670,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AD0346F21F0B30900FDA967 /* UIView.swift in Sources */,
+				4AD034B621F2041100FDA967 /* SelectProfilePictureVC.swift in Sources */,
 				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
 				4AD0347B21F0C3BC00FDA967 /* RedRoundedButton.swift in Sources */,
+				4AD034CB21F2258000FDA967 /* SelectJobPositionVC.swift in Sources */,
+				4AD034B421F1F05F00FDA967 /* CustomErrorMessageModal.swift in Sources */,
 				4AD0349021F1416800FDA967 /* AuthenticationModels.swift in Sources */,
+				4AD034C621F2084F00FDA967 /* CategoriesVC.swift in Sources */,
 				4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */,
+				4AD034B921F205AF00FDA967 /* MainAppNavigationVC.swift in Sources */,
+				4AD034D121F251DB00FDA967 /* JobService.swift in Sources */,
 				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
 				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
@@ -552,17 +687,22 @@
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
 				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
+				4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */,
 				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */,
 				4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */,
 				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
+				4AD034C921F208B300FDA967 /* CameraVC.swift in Sources */,
 				4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */,
 				4AD034A921F1E8CB00FDA967 /* UserServiceHelperMethods.swift in Sources */,
+				4AD034C321F2082000FDA967 /* SearchVC.swift in Sources */,
 				4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */,
 				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,
+				4AD034CD21F226B100FDA967 /* CustomInfoWindowModal.swift in Sources */,
 				4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */,
+				4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */,
 				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
 				4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */,
 				4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */,

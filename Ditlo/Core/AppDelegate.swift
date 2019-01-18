@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,8 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var navigationController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        configureFirebaseApp()
         setupInitialEntryVC()
         return true
+    }
+    
+    func configureFirebaseApp() {
+        FirebaseApp.configure()
+        
+        // cloud firestore
+        let db = Firestore.firestore()
+        print(db) // silence warning
     }
     
     func setupInitialEntryVC() {
@@ -27,17 +37,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let logInVC = LogInVC()
         navigationController = UINavigationController(rootViewController: logInVC)
         
-        // universal custom overlay
-        let customModalOverlay = CustomModalOverlay()
-        navigationController?.view.addSubview(customModalOverlay)
-        customModalOverlay.fillSuperview()
-        
-        
         navigationController?.isNavigationBarHidden = true
         
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
+        
+        // extension method
+        navigationController?.addCustomModalViewsToNavigationController()
     }
+
 
     
     

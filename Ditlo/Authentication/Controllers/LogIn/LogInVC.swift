@@ -132,10 +132,25 @@ class LogInVC: UIViewController {
 // auth nav bar delegate methods
 extension LogInVC: AuthentationNavBarDelegate {
     func redRoundedButtonPressed() {
+        self.view.isUserInteractionEnabled = false
         self.navigationController?.showCustomOverlayModal(withMessage: "LOGGING IN TO DITLO")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        AuthService.instance.logInUser(withLoginInfo: self.loginInfo) { (logInResponse) in
             self.navigationController?.hideCustomOverlayModal()
+            if logInResponse.success {
+                let mainAppNavigationVC = MainAppNavigationVC()
+                let transition = CATransition()
+                transition.duration = 0.3
+                transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+                transition.type = CATransitionType.push
+                transition.subtype = CATransitionSubtype.fromTop
+                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+                self.navigationController?.pushViewController(mainAppNavigationVC, animated: false)
+                self.view.isUserInteractionEnabled = true
+            } else {
+                let errorMessageConfig = CustomErrorMessageConfig(title: "LOG IN ERROR", body: logInResponse.errorMessage!)
+                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
+                self.view.isUserInteractionEnabled = true
+            }
         }
     }
 }
