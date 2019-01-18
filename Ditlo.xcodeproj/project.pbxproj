@@ -8,20 +8,64 @@
 
 /* Begin PBXBuildFile section */
 		4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0343421F0A43300FDA967 /* AppDelegate.swift */; };
-		4AD0343721F0A43300FDA967 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0343621F0A43300FDA967 /* ViewController.swift */; };
-		4AD0343A21F0A43300FDA967 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343821F0A43300FDA967 /* Main.storyboard */; };
 		4AD0343C21F0A43500FDA967 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343B21F0A43500FDA967 /* Assets.xcassets */; };
 		4AD0343F21F0A43500FDA967 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343D21F0A43500FDA967 /* LaunchScreen.storyboard */; };
+		4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0345021F0A7E400FDA967 /* UINavigationController.swift */; };
+		4AD0345321F0A9ED00FDA967 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0345221F0A9ED00FDA967 /* GoogleService-Info.plist */; };
+		4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0345721F0ABB900FDA967 /* LogInVC.swift */; };
+		4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346021F0AC6B00FDA967 /* Sizes.swift */; };
+		4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346221F0AE1500FDA967 /* Colours.swift */; };
+		4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346421F0AF8D00FDA967 /* Fonts.swift */; };
+		4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346921F0B1AB00FDA967 /* BaseView.swift */; };
+		4AD0346F21F0B30900FDA967 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346E21F0B30900FDA967 /* UIView.swift */; };
+		4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0347221F0B4AB00FDA967 /* AuthenticationNavBar.swift */; };
+		4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0347421F0B76F00FDA967 /* UIColor.swift */; };
+		4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0347721F0C21D00FDA967 /* PaddedBorderView.swift */; };
+		4AD0347B21F0C3BC00FDA967 /* RedRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0347A21F0C3BC00FDA967 /* RedRoundedButton.swift */; };
+		4AD0347D21F0C7D000FDA967 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0347C21F0C7D000FDA967 /* String.swift */; };
+		4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0347E21F0CE9400FDA967 /* ForgotPasswordVC.swift */; };
+		4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348021F0D32C00FDA967 /* BaseLabel.swift */; };
+		4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348221F0D36A00FDA967 /* TitleLabel.swift */; };
+		4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348421F0D82100FDA967 /* CustomInputView.swift */; };
+		4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348721F0FB3A00FDA967 /* GreyBorderRoundedButton.swift */; };
+		4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348921F0FF6700FDA967 /* SignUpVC.swift */; };
+		4AD0349021F1416800FDA967 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348F21F1416800FDA967 /* Authentication.swift */; };
+		4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0349321F1434200FDA967 /* AuthenticationHelperMethods.swift */; };
+		4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */; };
+		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ditlo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E1DA150F4DB12B06C2DE62A /* Pods-Ditlo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.debug.xcconfig"; sourceTree = "<group>"; };
 		4AD0343121F0A43300FDA967 /* Ditlo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ditlo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD0343421F0A43300FDA967 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4AD0343621F0A43300FDA967 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4AD0343921F0A43300FDA967 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4AD0343B21F0A43500FDA967 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AD0343E21F0A43500FDA967 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AD0344021F0A43500FDA967 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AD0345021F0A7E400FDA967 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		4AD0345221F0A9ED00FDA967 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AD0345721F0ABB900FDA967 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		4AD0346021F0AC6B00FDA967 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		4AD0346221F0AE1500FDA967 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
+		4AD0346421F0AF8D00FDA967 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		4AD0346921F0B1AB00FDA967 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		4AD0346E21F0B30900FDA967 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		4AD0347221F0B4AB00FDA967 /* AuthenticationNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNavBar.swift; sourceTree = "<group>"; };
+		4AD0347421F0B76F00FDA967 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		4AD0347721F0C21D00FDA967 /* PaddedBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedBorderView.swift; sourceTree = "<group>"; };
+		4AD0347A21F0C3BC00FDA967 /* RedRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedRoundedButton.swift; sourceTree = "<group>"; };
+		4AD0347C21F0C7D000FDA967 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		4AD0347E21F0CE9400FDA967 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		4AD0348021F0D32C00FDA967 /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
+		4AD0348221F0D36A00FDA967 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		4AD0348421F0D82100FDA967 /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		4AD0348721F0FB3A00FDA967 /* GreyBorderRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreyBorderRoundedButton.swift; sourceTree = "<group>"; };
+		4AD0348921F0FF6700FDA967 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		4AD0348F21F1416800FDA967 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		4AD0349321F1434200FDA967 /* AuthenticationHelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelperMethods.swift; sourceTree = "<group>"; };
+		4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModalOverlay.swift; sourceTree = "<group>"; };
+		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +85,8 @@
 			children = (
 				4AD0343321F0A43300FDA967 /* Ditlo */,
 				4AD0343221F0A43300FDA967 /* Products */,
+				A86E6858FE17E57995713E5A /* Pods */,
+				FA6A4B4E3B88256BF549FCA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +101,211 @@
 		4AD0343321F0A43300FDA967 /* Ditlo */ = {
 			isa = PBXGroup;
 			children = (
-				4AD0343421F0A43300FDA967 /* AppDelegate.swift */,
-				4AD0343621F0A43300FDA967 /* ViewController.swift */,
-				4AD0343821F0A43300FDA967 /* Main.storyboard */,
-				4AD0343B21F0A43500FDA967 /* Assets.xcassets */,
-				4AD0343D21F0A43500FDA967 /* LaunchScreen.storyboard */,
-				4AD0344021F0A43500FDA967 /* Info.plist */,
+				4AD0349121F1432500FDA967 /* HelperMethods */,
+				4AD0345C21F0AC1300FDA967 /* Constants */,
+				4AD0344F21F0A7CE00FDA967 /* Extensions */,
+				4AD0344C21F0A5F400FDA967 /* Models */,
+				4AD0344B21F0A5F000FDA967 /* Views */,
+				4AD0344A21F0A5E700FDA967 /* Controllers */,
+				4AD0344721F0A45300FDA967 /* MediaAssets */,
+				4AD0344621F0A43E00FDA967 /* Core */,
 			);
 			path = Ditlo;
+			sourceTree = "<group>";
+		};
+		4AD0344621F0A43E00FDA967 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0345221F0A9ED00FDA967 /* GoogleService-Info.plist */,
+				4AD0344021F0A43500FDA967 /* Info.plist */,
+				4AD0343421F0A43300FDA967 /* AppDelegate.swift */,
+				4AD0343D21F0A43500FDA967 /* LaunchScreen.storyboard */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4AD0344721F0A45300FDA967 /* MediaAssets */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0344921F0A47100FDA967 /* VideoFiles */,
+				4AD0344821F0A45D00FDA967 /* Assets */,
+			);
+			path = MediaAssets;
+			sourceTree = "<group>";
+		};
+		4AD0344821F0A45D00FDA967 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0343B21F0A43500FDA967 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		4AD0344921F0A47100FDA967 /* VideoFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoFiles;
+			sourceTree = "<group>";
+		};
+		4AD0344A21F0A5E700FDA967 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0349521F150A300FDA967 /* Modal */,
+				4AD0345421F0AB7100FDA967 /* Authentication */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD0344B21F0A5F000FDA967 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0347621F0C20300FDA967 /* Shared */,
+				4AD0347121F0B47D00FDA967 /* Authentication */,
+				4AD0346821F0B19B00FDA967 /* Base */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4AD0344C21F0A5F400FDA967 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0348E21F1415200FDA967 /* Authentication */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AD0344F21F0A7CE00FDA967 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0345021F0A7E400FDA967 /* UINavigationController.swift */,
+				4AD0346E21F0B30900FDA967 /* UIView.swift */,
+				4AD0347421F0B76F00FDA967 /* UIColor.swift */,
+				4AD0347C21F0C7D000FDA967 /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4AD0345421F0AB7100FDA967 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0345621F0AB9A00FDA967 /* SignUp */,
+				4AD0345521F0AB9300FDA967 /* LogIn */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4AD0345521F0AB9300FDA967 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0345721F0ABB900FDA967 /* LogInVC.swift */,
+				4AD0347E21F0CE9400FDA967 /* ForgotPasswordVC.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		4AD0345621F0AB9A00FDA967 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0348921F0FF6700FDA967 /* SignUpVC.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		4AD0345C21F0AC1300FDA967 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0346021F0AC6B00FDA967 /* Sizes.swift */,
+				4AD0346221F0AE1500FDA967 /* Colours.swift */,
+				4AD0346421F0AF8D00FDA967 /* Fonts.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		4AD0346821F0B19B00FDA967 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0346921F0B1AB00FDA967 /* BaseView.swift */,
+				4AD0348021F0D32C00FDA967 /* BaseLabel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		4AD0347121F0B47D00FDA967 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0347221F0B4AB00FDA967 /* AuthenticationNavBar.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4AD0347621F0C20300FDA967 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0348621F0FACC00FDA967 /* Buttons */,
+				4AD0347721F0C21D00FDA967 /* PaddedBorderView.swift */,
+				4AD0348221F0D36A00FDA967 /* TitleLabel.swift */,
+				4AD0348421F0D82100FDA967 /* CustomInputView.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4AD0348621F0FACC00FDA967 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0347A21F0C3BC00FDA967 /* RedRoundedButton.swift */,
+				4AD0348721F0FB3A00FDA967 /* GreyBorderRoundedButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		4AD0348E21F1415200FDA967 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0348F21F1416800FDA967 /* Authentication.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4AD0349121F1432500FDA967 /* HelperMethods */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0349221F1433000FDA967 /* Authentication */,
+			);
+			path = HelperMethods;
+			sourceTree = "<group>";
+		};
+		4AD0349221F1433000FDA967 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0349321F1434200FDA967 /* AuthenticationHelperMethods.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4AD0349521F150A300FDA967 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		A86E6858FE17E57995713E5A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E1DA150F4DB12B06C2DE62A /* Pods-Ditlo.debug.xcconfig */,
+				619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA6A4B4E3B88256BF549FCA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +315,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AD0344321F0A43500FDA967 /* Build configuration list for PBXNativeTarget "Ditlo" */;
 			buildPhases = (
+				56F487DE48519E9E5AB08D0E /* [CP] Check Pods Manifest.lock */,
 				4AD0342D21F0A43300FDA967 /* Sources */,
 				4AD0342E21F0A43300FDA967 /* Frameworks */,
 				4AD0342F21F0A43300FDA967 /* Resources */,
+				770E5FD9089936EDCFAAB9EC /* [CP] Embed Pods Frameworks */,
+				1C659DE39799F90AE63FD667 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,33 +371,116 @@
 			files = (
 				4AD0343F21F0A43500FDA967 /* LaunchScreen.storyboard in Resources */,
 				4AD0343C21F0A43500FDA967 /* Assets.xcassets in Resources */,
-				4AD0343A21F0A43300FDA967 /* Main.storyboard in Resources */,
+				4AD0345321F0A9ED00FDA967 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C659DE39799F90AE63FD667 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56F487DE48519E9E5AB08D0E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ditlo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		770E5FD9089936EDCFAAB9EC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4AD0342D21F0A43300FDA967 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AD0343721F0A43300FDA967 /* ViewController.swift in Sources */,
+				4AD0346F21F0B30900FDA967 /* UIView.swift in Sources */,
+				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
+				4AD0347B21F0C3BC00FDA967 /* RedRoundedButton.swift in Sources */,
+				4AD0349021F1416800FDA967 /* Authentication.swift in Sources */,
+				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
+				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
+				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
+				4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */,
+				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
+				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
+				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
+				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
+				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
+				4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */,
 				4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */,
+				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
+				4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */,
+				4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */,
+				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,
+				4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */,
+				4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */,
+				4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4AD0343821F0A43300FDA967 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4AD0343921F0A43300FDA967 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4AD0343D21F0A43500FDA967 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -280,11 +610,12 @@
 		};
 		4AD0344421F0A43500FDA967 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E1DA150F4DB12B06C2DE62A /* Pods-Ditlo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 74HAHD97KA;
-				INFOPLIST_FILE = Ditlo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Ditlo/Core/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,17 +623,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.harryferrier.Ditlo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		4AD0344521F0A43500FDA967 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 74HAHD97KA;
-				INFOPLIST_FILE = Ditlo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Ditlo/Core/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +642,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.harryferrier.Ditlo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
