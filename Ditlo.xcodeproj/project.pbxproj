@@ -29,9 +29,14 @@
 		4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348421F0D82100FDA967 /* CustomInputView.swift */; };
 		4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348721F0FB3A00FDA967 /* GreyBorderRoundedButton.swift */; };
 		4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348921F0FF6700FDA967 /* SignUpVC.swift */; };
-		4AD0349021F1416800FDA967 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348F21F1416800FDA967 /* Authentication.swift */; };
+		4AD0349021F1416800FDA967 /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0348F21F1416800FDA967 /* AuthenticationModels.swift */; };
 		4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0349321F1434200FDA967 /* AuthenticationHelperMethods.swift */; };
 		4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */; };
+		4AD034A221F1E59E00FDA967 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034A121F1E59E00FDA967 /* AuthenticationService.swift */; };
+		4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034A521F1E89F00FDA967 /* UserService.swift */; };
+		4AD034A921F1E8CB00FDA967 /* UserServiceHelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034A821F1E8CB00FDA967 /* UserServiceHelperMethods.swift */; };
+		4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034AF21F1E9BA00FDA967 /* UserModels.swift */; };
+		4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034B121F1EA4100FDA967 /* Routes.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +67,14 @@
 		4AD0348421F0D82100FDA967 /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
 		4AD0348721F0FB3A00FDA967 /* GreyBorderRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreyBorderRoundedButton.swift; sourceTree = "<group>"; };
 		4AD0348921F0FF6700FDA967 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		4AD0348F21F1416800FDA967 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		4AD0348F21F1416800FDA967 /* AuthenticationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
 		4AD0349321F1434200FDA967 /* AuthenticationHelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelperMethods.swift; sourceTree = "<group>"; };
 		4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModalOverlay.swift; sourceTree = "<group>"; };
+		4AD034A121F1E59E00FDA967 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		4AD034A521F1E89F00FDA967 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		4AD034A821F1E8CB00FDA967 /* UserServiceHelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceHelperMethods.swift; sourceTree = "<group>"; };
+		4AD034AF21F1E9BA00FDA967 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
+		4AD034B121F1EA4100FDA967 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,10 +111,10 @@
 		4AD0343321F0A43300FDA967 /* Ditlo */ = {
 			isa = PBXGroup;
 			children = (
-				4AD0349121F1432500FDA967 /* HelperMethods */,
+				4AD034A321F1E88100FDA967 /* Shared */,
+				4AD0349B21F1E3F700FDA967 /* Authentication */,
 				4AD0345C21F0AC1300FDA967 /* Constants */,
 				4AD0344F21F0A7CE00FDA967 /* Extensions */,
-				4AD0344C21F0A5F400FDA967 /* Models */,
 				4AD0344B21F0A5F000FDA967 /* Views */,
 				4AD0344A21F0A5E700FDA967 /* Controllers */,
 				4AD0344721F0A45300FDA967 /* MediaAssets */,
@@ -152,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				4AD0349521F150A300FDA967 /* Modal */,
-				4AD0345421F0AB7100FDA967 /* Authentication */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -161,18 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				4AD0347621F0C20300FDA967 /* Shared */,
-				4AD0347121F0B47D00FDA967 /* Authentication */,
 				4AD0346821F0B19B00FDA967 /* Base */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		4AD0344C21F0A5F400FDA967 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4AD0348E21F1415200FDA967 /* Authentication */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		4AD0344F21F0A7CE00FDA967 /* Extensions */ = {
@@ -184,15 +184,6 @@
 				4AD0347C21F0C7D000FDA967 /* String.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		4AD0345421F0AB7100FDA967 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				4AD0345621F0AB9A00FDA967 /* SignUp */,
-				4AD0345521F0AB9300FDA967 /* LogIn */,
-			);
-			path = Authentication;
 			sourceTree = "<group>";
 		};
 		4AD0345521F0AB9300FDA967 /* LogIn */ = {
@@ -218,6 +209,7 @@
 				4AD0346021F0AC6B00FDA967 /* Sizes.swift */,
 				4AD0346221F0AE1500FDA967 /* Colours.swift */,
 				4AD0346421F0AF8D00FDA967 /* Fonts.swift */,
+				4AD034B121F1EA4100FDA967 /* Routes.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -229,14 +221,6 @@
 				4AD0348021F0D32C00FDA967 /* BaseLabel.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		4AD0347121F0B47D00FDA967 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				4AD0347221F0B4AB00FDA967 /* AuthenticationNavBar.swift */,
-			);
-			path = Authentication;
 			sourceTree = "<group>";
 		};
 		4AD0347621F0C20300FDA967 /* Shared */ = {
@@ -257,14 +241,6 @@
 				4AD0348721F0FB3A00FDA967 /* GreyBorderRoundedButton.swift */,
 			);
 			path = Buttons;
-			sourceTree = "<group>";
-		};
-		4AD0348E21F1415200FDA967 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				4AD0348F21F1416800FDA967 /* Authentication.swift */,
-			);
-			path = Authentication;
 			sourceTree = "<group>";
 		};
 		4AD0349121F1432500FDA967 /* HelperMethods */ = {
@@ -289,6 +265,117 @@
 				4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		4AD0349B21F1E3F700FDA967 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034A021F1E58B00FDA967 /* Services */,
+				4AD0349F21F1E56800FDA967 /* Utilities */,
+				4AD0349E21F1E47800FDA967 /* Controllers */,
+				4AD0349D21F1E45400FDA967 /* Views */,
+				4AD0349C21F1E40800FDA967 /* Models */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		4AD0349C21F1E40800FDA967 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0348F21F1416800FDA967 /* AuthenticationModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AD0349D21F1E45400FDA967 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0347221F0B4AB00FDA967 /* AuthenticationNavBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4AD0349E21F1E47800FDA967 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0345521F0AB9300FDA967 /* LogIn */,
+				4AD0345621F0AB9A00FDA967 /* SignUp */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD0349F21F1E56800FDA967 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0349121F1432500FDA967 /* HelperMethods */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4AD034A021F1E58B00FDA967 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034A121F1E59E00FDA967 /* AuthenticationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4AD034A321F1E88100FDA967 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034AB21F1E95E00FDA967 /* User */,
+				4AD034AA21F1E94400FDA967 /* Models */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4AD034A421F1E88A00FDA967 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034A521F1E89F00FDA967 /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4AD034AA21F1E94400FDA967 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AD034AB21F1E95E00FDA967 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034AD21F1E98700FDA967 /* Utilities */,
+				4AD034AC21F1E97F00FDA967 /* Models */,
+				4AD034A421F1E88A00FDA967 /* Services */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		4AD034AC21F1E97F00FDA967 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034AF21F1E9BA00FDA967 /* UserModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AD034AD21F1E98700FDA967 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034AE21F1E98E00FDA967 /* HelperMethods */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4AD034AE21F1E98E00FDA967 /* HelperMethods */ = {
+			isa = PBXGroup;
+			children = (
+				4AD034A821F1E8CB00FDA967 /* UserServiceHelperMethods.swift */,
+			);
+			path = HelperMethods;
 			sourceTree = "<group>";
 		};
 		A86E6858FE17E57995713E5A /* Pods */ = {
@@ -456,13 +543,15 @@
 				4AD0346F21F0B30900FDA967 /* UIView.swift in Sources */,
 				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
 				4AD0347B21F0C3BC00FDA967 /* RedRoundedButton.swift in Sources */,
-				4AD0349021F1416800FDA967 /* Authentication.swift in Sources */,
+				4AD0349021F1416800FDA967 /* AuthenticationModels.swift in Sources */,
+				4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */,
 				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
 				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
 				4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */,
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
+				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
 				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
@@ -470,11 +559,14 @@
 				4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */,
 				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
 				4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */,
+				4AD034A921F1E8CB00FDA967 /* UserServiceHelperMethods.swift in Sources */,
 				4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */,
 				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,
 				4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */,
+				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
 				4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */,
 				4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */,
+				4AD034A221F1E59E00FDA967 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

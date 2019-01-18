@@ -25,3 +25,8 @@ struct SignupInfo: AuthInfoProtocol {
     var name: String
     var password: String
 }
+
+struct AuthResponse {
+    var success: Bool
+    var errorMessage: String?
+}
