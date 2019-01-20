@@ -24,21 +24,29 @@ class JobService {
         db.settings = settings
     }
     
-    func getJobsList(withUserId: String? = nil) {
-        let jobsRef = db.collection(_JOBS).document("jobs-list")
-        jobsRef.addSnapshotListener(includeMetadataChanges: false) { (document, error) in
+    func getJobsList(withUserId userId: String? = nil, completion: @escaping jobListCompletion) {
+        var jobsList: [Job] = []
+        let jobsRef = db.collection(_JOBS)
+        jobsRef.getDocuments { (snapshot, error) in
             if error != nil {
-                // do something here
-                print("error is", error?.localizedDescription)
+                print("Error", error?.localizedDescription)
             } else {
-                if let document = document, document.exists {
-                    if let data = document.data() {
-                        print(data)
+                if let documents = snapshot?.documents,
+                    documents.count > 0 {
+                    for job in documents {
+                        let jobData = job.data()
+                        let jobName = jobData["friendlyName"] as? String ?? "Couldn't retrieve job"
+                        if userId != nil {
+                            // check if it is their job and handle the isSelected state appropriately
+                        } else {
+                            let job = Job(jobName: jobName, isSelected: false)
+                            jobsList.append(job)
+                        }
                     }
+                    
+                    completion(jobsList)
                 }
             }
         }
-        
-        // get the jobs list here and pass it back
     }
 }

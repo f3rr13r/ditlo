@@ -11,13 +11,13 @@ import UIKit
 protocol AuthentationNavBarDelegate {
     func redRoundedButtonPressed()
     func backButtonPressed()
-    func greyBorderRoundedButtonPressed()
+    func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?)
 }
 
 extension AuthentationNavBarDelegate {
     func redRoundedButtonPressed() { }
     func backButtonPressed() { }
-    func greyBorderRoundedButtonPressed() { }
+    func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?) { }
 }
 
 class AuthenticationNavBar: BaseView {
@@ -175,11 +175,10 @@ extension AuthenticationNavBar: RedRoundedButtonDelegate, GreyBorderRoundedButto
     }
     
     @objc func backButtonPressed() {
-        print("Back button pressed")
         delegate?.backButtonPressed()
     }
     
-    func greyBorderRoundedButtonTapped() {
-        delegate?.greyBorderRoundedButtonPressed()
+    func greyBorderRoundedButtonTapped(buttonType: GreyBorderRoundedButtonType?) {
+        delegate?.greyBorderRoundedButtonPressed(buttonType: buttonType)
     }
 }

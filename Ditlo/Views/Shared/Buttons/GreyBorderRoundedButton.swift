@@ -9,12 +9,20 @@
 import UIKit
 
 protocol GreyBorderRoundedButtonDelegate {
-    func greyBorderRoundedButtonTapped()
+    func greyBorderRoundedButtonTapped(buttonType: GreyBorderRoundedButtonType?)
+}
+
+enum GreyBorderRoundedButtonType {
+    case unspecified
+    case skip
+    case addJob
 }
 
 class GreyBorderRoundedButton: BaseView {
 
     // injector variables
+    var buttonInputType: GreyBorderRoundedButtonType? = .unspecified
+    
     var buttonText: String? = "LOADING..." {
         didSet {
             if let buttonText = buttonText {
@@ -58,8 +66,8 @@ class GreyBorderRoundedButton: BaseView {
     }
     
     @objc func handleTap() {
-        if let buttonText = self.buttonText {
-            delegate?.greyBorderRoundedButtonTapped()
+        if let inputType = self.buttonInputType {
+            delegate?.greyBorderRoundedButtonTapped(buttonType: inputType)
         }
     }
 }

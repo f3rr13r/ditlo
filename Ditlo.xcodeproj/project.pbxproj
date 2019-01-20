@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
+		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
+		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
 		4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0343421F0A43300FDA967 /* AppDelegate.swift */; };
 		4AD0343C21F0A43500FDA967 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343B21F0A43500FDA967 /* Assets.xcassets */; };
 		4AD0343F21F0A43500FDA967 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343D21F0A43500FDA967 /* LaunchScreen.storyboard */; };
@@ -54,6 +57,9 @@
 /* Begin PBXFileReference section */
 		094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ditlo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1DA150F4DB12B06C2DE62A /* Pods-Ditlo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.debug.xcconfig"; sourceTree = "<group>"; };
+		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
+		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
 		4AD0343121F0A43300FDA967 /* Ditlo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ditlo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD0343421F0A43300FDA967 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AD0343B21F0A43500FDA967 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,6 +118,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A9F4B3821F3B0F400EDDE8B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A9F4B4121F3E73400EDDE8B /* Cells */,
+				4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A9F4B4121F3E73400EDDE8B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		4AD0342821F0A43300FDA967 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +266,7 @@
 			children = (
 				4AD0346921F0B1AB00FDA967 /* BaseView.swift */,
 				4AD0348021F0D32C00FDA967 /* BaseLabel.swift */,
+				4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -485,6 +509,7 @@
 		4AD034CE21F2519F00FDA967 /* Jobs */ = {
 			isa = PBXGroup;
 			children = (
+				4A9F4B3821F3B0F400EDDE8B /* Views */,
 				4AD034D221F2522C00FDA967 /* Models */,
 				4AD034CF21F251B700FDA967 /* Services */,
 			);
@@ -700,10 +725,13 @@
 				4AD034C321F2082000FDA967 /* SearchVC.swift in Sources */,
 				4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */,
 				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,
+				4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */,
 				4AD034CD21F226B100FDA967 /* CustomInfoWindowModal.swift in Sources */,
 				4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */,
 				4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */,
 				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
+				4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */,
+				4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */,
 				4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */,
 				4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */,
 				4AD034A221F1E59E00FDA967 /* AuthenticationService.swift in Sources */,

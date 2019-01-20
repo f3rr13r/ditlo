@@ -168,7 +168,19 @@ extension LogInVC: CustomInputViewDelegate {
                 break
             default: return
         }
-        
+        updateLogInButtonDisabledState(with: self.loginInfo)
+    }
+    
+    func inputClearButtonPressed(inputType: CustomInputType) {
+        switch inputType {
+            case .emailAddress:
+                self.loginInfo.emailAddress = ""
+                break
+            case .password:
+                self.loginInfo.password = ""
+                break
+            default: return
+        }
         updateLogInButtonDisabledState(with: self.loginInfo)
     }
     
@@ -187,7 +199,7 @@ extension LogInVC: CustomInputViewDelegate {
 
 // sign up button delegate methods
 extension LogInVC: GreyBorderRoundedButtonDelegate {
-    func greyBorderRoundedButtonTapped() {
+    func greyBorderRoundedButtonTapped(buttonType: GreyBorderRoundedButtonType?) {
         let signUpVC = SignUpVC()
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }

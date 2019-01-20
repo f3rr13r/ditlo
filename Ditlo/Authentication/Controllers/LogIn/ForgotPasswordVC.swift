@@ -101,6 +101,7 @@ class ForgotPasswordVC: UIViewController {
 
 // auth nav bar delegate methods
 extension ForgotPasswordVC: AuthentationNavBarDelegate {
+    
     func redRoundedButtonPressed() {
         // send email here
     }
@@ -112,6 +113,11 @@ extension ForgotPasswordVC: AuthentationNavBarDelegate {
 
 // custom input view delegate methods
 extension ForgotPasswordVC: CustomInputViewDelegate {
+    func inputClearButtonPressed(inputType: CustomInputType) {
+        self.emailAddress = ""
+        updateSendPasswordEmailButtonDisabledState(with: self.emailAddress)
+    }
+    
     func inputValueDidChange(inputType: CustomInputType, inputValue: String) {
         self.emailAddress = inputValue
         updateSendPasswordEmailButtonDisabledState(with: self.emailAddress)

@@ -188,7 +188,8 @@ class SelectProfilePictureVC: UIViewController {
 
 // select profile picture nav bar delegate methods
 extension SelectProfilePictureVC: AuthentationNavBarDelegate {
-    func greyBorderRoundedButtonPressed() {
+    
+    func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?) {
         navigateToNextPage()
     }
 }
@@ -216,7 +217,7 @@ extension SelectProfilePictureVC: RedRoundedButtonDelegate, GreyBorderRoundedBut
         }
     }
     
-    func greyBorderRoundedButtonTapped() {
+    func greyBorderRoundedButtonTapped(buttonType: GreyBorderRoundedButtonType?) {
         revertToDefaultPageState()
     }
     

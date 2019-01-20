@@ -149,27 +149,28 @@ class SignUpVC: UIViewController {
 // auth nav bar delegate methods
 extension SignUpVC: AuthentationNavBarDelegate {
     func redRoundedButtonPressed() {
-//        let selectProfilePictureVC = SelectProfilePictureVC()
-//        self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
+        let selectProfilePictureVC = SelectProfilePictureVC()
+        self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
         
-        self.view.isUserInteractionEnabled = false
-        self.navigationController?.showCustomOverlayModal(withMessage: "CREATING DITLO PROFILE")
-        AuthService.instance.signUpUser(with: self.signUpInfo) { (signUpResponse) in
-            self.navigationController?.hideCustomOverlayModal()
-            self.view.isUserInteractionEnabled = true
-            if signUpResponse.success {
-                let selectProfilePictureVC = SelectProfilePictureVC()
-                self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
-            } else {
-                let errorMessageConfig = CustomErrorMessageConfig(title: "SIGN UP ERROR", body: signUpResponse.errorMessage!)
-                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
-            }
-        }
+//        self.view.isUserInteractionEnabled = false
+//        self.navigationController?.showCustomOverlayModal(withMessage: "CREATING DITLO PROFILE")
+//        AuthService.instance.signUpUser(with: self.signUpInfo) { (signUpResponse) in
+//            self.navigationController?.hideCustomOverlayModal()
+//            self.view.isUserInteractionEnabled = true
+//            if signUpResponse.success {
+//                let selectProfilePictureVC = SelectProfilePictureVC()
+//                self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
+//            } else {
+//                let errorMessageConfig = CustomErrorMessageConfig(title: "SIGN UP ERROR", body: signUpResponse.errorMessage!)
+//                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
+//            }
+//        }
     }
 }
 
 // custom input delegate methods
 extension SignUpVC: CustomInputViewDelegate {
+    
     func inputValueDidChange(inputType: CustomInputType, inputValue: String) {
         switch inputType {
             case .emailAddress:
@@ -181,8 +182,26 @@ extension SignUpVC: CustomInputViewDelegate {
             case .password:
                 self.signUpInfo.password = inputValue
                 break
+            case .unspecified:
+                break
         }
-        
+        updateSignUpButtonDisabledState(with: self.signUpInfo)
+    }
+    
+    func inputClearButtonPressed(inputType: CustomInputType) {
+        switch inputType {
+        case .emailAddress:
+            self.signUpInfo.emailAddress = ""
+            break
+        case .name:
+            self.signUpInfo.name = ""
+            break
+        case .password:
+            self.signUpInfo.password = ""
+            break
+        case .unspecified:
+            break
+        }
         updateSignUpButtonDisabledState(with: self.signUpInfo)
     }
     
@@ -193,7 +212,7 @@ extension SignUpVC: CustomInputViewDelegate {
 
 // navigate to log in button delegate
 extension SignUpVC: GreyBorderRoundedButtonDelegate {
-    func greyBorderRoundedButtonTapped() {
+    func greyBorderRoundedButtonTapped(buttonType: GreyBorderRoundedButtonType?) {
         self.navigationController?.popViewController(animated: true)
     }
 }

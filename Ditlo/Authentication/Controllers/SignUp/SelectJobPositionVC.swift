@@ -15,7 +15,7 @@ class SelectJobPositionVC: UIViewController {
         let navbar = AuthenticationNavBar()
         navbar.needsBackButton = true
         navbar.needsRedRoundedButton = false
-        navbar.isRedRoundedButtonEnabled = false
+        navbar.isRedRoundedButtonEnabled = true
         navbar.needsGreyBorderButton = true
         navbar.greyBorderRoundedButtonText = "SKIP"
         return navbar
@@ -41,9 +41,10 @@ class SelectJobPositionVC: UIViewController {
     
     let searchJobsInput: CustomInputView = {
         let customInputView = CustomInputView()
+        customInputView.inputType = .unspecified
         customInputView.titleConfig = TitleLabelConfiguration(titleText: "JOB KEYWORDS", titleFont: smallTitleFont)
         customInputView.hideBottomBorder = false
-        customInputView.layer.zPosition = 2
+        customInputView.layer.zPosition = 1
         return customInputView
     }()
     
@@ -52,7 +53,6 @@ class SelectJobPositionVC: UIViewController {
         let view = UIView()
         view.backgroundColor = .white
         view.isHidden = true
-        view.layer.zPosition = 1
         return view
     }()
     var addJobContainerTopConstraint: NSLayoutConstraint?
@@ -71,6 +71,29 @@ class SelectJobPositionVC: UIViewController {
     let addJobBottomBorder = PaddedBorderView()
     
     
+    // results collection view
+    let jobsListCollectionViewCellId = "jobsListCollectionViewCellId"
+    lazy var jobsListCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.backgroundColor = .clear
+        cv.register(JobSelectorCell.self, forCellWithReuseIdentifier: jobsListCollectionViewCellId)
+        return cv
+    }()
+    
+    let jobListLoadingView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let loadingContentView: LoadingContentView = {
+        let view = LoadingContentView()
+        view.loadingContentMessage = "LOADING JOBS LIST"
+        return view
+    }()
+
+    
     let dismissKeyboardView: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
@@ -82,11 +105,13 @@ class SelectJobPositionVC: UIViewController {
     // variables
     let jobPositionInfoWindowConfig = CustomInfoMessageConfig(title: "SELECT YOUR JOB POSITION", body: "Select your job by searching from the list below, or add a new one to our database. Doing this will help you be more reachable to people who are interested in what you do. If you prefer not to then you can just click skip")
     var isAddJobViewVisible: Bool = false
+    var jobsList: [Job] = []
+    var isSearchingJobs: Bool = false
+    var searchedJobsList: [Job] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-    
         setupChildDelegates()
         getCategoriesData()
         anchorChildViews()
@@ -133,15 +158,27 @@ class SelectJobPositionVC: UIViewController {
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
             self.addJobContainerTopConstraint?.constant = -44.0
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }) { (isAnimationComplete) in
+            if isAnimationComplete {
+                self.addJobContainerView.isHidden = true
+            }
+        }
     }
     
     func setupChildDelegates() {
         selectJobPositionNavBar.delegate = self
+        searchJobsInput.delegate = self
+        jobsListCollectionView.delegate = self
+        jobsListCollectionView.dataSource = self
+        addJobButton.delegate = self
     }
     
     func getCategoriesData() {
-        JobService.instance.getJobsList()
+        JobService.instance.getJobsList { (jobsListData) in
+            self.jobsList = jobsListData
+            self.jobListLoadingView.isHidden = true
+            self.jobsListCollectionView.reloadData()
+        }
     }
     
     func anchorChildViews() {
@@ -170,11 +207,11 @@ class SelectJobPositionVC: UIViewController {
         
         // search bar
         self.view.addSubview(searchJobsInput)
-        searchJobsInput.anchor(withTopAnchor: titleLabel.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 30.0, left: 0.0, bottom: 0.0, right: 0.0))
+        searchJobsInput.anchor(withTopAnchor: titleLabel.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 30.0, left: 0.0, bottom: 0.0, right: 0.0))
 
        // add job stuff
         self.view.addSubview(addJobContainerView)
-        addJobContainerView.anchor(withTopAnchor: searchJobsInput.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 44.0, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
+        addJobContainerView.anchor(withTopAnchor: nil, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 44.0, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
         addJobContainerTopConstraint = NSLayoutConstraint(item: addJobContainerView, attribute: .top, relatedBy: .equal, toItem: searchJobsInput, attribute: .bottom, multiplier: 1.0, constant: -44.0)
         self.view.addConstraint(addJobContainerTopConstraint!)
         
@@ -188,10 +225,26 @@ class SelectJobPositionVC: UIViewController {
 
         addJobContainerView.addSubview(addJobLabel)
         addJobLabel.anchor(withTopAnchor: addJobContainerView.topAnchor, leadingAnchor: addJobContainerView.leadingAnchor, bottomAnchor: addJobContainerView.bottomAnchor, trailingAnchor: addJobButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        
+        // jobs list collection view
+        self.view.addSubview(jobsListCollectionView)
+        jobsListCollectionView.anchor(withTopAnchor: addJobContainerView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil)
+        
+        // loading stuff
+        self.view.addSubview(jobListLoadingView)
+        jobListLoadingView.anchor(withTopAnchor: searchJobsInput.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        jobListLoadingView.addSubview(loadingContentView)
+        loadingContentView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: jobListLoadingView.centerXAnchor, centreYAnchor: jobListLoadingView.centerYAnchor)
 
        // dismiss keyboard view
         self.view.addSubview(dismissKeyboardView)
         dismissKeyboardView.fillSuperview()
+    }
+    
+    func updateSelectJobPositionNavBar(withJob job: Job) {
+        selectJobPositionNavBar.redRoundedButtonText = job.isSelected ? "SELECT JOB" : ""
+        selectJobPositionNavBar.needsRedRoundedButton = job.isSelected
+        selectJobPositionNavBar.needsGreyBorderButton = !job.isSelected
     }
 }
 
@@ -202,17 +255,94 @@ extension SelectJobPositionVC: AuthentationNavBarDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func greyBorderRoundedButtonPressed() {
-        if isAddJobViewVisible {
-            hideAddJobView()
-        } else {
-            showAddJobView()
-        }
-        
-        isAddJobViewVisible = !isAddJobViewVisible
+    func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?) {
+        print(buttonType)
     }
     
     func redRoundedButtonPressed() {
         // update profile on database, and proceed to next view controller
+    }
+}
+
+
+extension SelectJobPositionVC: GreyBorderRoundedButtonDelegate {
+    func greyBorderRoundedButtonTapped(buttonType: GreyBorderRoundedButtonType?) {
+        print("Add job button pressed")
+    }
+}
+
+
+// input delegate methods
+extension SelectJobPositionVC: CustomInputViewDelegate {
+    
+    func inputValueDidChange(inputType: CustomInputType, inputValue: String) {
+        if !inputValue.isEmpty && !inputValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            searchedJobsList = jobsList.filter({ (job) -> Bool in
+                return job.jobName.lowercased().contains(find: inputValue.lowercased())
+            })
+            isSearchingJobs = true
+            
+            if searchedJobsList.count > 0 {
+                hideAddJobView()
+            } else {
+                showAddJobView()
+            }
+        } else {
+            isSearchingJobs = false
+            hideAddJobView()
+        }
+        jobsListCollectionView.reloadData()
+    }
+    
+    func inputClearButtonPressed(inputType: CustomInputType) {
+        isSearchingJobs = false
+        hideAddJobView()
+        jobsListCollectionView.reloadData()
+    }
+}
+
+
+// collection view delegate methods
+extension SelectJobPositionVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return isSearchingJobs ? searchedJobsList.count : jobsList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let jobSelectorCell = collectionView.dequeueReusableCell(withReuseIdentifier: jobsListCollectionViewCellId, for: indexPath) as? JobSelectorCell else { return UICollectionViewCell() }
+        jobSelectorCell.job = isSearchingJobs ? searchedJobsList[indexPath.item] : jobsList[indexPath.item]
+        return jobSelectorCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? JobSelectorCell else { return }
+        
+        if let cellJob = cell.job {
+            for i in 0..<searchedJobsList.count {
+                if searchedJobsList[i].jobName == cellJob.jobName {
+                    searchedJobsList[i].isSelected = !searchedJobsList[i].isSelected
+                } else {
+                    searchedJobsList[i].isSelected = false
+                }
+            }
+            for i in 0..<jobsList.count {
+                if jobsList[i].jobName == cellJob.jobName {
+                    jobsList[i].isSelected = !jobsList[i].isSelected
+                    self.updateSelectJobPositionNavBar(withJob: jobsList[i])
+                } else {
+                    jobsList[i].isSelected = false
+                }
+            }
+            collectionView.reloadData()
+        }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: screenWidth, height: 44.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0)
     }
 }

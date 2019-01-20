@@ -9,6 +9,7 @@
 import UIKit
 
 enum CustomInputType {
+    case unspecified
     case emailAddress
     case name
     case password
@@ -16,6 +17,7 @@ enum CustomInputType {
 
 protocol CustomInputViewDelegate {
     func inputValueDidChange(inputType: CustomInputType, inputValue: String)
+    func inputClearButtonPressed(inputType: CustomInputType)
     func forgotPasswordButtonPressed()
 }
 
@@ -26,7 +28,7 @@ extension CustomInputViewDelegate {
 class CustomInputView: BaseView {
     
     // injector variables
-    var inputType: CustomInputType? {
+    var inputType: CustomInputType? = .unspecified {
         didSet {
             if let inputType = self.inputType {
                 if inputType == .password {
@@ -166,6 +168,14 @@ extension CustomInputView: UITextFieldDelegate {
            let inputValue = input.text {
             delegate?.inputValueDidChange(inputType: inputType, inputValue: inputValue)
         }
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        print("inputType", inputType)
+        if let inputType = self.inputType {
+            delegate?.inputClearButtonPressed(inputType: inputType)
+        }
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
