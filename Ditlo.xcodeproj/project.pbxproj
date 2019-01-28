@@ -51,6 +51,11 @@
 		4AD034CD21F226B100FDA967 /* CustomInfoWindowModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034CC21F226B100FDA967 /* CustomInfoWindowModal.swift */; };
 		4AD034D121F251DB00FDA967 /* JobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034D021F251DB00FDA967 /* JobService.swift */; };
 		4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034D321F2523D00FDA967 /* JobModels.swift */; };
+		4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF6C21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift */; };
+		4AD4AF7421FE56DD001F5AEF /* CategoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7321FE56DD001F5AEF /* CategoriesService.swift */; };
+		4AD4AF7621FE5C2E001F5AEF /* CategoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */; };
+		4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */; };
+		4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +108,11 @@
 		4AD034CC21F226B100FDA967 /* CustomInfoWindowModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoWindowModal.swift; sourceTree = "<group>"; };
 		4AD034D021F251DB00FDA967 /* JobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobService.swift; sourceTree = "<group>"; };
 		4AD034D321F2523D00FDA967 /* JobModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModels.swift; sourceTree = "<group>"; };
+		4AD4AF6C21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFavouriteCategoriesVC.swift; sourceTree = "<group>"; };
+		4AD4AF7321FE56DD001F5AEF /* CategoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesService.swift; sourceTree = "<group>"; };
+		4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModels.swift; sourceTree = "<group>"; };
+		4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesUtilities.swift; sourceTree = "<group>"; };
+		4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +256,7 @@
 				4AD0348921F0FF6700FDA967 /* SignUpVC.swift */,
 				4AD034B521F2041100FDA967 /* SelectProfilePictureVC.swift */,
 				4AD034CA21F2258000FDA967 /* SelectJobPositionVC.swift */,
+				4AD4AF6C21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -373,6 +384,8 @@
 		4AD034A321F1E88100FDA967 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4AD4AF7721FE6B39001F5AEF /* Utilities */,
+				4AD4AF6E21FE56AC001F5AEF /* Categories */,
 				4AD034CE21F2519F00FDA967 /* Jobs */,
 				4AD0349521F150A300FDA967 /* Modals */,
 				4AD034AB21F1E95E00FDA967 /* User */,
@@ -532,6 +545,64 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		4AD4AF6E21FE56AC001F5AEF /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7221FE56C8001F5AEF /* Services */,
+				4AD4AF7121FE56C2001F5AEF /* Models */,
+				4AD4AF6F21FE56B5001F5AEF /* Views */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		4AD4AF6F21FE56B5001F5AEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7021FE56B9001F5AEF /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4AD4AF7021FE56B9001F5AEF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4AD4AF7121FE56C2001F5AEF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AD4AF7221FE56C8001F5AEF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7321FE56DD001F5AEF /* CategoriesService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4AD4AF7721FE6B39001F5AEF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7821FE6B59001F5AEF /* Categories */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4AD4AF7821FE6B59001F5AEF /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		A86E6858FE17E57995713E5A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +734,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/DGCollectionViewLeftAlignFlowLayout/DGCollectionViewLeftAlignFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -674,6 +746,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCollectionViewLeftAlignFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -716,22 +789,27 @@
 				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
+				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
+				4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */,
 				4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */,
 				4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */,
 				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
 				4AD034C921F208B300FDA967 /* CameraVC.swift in Sources */,
 				4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */,
 				4AD034A921F1E8CB00FDA967 /* UserServiceHelperMethods.swift in Sources */,
+				4AD4AF7621FE5C2E001F5AEF /* CategoryModels.swift in Sources */,
 				4AD034C321F2082000FDA967 /* SearchVC.swift in Sources */,
 				4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */,
 				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,
 				4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */,
 				4AD034CD21F226B100FDA967 /* CustomInfoWindowModal.swift in Sources */,
 				4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */,
+				4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */,
 				4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */,
 				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
 				4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */,
 				4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */,
+				4AD4AF7421FE56DD001F5AEF /* CategoriesService.swift in Sources */,
 				4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */,
 				4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */,
 				4AD034A221F1E59E00FDA967 /* AuthenticationService.swift in Sources */,

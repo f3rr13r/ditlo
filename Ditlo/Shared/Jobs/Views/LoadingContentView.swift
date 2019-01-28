@@ -43,7 +43,6 @@ class LoadingContentView: BaseView {
     
     let loadingMessageLabel: UILabel = {
         let label = UILabel()
-        //label.text = "LOADING JOBS LIST"
         label.font = smallTitleFont
         label.textColor = ditloVeryLightGrey
         label.textAlignment = .center

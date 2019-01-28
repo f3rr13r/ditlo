@@ -22,3 +22,7 @@ let _FRIENDS = "friends"
 
 // jobs
 let _JOBS = "jobs"
+
+// categories
+let _CATEGORIES = "categories"
+let _CHILD_CATEGORIES = "childCategories"

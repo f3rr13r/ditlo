@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DGCollectionViewLeftAlignFlowLayout
 
 class SelectJobPositionVC: UIViewController {
 
@@ -74,10 +75,10 @@ class SelectJobPositionVC: UIViewController {
     // results collection view
     let jobsListCollectionViewCellId = "jobsListCollectionViewCellId"
     lazy var jobsListCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
+        let flowLayout = DGCollectionViewLeftAlignFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         cv.backgroundColor = .clear
+        cv.showsVerticalScrollIndicator = false
         cv.register(JobSelectorCell.self, forCellWithReuseIdentifier: jobsListCollectionViewCellId)
         return cv
     }()
@@ -113,7 +114,7 @@ class SelectJobPositionVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupChildDelegates()
-        getCategoriesData()
+        getJobListData()
         anchorChildViews()
     }
     
@@ -173,7 +174,7 @@ class SelectJobPositionVC: UIViewController {
         addJobButton.delegate = self
     }
     
-    func getCategoriesData() {
+    func getJobListData() {
         JobService.instance.getJobsList { (jobsListData) in
             self.jobsList = jobsListData
             self.jobListLoadingView.isHidden = true
@@ -228,7 +229,7 @@ class SelectJobPositionVC: UIViewController {
         
         // jobs list collection view
         self.view.addSubview(jobsListCollectionView)
-        jobsListCollectionView.anchor(withTopAnchor: addJobContainerView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil)
+        jobsListCollectionView.anchor(withTopAnchor: addJobContainerView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
         
         // loading stuff
         self.view.addSubview(jobListLoadingView)
@@ -246,6 +247,11 @@ class SelectJobPositionVC: UIViewController {
         selectJobPositionNavBar.needsRedRoundedButton = job.isSelected
         selectJobPositionNavBar.needsGreyBorderButton = !job.isSelected
     }
+    
+    func navigateToSelectFavouriteCategoriesVC() {
+        let selectFavouriteCategoriesVC = SelectFavouriteCategoriesVC()
+        self.navigationController?.pushViewController(selectFavouriteCategoriesVC, animated: true)
+    }
 }
 
 
@@ -256,7 +262,7 @@ extension SelectJobPositionVC: AuthentationNavBarDelegate {
     }
     
     func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?) {
-        print(buttonType)
+        navigateToSelectFavouriteCategoriesVC()
     }
     
     func redRoundedButtonPressed() {
@@ -339,7 +345,16 @@ extension SelectJobPositionVC: UICollectionViewDelegate, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth, height: 44.0)
+        if isSearchingJobs && searchedJobsList.count > 0 {
+            let searchResultCellWidth = searchedJobsList[indexPath.item].jobName.widthOfString(usingFont: defaultParagraphFont) + 38.0
+            return CGSize(width: searchResultCellWidth, height: 40.0)
+        } else if jobsList.count > 0 {
+            let jobCellWidth = jobsList[indexPath.item].jobName.widthOfString(usingFont: defaultParagraphFont) + 38.0
+            return CGSize(width: jobCellWidth, height: 40.0)
+        } else {
+            return CGSize(width: 0.0, height: 0.0)
+        }
+//        return CGSize(width: screenWidth, height: 44.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
