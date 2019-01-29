@@ -354,7 +354,6 @@ extension SelectJobPositionVC: UICollectionViewDelegate, UICollectionViewDelegat
         } else {
             return CGSize(width: 0.0, height: 0.0)
         }
-//        return CGSize(width: screenWidth, height: 44.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

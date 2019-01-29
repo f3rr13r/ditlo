@@ -14,10 +14,15 @@ class CategoryCell: BaseCell {
     var category: ChildCategory? {
         didSet {
             if let category = self.category {
-                backgroundColor = category.isSelected ? category.backgroundColor : category.backgroundColor.withAlphaComponent(0.65)
-                categoryNameLabel.text = category.name
-                if category.isSelected {
-                    categoryNameLabel.underline()
+                if !category.name.contains(find: "Toggle All") {
+                    backgroundColor = category.isSelected ? category.backgroundColor : category.backgroundColor.withAlphaComponent(0.65)
+                    categoryNameLabel.text = category.name
+                    if category.isSelected {
+                        categoryNameLabel.underline()
+                    }
+                } else {
+                    backgroundColor = ditloLightGrey
+                    categoryNameLabel.text = category.name
                 }
             }
         }

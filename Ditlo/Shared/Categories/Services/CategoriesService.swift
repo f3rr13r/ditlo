@@ -58,7 +58,7 @@ class CategoriesService {
                                         for childCategory in documents {
                                             // prefix an ALL setting to the childCategories
                                             if category.childCategories.count == 0 {
-                                                let allCategory = ChildCategory(id: 0, name: "TOGGLE ALL", backgroundColor: category.backgroundColor, isSelected: false)
+                                                let allCategory = ChildCategory(id: 0, name: "Toggle All \(category.name)", backgroundColor: category.backgroundColor, isSelected: false)
                                                 category.childCategories.append(allCategory)
                                             }
                                             

@@ -177,23 +177,23 @@ class SelectFavouriteCategoriesVC: UIViewController {
         selectedCategoriesCount = 0
         for i in 0..<categories.count {
             if categories[i].allCategoriesSelected {
-                selectedCategoriesCount += categories[i].childCategories.count
+                selectedCategoriesCount += categories[i].childCategories.count - 1
             } else {
                 for a in 0..<categories[i].childCategories.count {
-                    if categories[i].childCategories[a].isSelected {
+                    if categories[i].childCategories[a].isSelected && !categories[i].childCategories[a].name.contains(find: "Toggle All") {
                         selectedCategoriesCount += 1
                     }
                 }
             }
         }
-        
         updateCustomNavBarButtonState()
     }
     
     func updateCustomNavBarButtonState() {
         if selectedCategoriesCount > 0 {
+            let categoryPostFix = selectedCategoriesCount > 1 ? "CATEGORIES" : "CATEGORY"
             selectFavouriteCategoriesNavBar.needsGreyBorderButton = false
-            selectFavouriteCategoriesNavBar.redRoundedButtonText = "SELECT \(selectedCategoriesCount) CATEGORIES"
+            selectFavouriteCategoriesNavBar.redRoundedButtonText = "SELECT \(selectedCategoriesCount) \(categoryPostFix)"
             selectFavouriteCategoriesNavBar.needsRedRoundedButton = true
         } else {
             selectFavouriteCategoriesNavBar.needsRedRoundedButton = false
@@ -273,7 +273,7 @@ extension SelectFavouriteCategoriesVC: CustomInputViewDelegate {
         if !inputValue.isEmpty && !inputValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             for i in 0..<categories.count {
                 for a in 0..<categories[i].childCategories.count {
-                    if categories[i].childCategories[a].name != "TOGGLE ALL" && categories[i].childCategories[a].name.lowercased().contains(find: inputValue.lowercased()) {
+                    if !categories[i].childCategories[a].name.contains(find: "Toggle All") && categories[i].childCategories[a].name.lowercased().contains(find: inputValue.lowercased()) {
                         searchedCategories.append(categories[i].childCategories[a])
                     }
                 }
@@ -399,7 +399,7 @@ extension SelectFavouriteCategoriesVC: UICollectionViewDelegate, UICollectionVie
             } else {
                 
                 /*-- toggle all --*/
-                if categories[selectedParentCategoryIndex].childCategories[indexPath.item].name == "TOGGLE ALL" {
+                if categories[selectedParentCategoryIndex].childCategories[indexPath.item].name.contains(find: "Toggle All") {
                     if categories[selectedParentCategoryIndex].allCategoriesSelected {
                         for i in 0..<categories[selectedParentCategoryIndex].childCategories.count {
                             categories[selectedParentCategoryIndex].childCategories[i].isSelected = false

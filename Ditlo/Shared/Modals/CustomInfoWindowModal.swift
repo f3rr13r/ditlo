@@ -85,7 +85,7 @@ class CustomInfoWindowModal: BaseView {
         infoWindowTitleLabel.anchor(withTopAnchor: miniDitloLogoImageView.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
         
         infoWindowContainer.addSubview(infoWindowBodyLabel)
-        infoWindowBodyLabel.anchor(withTopAnchor: infoWindowTitleLabel.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: infoWindowContainer.bottomAnchor, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 14.0, left: horizontalPadding, bottom: -14.0, right: -horizontalPadding))
+        infoWindowBodyLabel.anchor(withTopAnchor: infoWindowTitleLabel.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: infoWindowContainer.bottomAnchor, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 14.0, left: horizontalPadding, bottom: -20.0, right: -horizontalPadding))
     }
     
     func showInfoWindowModal(withInfoWindowConfig infoWindowConfig: CustomInfoMessageConfig, andAnimation needsAnimation: Bool = false) {
