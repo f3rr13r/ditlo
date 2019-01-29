@@ -12,7 +12,7 @@ import DGCollectionViewLeftAlignFlowLayout
 class SelectFavouriteCategoriesVC: UIViewController {
     
     // views
-    let selectJobPositionNavBar: AuthenticationNavBar = {
+    let selectFavouriteCategoriesNavBar: AuthenticationNavBar = {
         let navbar = AuthenticationNavBar()
         navbar.needsBackButton = true
         navbar.needsRedRoundedButton = false
@@ -62,18 +62,49 @@ class SelectFavouriteCategoriesVC: UIViewController {
         cv.register(CategoryCell.self, forCellWithReuseIdentifier: parentCategoryCellId)
         return cv
     }()
+    var parentCategoryCollectionViewTopAnchorConstraint: NSLayoutConstraint?
+    var parentCategoryCollectionViewHeightConstraint: NSLayoutConstraint?
     
     // child category collection view
     private let childCategoryCellId = "childCategoryCellId"
     lazy var childCategoryCollectionView: UICollectionView = {
-        let dgLeftFlowLayout = DGCollectionViewLeftAlignFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: dgLeftFlowLayout)
+        let flowLayout = DGCollectionViewLeftAlignFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         cv.backgroundColor = UIColor.clear
         cv.delegate = self
         cv.dataSource = self
         cv.showsVerticalScrollIndicator = false
         cv.register(CategoryCell.self, forCellWithReuseIdentifier: childCategoryCellId)
         return cv
+    }()
+    
+    let categoriesListLoadingView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let loadingContentView: LoadingContentView = {
+        let view = LoadingContentView()
+        view.loadingContentMessage = "LOADING CATEGORIES LIST"
+        return view
+    }()
+    
+    let noSearchResultsView = UIView()
+    
+    let noSearchResultsLabel: UILabel = {
+        let label = UILabel()
+        label.font = smallTitleFont
+        label.text = "NO MATCHING CATEGORIES FOUND"
+        label.textColor = ditloVeryLightGrey
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let dismissKeyboardView: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
+        button.alpha = 0
+        return button
     }()
     
     
@@ -83,7 +114,8 @@ class SelectFavouriteCategoriesVC: UIViewController {
     var categories: [Category] = []
     var selectedParentCategoryIndex: Int = 0
     var isSearchingCategories: Bool = false
-    var searchedCategories: [Category] = []
+    var searchedCategories: [ChildCategory] = []
+    var selectedCategoriesCount: Int = 0
     
 
     override func viewDidLoad() {
@@ -94,12 +126,37 @@ class SelectFavouriteCategoriesVC: UIViewController {
         anchorChildViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func animateWithKeyboard(_ notification: NSNotification) {
+        let moveUp = (notification.name == UIResponder.keyboardWillShowNotification)
+        dismissKeyboardView.alpha = moveUp ? 1.0 : 0.0
+        
+    }
+    
     @objc func presentInfoWindowModal() {
         self.navigationController?.showInfoWindowModal(withInfoWindowConfig: selectFavouriteCategoriesInfoWindowConfig, andAnimation: true)
     }
     
+    @objc func dismissKeyboard() {
+        searchCategoriesInput.dismissKeyboard()
+    }
+    
     func setupChildDelegates() {
-        
+        self.searchCategoriesInput.delegate = self
     }
     
     func getCategoriesData() {        
@@ -111,21 +168,51 @@ class SelectFavouriteCategoriesVC: UIViewController {
                 self.selectedParentCategoryIndex = 0
                 self.parentCategoryCollectionView.reloadData()
                 self.childCategoryCollectionView.reloadData()
+                self.categoriesListLoadingView.isHidden = true
             }
+        }
+    }
+    
+    func updateSelectedCategoriesCount() {
+        selectedCategoriesCount = 0
+        for i in 0..<categories.count {
+            if categories[i].allCategoriesSelected {
+                selectedCategoriesCount += categories[i].childCategories.count
+            } else {
+                for a in 0..<categories[i].childCategories.count {
+                    if categories[i].childCategories[a].isSelected {
+                        selectedCategoriesCount += 1
+                    }
+                }
+            }
+        }
+        
+        updateCustomNavBarButtonState()
+    }
+    
+    func updateCustomNavBarButtonState() {
+        if selectedCategoriesCount > 0 {
+            selectFavouriteCategoriesNavBar.needsGreyBorderButton = false
+            selectFavouriteCategoriesNavBar.redRoundedButtonText = "SELECT \(selectedCategoriesCount) CATEGORIES"
+            selectFavouriteCategoriesNavBar.needsRedRoundedButton = true
+        } else {
+            selectFavouriteCategoriesNavBar.needsRedRoundedButton = false
+            selectFavouriteCategoriesNavBar.redRoundedButtonText = ""
+            selectFavouriteCategoriesNavBar.needsGreyBorderButton = true
         }
     }
     
     func anchorChildViews() {
         // custom navbar
-        self.view.addSubview(selectJobPositionNavBar)
-        selectJobPositionNavBar.anchor(withTopAnchor: self.view.safeAreaLayoutGuide.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
+        self.view.addSubview(selectFavouriteCategoriesNavBar)
+        selectFavouriteCategoriesNavBar.anchor(withTopAnchor: self.view.safeAreaLayoutGuide.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
         
         // title label
         let titleConfig = TitleLabelConfiguration(titleText: "PREFERRED CATEGORIES", titleFont: defaultTitleFont)
         titleLabel.titleConfig = titleConfig
         
         self.view.addSubview(titleLabel)
-        titleLabel.anchor(withTopAnchor: selectJobPositionNavBar.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: 0.0, right: 0.0))
+        titleLabel.anchor(withTopAnchor: selectFavouriteCategoriesNavBar.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: 0.0, right: 0.0))
         
         // calculate title label width and height
         let titleLabelSize: CGSize = CGSize(width: titleConfig.titleText.widthOfString(usingFont: titleConfig.titleFont) + 1.0, height: titleConfig.titleText.heightOfString(usingFont: titleConfig.titleFont))
@@ -145,16 +232,82 @@ class SelectFavouriteCategoriesVC: UIViewController {
         
         // parent categories collection view
         self.view.addSubview(parentCategoryCollectionView)
-        parentCategoryCollectionView.anchor(withTopAnchor: searchCategoriesInput.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 40.0, padding: .init(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0))
+        parentCategoryCollectionView.anchor(withTopAnchor: nil, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        
+        /*-- top anchor constraint -- */
+        parentCategoryCollectionViewTopAnchorConstraint = NSLayoutConstraint(item: parentCategoryCollectionView, attribute: .top, relatedBy: .equal, toItem: searchCategoriesInput, attribute: .bottom, multiplier: 1.0, constant: 20.0)
+        
+        /*-- height constraint --*/
+        parentCategoryCollectionViewHeightConstraint = NSLayoutConstraint(item: parentCategoryCollectionView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40.0)
+        self.view.addConstraints([parentCategoryCollectionViewTopAnchorConstraint!, parentCategoryCollectionViewHeightConstraint!])
         
         // child categories collection view
         self.view.addSubview(childCategoryCollectionView)
         childCategoryCollectionView.anchor(withTopAnchor: parentCategoryCollectionView.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 24.0, left: 0.0, bottom: 0.0, right: 0.0))
+        
+        // loading stuff
+        self.view.addSubview(categoriesListLoadingView)
+        categoriesListLoadingView.anchor(withTopAnchor: searchCategoriesInput.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        categoriesListLoadingView.addSubview(loadingContentView)
+        loadingContentView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: categoriesListLoadingView.centerXAnchor, centreYAnchor: categoriesListLoadingView.centerYAnchor)
+        
+        // searching -- no data state -- hidden by default
+        noSearchResultsView.isHidden = true
+        self.view.addSubview(noSearchResultsView)
+        noSearchResultsView.anchor(withTopAnchor: searchCategoriesInput.bottomAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        noSearchResultsView.addSubview(noSearchResultsLabel)
+        noSearchResultsLabel.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: noSearchResultsView.centerXAnchor, centreYAnchor: noSearchResultsView.centerYAnchor)
+        
+        // dismiss keyboard view
+        self.view.addSubview(dismissKeyboardView)
+        dismissKeyboardView.fillSuperview()
     }
 }
 
 
-// collection view
+// input delegate methods
+extension SelectFavouriteCategoriesVC: CustomInputViewDelegate {
+    
+    func inputValueDidChange(inputType: CustomInputType, inputValue: String) {
+        searchedCategories = []
+        if !inputValue.isEmpty && !inputValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            for i in 0..<categories.count {
+                for a in 0..<categories[i].childCategories.count {
+                    if categories[i].childCategories[a].name != "TOGGLE ALL" && categories[i].childCategories[a].name.lowercased().contains(find: inputValue.lowercased()) {
+                        searchedCategories.append(categories[i].childCategories[a])
+                    }
+                }
+            }
+            
+            if searchedCategories.count > 0 {
+                isSearchingCategories = true
+                parentCategoryCollectionViewTopAnchorConstraint?.constant = 0.0
+                parentCategoryCollectionViewHeightConstraint?.constant = 0.0
+                noSearchResultsView.isHidden = true
+            } else {
+                // show a no data state
+                noSearchResultsView.isHidden = false
+            }
+        } else {
+            isSearchingCategories = false
+            parentCategoryCollectionViewTopAnchorConstraint?.constant = 20.0
+            parentCategoryCollectionViewHeightConstraint?.constant = 40.0
+        }
+        
+        childCategoryCollectionView.reloadData()
+    }
+    
+    func inputClearButtonPressed(inputType: CustomInputType) {
+        isSearchingCategories = false
+        noSearchResultsView.isHidden = true
+        parentCategoryCollectionViewTopAnchorConstraint?.constant = 20.0
+        parentCategoryCollectionViewHeightConstraint?.constant = 40.0
+        childCategoryCollectionView.reloadData()
+    }
+}
+
+
+// collection view delegate and datasource methods
 extension SelectFavouriteCategoriesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isCategoriesDataLoaded {
@@ -165,7 +318,7 @@ extension SelectFavouriteCategoriesVC: UICollectionViewDelegate, UICollectionVie
                 
             // child categories
             } else {
-                return categories[selectedParentCategoryIndex].childCategories.count
+                return isSearchingCategories ? searchedCategories.count : categories[selectedParentCategoryIndex].childCategories.count
             }
         } else {
             return 0
@@ -177,6 +330,7 @@ extension SelectFavouriteCategoriesVC: UICollectionViewDelegate, UICollectionVie
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
         
+        /*-- parent --*/
         if collectionView == parentCategoryCollectionView {
             let category = ChildCategory(
                 id: categories[indexPath.item].id,
@@ -184,8 +338,18 @@ extension SelectFavouriteCategoriesVC: UICollectionViewDelegate, UICollectionVie
                 backgroundColor: categories[indexPath.item].backgroundColor,
                 isSelected: categories[indexPath.item].isSelected)
             cell.category = category
+            
+        /*-- child category --*/
         } else {
-            cell.category = categories[selectedParentCategoryIndex].childCategories[indexPath.item]
+            
+            /*-- searching --*/
+            if isSearchingCategories {
+                cell.category = searchedCategories[indexPath.item]
+                
+            /*-- not searching --*/
+            } else {
+                cell.category = categories[selectedParentCategoryIndex].childCategories[indexPath.item]
+            }
         }
         
         return cell
@@ -212,31 +376,78 @@ extension SelectFavouriteCategoriesVC: UICollectionViewDelegate, UICollectionVie
             }
             
         } else if collectionView == childCategoryCollectionView {
-            if categories[selectedParentCategoryIndex].childCategories[indexPath.item].name == "TOGGLE ALL" {
-                categories[selectedParentCategoryIndex].isSelected = !categories[selectedParentCategoryIndex].isSelected
-                for i in 0..<categories[selectedParentCategoryIndex].childCategories.count {
-                    categories[selectedParentCategoryIndex].childCategories[i].isSelected = categories[selectedParentCategoryIndex].isSelected ? true : false
+            
+            /*-- searching --*/
+            if isSearchingCategories {
+                searchedCategories[indexPath.item].isSelected = !searchedCategories[indexPath.item].isSelected
+                
+                for i in 0..<categories.count {
+                    for a in 0..<categories[i].childCategories.count {
+                        if categories[i].childCategories[a].name == searchedCategories[indexPath.item].name {
+                            categories[i].childCategories[a].isSelected = searchedCategories[indexPath.item].isSelected
+                            if !categories[i].childCategories[a].isSelected {
+                                categories[i].allCategoriesSelected = false
+                            }
+                        }
+                    }
                 }
                 
-                print(categories[selectedParentCategoryIndex].childCategories)
-            } else {
-                categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected = !categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected
+                updateSelectedCategoriesCount()
+                childCategoryCollectionView.reloadData()
                 
-                if categories[selectedParentCategoryIndex].isSelected == true {
-                    categories[selectedParentCategoryIndex].isSelected = false
+            /*-- not searching --*/
+            } else {
+                
+                /*-- toggle all --*/
+                if categories[selectedParentCategoryIndex].childCategories[indexPath.item].name == "TOGGLE ALL" {
+                    if categories[selectedParentCategoryIndex].allCategoriesSelected {
+                        for i in 0..<categories[selectedParentCategoryIndex].childCategories.count {
+                            categories[selectedParentCategoryIndex].childCategories[i].isSelected = false
+                        }
+                    } else {
+                        for i in 0..<categories[selectedParentCategoryIndex].childCategories.count {
+                            categories[selectedParentCategoryIndex].childCategories[i].isSelected = true
+                        }
+                    }
+                    
+                    /*-- change the selected value of the parent --*/
+                    categories[selectedParentCategoryIndex].allCategoriesSelected = !categories[selectedParentCategoryIndex].allCategoriesSelected
+                    updateSelectedCategoriesCount()
+                    childCategoryCollectionView.reloadData()
+                    
+                    /*-- individual category --*/
+                } else {
+                    categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected = !categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected
+                    
+                    if categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected == false {
+                        categories[selectedParentCategoryIndex].allCategoriesSelected = false
+                    }
+                    
+                    updateSelectedCategoriesCount()
+                    childCategoryCollectionView.reloadData()
                 }
             }
-            
-            collectionView.reloadData()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        /*-- parent category --*/
         if collectionView == parentCategoryCollectionView {
             let parentCategoryCellWidth = categories[indexPath.item].name.widthOfString(usingFont: defaultParagraphFont) + 38.0
             return CGSize(width: parentCategoryCellWidth, height: 40.0)
+            
+        /*-- child category --*/
         } else if collectionView == childCategoryCollectionView {
-            let childCategoryCellWidth = categories[selectedParentCategoryIndex].childCategories[indexPath.item].name.widthOfString(usingFont: defaultParagraphFont) + 38.0
+            var childCategoryCellWidth: CGFloat = 0.0
+            
+            /*-- searching --*/
+            if isSearchingCategories {
+                childCategoryCellWidth = searchedCategories[indexPath.item].name.widthOfString(usingFont: defaultParagraphFont) + 38.0
+                
+            /*-- not searching --*/
+            } else {
+                childCategoryCellWidth = categories[selectedParentCategoryIndex].childCategories[indexPath.item].name.widthOfString(usingFont: defaultParagraphFont) + 38.0
+            }
             return CGSize(width: childCategoryCellWidth, height: 40.0)
         }
         

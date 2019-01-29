@@ -44,6 +44,7 @@ class CategoriesService {
                                 id: categoryId,
                                 name: categoryName,
                                 isSelected: false,
+                                allCategoriesSelected: false,
                                 backgroundColor: getCategoryColour(withId: categoryId),
                                 childCategories: [])
                             let childCategoryRef = categoriesRef.document(categoryName).collection(_CHILD_CATEGORIES)
