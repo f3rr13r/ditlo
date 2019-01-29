@@ -149,22 +149,19 @@ class SignUpVC: UIViewController {
 // auth nav bar delegate methods
 extension SignUpVC: AuthentationNavBarDelegate {
     func redRoundedButtonPressed() {
-        let selectProfilePictureVC = SelectProfilePictureVC()
-        self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
-        
-//        self.view.isUserInteractionEnabled = false
-//        self.navigationController?.showCustomOverlayModal(withMessage: "CREATING DITLO PROFILE")
-//        AuthService.instance.signUpUser(with: self.signUpInfo) { (signUpResponse) in
-//            self.navigationController?.hideCustomOverlayModal()
-//            self.view.isUserInteractionEnabled = true
-//            if signUpResponse.success {
-//                let selectProfilePictureVC = SelectProfilePictureVC()
-//                self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
-//            } else {
-//                let errorMessageConfig = CustomErrorMessageConfig(title: "SIGN UP ERROR", body: signUpResponse.errorMessage!)
-//                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
-//            }
-//        }
+        self.view.isUserInteractionEnabled = false
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: "CREATING DITLO ACCOUNT")
+        AuthService.instance.signUpUser(with: self.signUpInfo) { (signUpResponse) in
+            SharedModalsService.instance.hideCustomOverlayModal()
+            self.view.isUserInteractionEnabled = true
+            if signUpResponse.success {
+                let selectProfilePictureVC = SelectProfilePictureVC()
+                self.navigationController?.pushViewController(selectProfilePictureVC, animated: true)
+            } else {
+                let errorMessageConfig = CustomErrorMessageConfig(title: "SIGN UP ERROR", body: signUpResponse.errorMessage!)
+                SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
+            }
+        }
     }
 }
 

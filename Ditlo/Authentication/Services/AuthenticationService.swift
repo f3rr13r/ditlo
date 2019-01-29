@@ -73,6 +73,31 @@ class AuthService {
         userDefaults.synchronize()
     }
     
+    func sendForgotPasswordEmail(withEmailAddress emailAddress: String, completion: @escaping AuthResponseCompletion) {
+        Auth.auth().fetchSignInMethods(forEmail: emailAddress) { (availableMethods, error) in
+            if error != nil {
+                let forgotPasswordErrorResponse = AuthResponse(success: false, errorMessage: error?.localizedDescription)
+                completion(forgotPasswordErrorResponse)
+            } else {
+                if let availableMethods = availableMethods,
+                    availableMethods.count > 0 {
+                    Auth.auth().sendPasswordReset(withEmail: emailAddress) { (error) in
+                        if error != nil {
+                            let forgotPasswordErrorResponse = AuthResponse(success: false, errorMessage: error?.localizedDescription)
+                            completion(forgotPasswordErrorResponse)
+                        } else {
+                            let forgotPasswordSuccessResponse = AuthResponse(success: true, errorMessage: nil)
+                            completion(forgotPasswordSuccessResponse)
+                        }
+                    }
+                } else {
+                    let noEmailRegisteredErrorResponse = AuthResponse(success: false, errorMessage: "There is no account registered with this email address")
+                    completion(noEmailRegisteredErrorResponse)
+                }
+            }
+        }
+    }
+    
     func logoutUser(completion: (Bool) -> ()) {
         do {
             try Auth.auth().signOut()

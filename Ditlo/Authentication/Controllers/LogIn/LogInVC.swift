@@ -55,11 +55,21 @@ class LogInVC: UIViewController {
     // variables
     var loginInfo: LoginInfo = LoginInfo(emailAddress: "", password: "")
     
+    override func loadView() {
+        super.loadView()
+        
+        // check the user defaults
+    }
+    
     override func viewDidLoad() {
-        self.view.backgroundColor = .white
-        setupChildDelegates()
-        addDismissKeyboardGesture()
-        anchorChildViews()
+        if UserDefaults.standard.object(forKey: "userId") != nil {
+            self.navigationController?.navigateIntoMainApp(withAnimation: false)
+        } else {
+            self.view.backgroundColor = .white
+            setupChildDelegates()
+            addDismissKeyboardGesture()
+            anchorChildViews()
+        }
     }
     
     func setupChildDelegates() {
@@ -133,23 +143,15 @@ class LogInVC: UIViewController {
 extension LogInVC: AuthentationNavBarDelegate {
     func redRoundedButtonPressed() {
         self.view.isUserInteractionEnabled = false
-        self.navigationController?.showCustomOverlayModal(withMessage: "LOGGING IN TO DITLO")
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: "LOGGING INTO DITLO")
         AuthService.instance.logInUser(withLoginInfo: self.loginInfo) { (logInResponse) in
-            self.navigationController?.hideCustomOverlayModal()
+            SharedModalsService.instance.hideCustomOverlayModal()
+            self.view.isUserInteractionEnabled = true
             if logInResponse.success {
-                let mainAppNavigationVC = MainAppNavigationVC()
-                let transition = CATransition()
-                transition.duration = 0.3
-                transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-                transition.type = CATransitionType.push
-                transition.subtype = CATransitionSubtype.fromTop
-                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-                self.navigationController?.pushViewController(mainAppNavigationVC, animated: false)
-                self.view.isUserInteractionEnabled = true
+                self.navigationController?.navigateIntoMainApp(withAnimation: true)
             } else {
                 let errorMessageConfig = CustomErrorMessageConfig(title: "LOG IN ERROR", body: logInResponse.errorMessage!)
-                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
-                self.view.isUserInteractionEnabled = true
+            SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
             }
         }
     }

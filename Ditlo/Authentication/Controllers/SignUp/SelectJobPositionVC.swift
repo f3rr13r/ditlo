@@ -140,7 +140,7 @@ class SelectJobPositionVC: UIViewController {
     }
     
     @objc func presentInfoWindowModal() {
-        self.navigationController?.showInfoWindowModal(withInfoWindowConfig: jobPositionInfoWindowConfig, andAnimation: true)
+        SharedModalsService.instance.showInfoWindowModal(withInfoWindowConfig: jobPositionInfoWindowConfig, andAnimation: true)
     }
     
     @objc func dismissKeyboard() {
@@ -266,7 +266,22 @@ extension SelectJobPositionVC: AuthentationNavBarDelegate {
     }
     
     func redRoundedButtonPressed() {
-        // update profile on database, and proceed to next view controller
+        self.view.isUserInteractionEnabled = false
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: "SAVING JOB POSITION")
+        jobsList.forEach { (job) in
+            if job.isSelected {
+                UserService.instance.updateUserData(withName: "job", andValue: job.jobName) { (jobPositionWasStoredSuccessfully) in
+                    SharedModalsService.instance.hideCustomOverlayModal()
+                    self.view.isUserInteractionEnabled = true
+                    if jobPositionWasStoredSuccessfully {
+                        self.navigateToSelectFavouriteCategoriesVC()
+                    } else {
+                        let jobPositionErrorConfig = CustomErrorMessageConfig(title: "JOB POSITION ERROR", body: "Something went wrong when trying to save your selected job position. Please try again, or click the 'skip' button to return to it later")
+                        SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: jobPositionInfoWindowConfig)
+                    }
+                }
+            }
+        }
     }
 }
 

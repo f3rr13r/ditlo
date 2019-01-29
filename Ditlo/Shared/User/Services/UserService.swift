@@ -36,6 +36,8 @@ class UserService {
                 return
             }
             
+            print(userId)
+            
             let currentUserRef = db.collection(_USERS).document(userId)
             currentUserRef.addSnapshotListener { (document, error) in
                 if error != nil {

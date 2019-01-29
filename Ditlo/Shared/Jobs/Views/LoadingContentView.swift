@@ -63,6 +63,6 @@ class LoadingContentView: BaseView {
         loadingSpinner.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: loadingSpinnerContainerView.centerXAnchor, centreYAnchor: loadingSpinnerContainerView.centerYAnchor)
         
         addSubview(loadingMessageLabel)
-        loadingMessageLabel.anchor(withTopAnchor: loadingSpinnerContainerView.bottomAnchor, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: self.centerXAnchor, centreYAnchor: nil, widthAnchor: screenWidth * (horizontalPadding * 2), heightAnchor: nil, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0))
+        loadingMessageLabel.anchor(withTopAnchor: loadingSpinnerContainerView.bottomAnchor, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: self.centerXAnchor, centreYAnchor: nil, widthAnchor: screenWidth - (horizontalPadding * 2), heightAnchor: nil, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0))
     }
 }

@@ -19,7 +19,16 @@ class MainAppNavigationVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        getCurrentUserData()
         configureTabBar()
+    }
+    
+    func getCurrentUserData() {
+        UserService.instance.getCurrentUserDataFromCloudFirestore { (gotCurrentUserProfileDataSuccessfully) in
+            if gotCurrentUserProfileDataSuccessfully {
+                self.homeVC.appHasCurrentUserData()
+            }
+        }
     }
     
     func configureTabBar() {

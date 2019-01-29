@@ -103,10 +103,25 @@ class ForgotPasswordVC: UIViewController {
 extension ForgotPasswordVC: AuthentationNavBarDelegate {
     
     func redRoundedButtonPressed() {
-        // send email here
+        self.view.isUserInteractionEnabled = false
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: "ATTEMPTING TO SEND EMAIL")
+        AuthService.instance.sendForgotPasswordEmail(withEmailAddress: self.emailAddress) { (forgotPasswordResponse) in
+            SharedModalsService.instance.hideCustomOverlayModal()
+            self.view.isUserInteractionEnabled = true
+            if forgotPasswordResponse.success {
+                self.dismissForgotPasswordVC()
+            } else {
+                let errorMessageConfig = CustomErrorMessageConfig(title: "FORGOT PASSWORD ERROR", body: forgotPasswordResponse.errorMessage!)
+                SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: errorMessageConfig)
+            }
+        }
     }
     
     func backButtonPressed() {
+        dismissForgotPasswordVC()
+    }
+    
+    func dismissForgotPasswordVC() {
         self.navigationController?.popViewController(animated: true)
     }
 }

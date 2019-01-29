@@ -148,7 +148,7 @@ class SelectFavouriteCategoriesVC: UIViewController {
     }
     
     @objc func presentInfoWindowModal() {
-        self.navigationController?.showInfoWindowModal(withInfoWindowConfig: selectFavouriteCategoriesInfoWindowConfig, andAnimation: true)
+        SharedModalsService.instance.showInfoWindowModal(withInfoWindowConfig: selectFavouriteCategoriesInfoWindowConfig, andAnimation: true)
     }
     
     @objc func dismissKeyboard() {
@@ -156,6 +156,7 @@ class SelectFavouriteCategoriesVC: UIViewController {
     }
     
     func setupChildDelegates() {
+        self.selectFavouriteCategoriesNavBar.delegate = self
         self.searchCategoriesInput.delegate = self
     }
     
@@ -261,6 +262,38 @@ class SelectFavouriteCategoriesVC: UIViewController {
         // dismiss keyboard view
         self.view.addSubview(dismissKeyboardView)
         dismissKeyboardView.fillSuperview()
+    }
+}
+
+
+// custom nav bar delegate methods
+extension SelectFavouriteCategoriesVC: AuthentationNavBarDelegate {
+    func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?) {
+        
+    }
+    
+    func redRoundedButtonPressed() {
+        self.view.isUserInteractionEnabled = false
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: "SAVING FAVOURITE CATEGORIES")
+        var selectedCategoryIds: [Int] = []
+        for i in 0..<categories.count {
+            for a in 0..<categories[i].childCategories.count {
+                if !categories[i].childCategories[a].name.contains(find: "Toggle All") && categories[i].childCategories[a].isSelected {
+                    selectedCategoryIds.append(categories[i].childCategories[a].id)
+                }
+            }
+        }
+        
+        UserService.instance.updateUserData(withName: "favouriteCategoryIds", andValue: selectedCategoryIds) { (favouriteCategoriesStoredSuccessfully) in
+            SharedModalsService.instance.hideCustomOverlayModal()
+            self.view.isUserInteractionEnabled = true
+            if favouriteCategoriesStoredSuccessfully {
+                self.navigationController?.navigateIntoMainApp(withAnimation: true)
+            } else {
+                let favouriteCategoriesErrorConfig = CustomErrorMessageConfig(title: "FAVOURITE CATEGORIES ERROR", body: "Something went wrong when trying to save your chosen favourite categories. Please try again, or click the 'skip' button to return to it later")
+                SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: favouriteCategoriesErrorConfig)
+            }
+        }
     }
 }
 

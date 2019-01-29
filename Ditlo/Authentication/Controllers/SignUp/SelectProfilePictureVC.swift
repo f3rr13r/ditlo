@@ -166,17 +166,18 @@ class SelectProfilePictureVC: UIViewController {
     }
     
     func updateProfileData(withImage image: UIImage) {
-        self.navigateToNextPage()
-//        self.navigationController?.showCustomOverlayModal(withMessage: "SAVING PROFILE PICTURE")
-//        UserService.instance.updateUserData(withName: "profileImageUrl", andValue: image) { (profilePictureWasStoredSuccessfully) in
-//            self.navigationController?.hideCustomOverlayModal()
-//            if profilePictureWasStoredSuccessfully {
-//                self.navigateToNextPage()
-//            } else {
-//                let profilePictureErrorConfig = CustomErrorMessageConfig(title: "PROFILE PICTURE ERROR", body: "Something went wrong when trying to save your selected profile picture. Please try again, or click the 'skip' button to return to it later")
-//                self.navigationController?.showErrorMessageModal(withErrorMessageConfig: profilePictureErrorConfig)
-//            }
-//        }
+        self.view.isUserInteractionEnabled = false
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: "SAVING PROFILE PICTURE")
+        UserService.instance.updateUserData(withName: "profileImageUrl", andValue: image) { (profilePictureWasStoredSuccessfully) in
+            SharedModalsService.instance.hideCustomOverlayModal()
+            self.view.isUserInteractionEnabled = true
+            if profilePictureWasStoredSuccessfully {
+                self.navigateToNextPage()
+            } else {
+                let profilePictureErrorConfig = CustomErrorMessageConfig(title: "PROFILE PICTURE ERROR", body: "Something went wrong when trying to save your selected profile picture. Please try again, or click the 'skip' button to return to it later")
+                SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: profilePictureErrorConfig)
+            }
+        }
     }
     
     func navigateToNextPage() {

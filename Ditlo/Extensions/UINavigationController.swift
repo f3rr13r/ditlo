@@ -20,63 +20,20 @@ extension UINavigationController {
     
     
     /*--
-        custom modal overlay methods
-    --*/
-    func addCustomModalViewsToNavigationController() {
-        // universal custom overlay modal
-        let customModalOverlay = CustomModalOverlay()
-        self.view.addSubview(customModalOverlay)
-        customModalOverlay.fillSuperview()
+        animate into main app
+     --*/
+    func navigateIntoMainApp(withAnimation needsAnimation: Bool = false) {
+        let mainAppNavigationVC = MainAppNavigationVC()
         
-        // error message modal
-        let errorMessageModal = CustomErrorMessageModal()
-        self.view.addSubview(errorMessageModal)
-        errorMessageModal.fillSuperview()
+        if needsAnimation {
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromTop
+            self.view.layer.add(transition, forKey: kCATransition)
+        }
         
-        // info window modal
-        let infoWindowModal = CustomInfoWindowModal()
-        self.view.addSubview(infoWindowModal)
-        infoWindowModal.fillSuperview()
-    }
-    
-    
-    func showCustomOverlayModal(withMessage message: String) {
-        for subview in self.view.subviews {
-            if let customModalOverlay = subview as? CustomModalOverlay {
-                customModalOverlay.showCustomOverlayModal(withMessage: message)
-            }
-        }
-    }
-    
-    func hideCustomOverlayModal() {
-        for subview in self.view.subviews {
-            if let customModalOverlay = subview as? CustomModalOverlay {
-                customModalOverlay.hideCustomOverlayModal()
-            }
-        }
-    }
-    
-    
-    /*--
-        error message modal methods -- we will close it from within
-    --*/
-    func showErrorMessageModal(withErrorMessageConfig errorMessageConfig: CustomErrorMessageConfig) {
-        for subview in self.view.subviews {
-            if let errorMessageModal = subview as? CustomErrorMessageModal {
-                errorMessageModal.showErrorMessageContainer(withErrorMessageConfig: errorMessageConfig)
-            }
-        }
-    }
-    
-    
-    /*--
-        info window modal methods -- we will close it from within
-    --*/
-    func showInfoWindowModal(withInfoWindowConfig infoWindowConfig: CustomInfoMessageConfig, andAnimation needsAnimation: Bool = false) {
-        for subview in self.view.subviews {
-            if let infoWindowModal = subview as? CustomInfoWindowModal {
-                infoWindowModal.showInfoWindowModal(withInfoWindowConfig: infoWindowConfig, andAnimation: needsAnimation)
-            }
-        }
+        self.pushViewController(mainAppNavigationVC, animated: false)
     }
 }
