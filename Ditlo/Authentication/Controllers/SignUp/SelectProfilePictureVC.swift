@@ -241,7 +241,7 @@ extension SelectProfilePictureVC: UINavigationControllerDelegate, UIImagePickerC
             proceedToImageSelectedPageState(withImage: originalImage)
         } else {
             let profilePictureErrorConfig = CustomErrorMessageConfig(title: "PROFILE PICTURE ERROR", body: "Something went wrong when trying to upload your selected profile picture. Please try again, or click the 'skip' button to return to it later")
-            self.navigationController?.showErrorMessageModal(withErrorMessageConfig: profilePictureErrorConfig)
+            SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: profilePictureErrorConfig)
         }
     }
     

@@ -10,7 +10,9 @@
 		4A3DA2832200A948005207D8 /* MainDitloNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA2822200A948005207D8 /* MainDitloNavBar.swift */; };
 		4A3DA2862200B8DA005207D8 /* RoundProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA2852200B8DA005207D8 /* RoundProfilePictureView.swift */; };
 		4A3DA28A2200D34F005207D8 /* CustomCalendarModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA2892200D34F005207D8 /* CustomCalendarModal.swift */; };
-		4A3DA28D220107FC005207D8 /* AppDelegateModals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA28C220107FC005207D8 /* AppDelegateModals.swift */; };
+		4A3DA28D220107FC005207D8 /* SharedModalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA28C220107FC005207D8 /* SharedModalsService.swift */; };
+		4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA29022011428005207D8 /* CustomCalendarCell.swift */; };
+		4A3DA293220123BB005207D8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA292220123BB005207D8 /* Date.swift */; };
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
@@ -70,7 +72,9 @@
 		4A3DA2822200A948005207D8 /* MainDitloNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDitloNavBar.swift; sourceTree = "<group>"; };
 		4A3DA2852200B8DA005207D8 /* RoundProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundProfilePictureView.swift; sourceTree = "<group>"; };
 		4A3DA2892200D34F005207D8 /* CustomCalendarModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarModal.swift; sourceTree = "<group>"; };
-		4A3DA28C220107FC005207D8 /* AppDelegateModals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateModals.swift; sourceTree = "<group>"; };
+		4A3DA28C220107FC005207D8 /* SharedModalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModalsService.swift; sourceTree = "<group>"; };
+		4A3DA29022011428005207D8 /* CustomCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarCell.swift; sourceTree = "<group>"; };
+		4A3DA292220123BB005207D8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
@@ -149,9 +153,18 @@
 		4A3DA28E22010D4B005207D8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4A3DA28C220107FC005207D8 /* AppDelegateModals.swift */,
+				4A3DA28C220107FC005207D8 /* SharedModalsService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4A3DA28F220113E7005207D8 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				4A3DA2892200D34F005207D8 /* CustomCalendarModal.swift */,
+				4A3DA29022011428005207D8 /* CustomCalendarCell.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		4A9F4B3821F3B0F400EDDE8B /* Views */ = {
@@ -264,6 +277,7 @@
 				4AD0347421F0B76F00FDA967 /* UIColor.swift */,
 				4AD0347C21F0C7D000FDA967 /* String.swift */,
 				4AB7AB9722008A1800A2A8DD /* UILabel.swift */,
+				4A3DA292220123BB005207D8 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -349,10 +363,10 @@
 		4AD0349521F150A300FDA967 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
+				4A3DA28F220113E7005207D8 /* Calendar */,
 				4AD0349621F150CD00FDA967 /* CustomModalOverlay.swift */,
 				4AD034B321F1F05F00FDA967 /* CustomErrorMessageModal.swift */,
 				4AD034CC21F226B100FDA967 /* CustomInfoWindowModal.swift */,
-				4A3DA2892200D34F005207D8 /* CustomCalendarModal.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -769,6 +783,7 @@
 				"${BUILT_PRODUCTS_DIR}/DGCollectionViewLeftAlignFlowLayout/DGCollectionViewLeftAlignFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -782,6 +797,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCollectionViewLeftAlignFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -816,9 +832,11 @@
 				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
 				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
+				4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */,
 				4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */,
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
+				4A3DA293220123BB005207D8 /* Date.swift in Sources */,
 				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
 				4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */,
 				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
@@ -827,7 +845,7 @@
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
 				4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */,
 				4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */,
-				4A3DA28D220107FC005207D8 /* AppDelegateModals.swift in Sources */,
+				4A3DA28D220107FC005207D8 /* SharedModalsService.swift in Sources */,
 				4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */,
 				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
 				4A3DA2862200B8DA005207D8 /* RoundProfilePictureView.swift in Sources */,

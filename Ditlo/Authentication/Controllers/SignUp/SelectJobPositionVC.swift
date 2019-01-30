@@ -277,7 +277,7 @@ extension SelectJobPositionVC: AuthentationNavBarDelegate {
                         self.navigateToSelectFavouriteCategoriesVC()
                     } else {
                         let jobPositionErrorConfig = CustomErrorMessageConfig(title: "JOB POSITION ERROR", body: "Something went wrong when trying to save your selected job position. Please try again, or click the 'skip' button to return to it later")
-                        SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: jobPositionInfoWindowConfig)
+                        SharedModalsService.instance.showErrorMessageModal(withErrorMessageConfig: jobPositionErrorConfig)
                     }
                 }
             }

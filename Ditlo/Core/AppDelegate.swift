@@ -42,8 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         
-        // extension method
-        SharedModalsService.instance.addCustomModalViewsTo(navigationController: navigationController!)
+    SharedModalsService.instance.initializeSharedModalsMethodsClass(withAppDelegate: self, andNavigationController: self.navigationController!)
     }
 
 

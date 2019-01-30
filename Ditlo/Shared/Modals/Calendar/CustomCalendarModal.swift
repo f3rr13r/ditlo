@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JTAppleCalendar
 
 class CustomCalendarModal: BaseView {
 
@@ -34,12 +35,33 @@ class CustomCalendarModal: BaseView {
         return label
     }()
     
+    let calendar: JTAppleCalendarView = {
+        let c = JTAppleCalendarView(frame: .zero)
+        c.backgroundColor = UIColor.clear
+        c.scrollDirection = .horizontal
+        c.allowsDateCellStretching = false
+        //c.cellSize = ((screenWidth - (horizontalPadding * 2)) / 7)
+        c.isPagingEnabled = true
+        c.sectionInset = UIEdgeInsets(top: 0.0, left: horizontalPadding, bottom: 0.0, right: horizontalPadding)
+        c.register(CustomCalendarCell.self, forCellWithReuseIdentifier: "CalendarCellId")
+        return c
+    }()
+    
+    // variables
+    let dateFormatter = DateFormatter()
+    
     override func setupViews() {
         super.setupViews()
         backgroundColor = ditloOffBlack.withAlphaComponent(0.75)
         alpha = 0.0
+        setupChildDelegates()
         setupDismissCalendarContainerViewTapGesture()
         anchorChildViews()
+    }
+    
+    func setupChildDelegates() {
+        calendar.calendarDelegate = self
+        calendar.calendarDataSource = self
     }
     
     func setupDismissCalendarContainerViewTapGesture() {
@@ -59,6 +81,10 @@ class CustomCalendarModal: BaseView {
         
         calendarContainerView.addSubview(ditloLogoNameLabel)
         ditloLogoNameLabel.anchor(withTopAnchor: nil, leadingAnchor: miniDitloLogoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: miniDitloLogoImageView.centerYAnchor, widthAnchor: 60.0, heightAnchor: nil, padding: .init(top: 0.0, left: 4.0, bottom: 0.0, right: 0.0))
+        
+        // calendar
+        calendarContainerView.addSubview(calendar)
+        calendar.anchor(withTopAnchor: miniDitloLogoImageView.bottomAnchor, leadingAnchor: calendarContainerView.leadingAnchor, bottomAnchor: calendarContainerView.bottomAnchor, trailingAnchor: calendarContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: 0.0, bottom: -20.0, right: 0.0))
     }
     
     func showCalendar() {
@@ -88,6 +114,49 @@ class CustomCalendarModal: BaseView {
                     }
                 })
             }
+        }
+    }
+}
+
+
+// calendar delegate and datasource methods
+extension CustomCalendarModal: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
+    
+    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+        // set up date formatter conditions
+        dateFormatter.dateFormat = "yyyy MM dd"
+        dateFormatter.timeZone = Calendar.current.timeZone
+        dateFormatter.locale = Calendar.current.locale
+        
+        // set parameters
+        let startDate = dateFormatter.date(from: "2018 07 01")
+        let endDate = Date()
+        
+        let parameters = ConfigurationParameters(startDate: startDate ?? endDate, endDate: endDate)
+        
+        return parameters
+        
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+        guard let customCalendarCell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCellId", for: indexPath) as? CustomCalendarCell else { return JTAppleCell() }
+        configureCalendarCell(withCalendarCell: customCalendarCell, cellState: cellState, date: date)
+        return customCalendarCell
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+        guard let customCalendarCell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCellId", for: indexPath) as? CustomCalendarCell else { return }
+        configureCalendarCell(withCalendarCell: customCalendarCell, cellState: cellState, date: date)
+    }
+    
+    func configureCalendarCell(withCalendarCell customCalendarCell: CustomCalendarCell, cellState: CellState, date: Date) {
+        customCalendarCell.dateLabel.text = cellState.text
+        
+        let inbuiltCalendar = Calendar(identifier: .gregorian)
+        if inbuiltCalendar.isDateInToday(date) {
+            customCalendarCell.backgroundColor = ditloRed
+        } else {
+            customCalendarCell.backgroundColor = ditloLightGrey
         }
     }
 }
