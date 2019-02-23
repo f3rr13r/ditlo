@@ -24,3 +24,6 @@ let ditloDarkBlue: UIColor = UIColor.init(hexString: "#5795E0")
 let ditloOrange: UIColor = UIColor.init(hexString: "#FFB200")
 let ditloYellow: UIColor = UIColor.init(hexString: "#FDE16B")
 let ditloPink: UIColor = UIColor.init(hexString: "#FD74D1")
+
+// gradient
+let defaultGradientEndColour: UIColor = UIColor.init(hexString: "#F8F8F8")

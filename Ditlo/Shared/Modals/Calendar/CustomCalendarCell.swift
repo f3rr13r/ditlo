@@ -10,9 +10,64 @@ import UIKit
 import JTAppleCalendar
 
 class CustomCalendarCell: JTAppleCell {
+    
+    // injector variables
+    
+    var isDateInMonth: Bool? = true {
+        didSet {
+            if let isDateInMonth = self.isDateInMonth {
+                self.dateLabel.textColor = isDateInMonth ? ditloOffBlack : ditloVeryLightGrey
+                if !isDateInMonth {
+                    roundedFocusView.backgroundColor = UIColor.clear
+                }
+            }
+        }
+    }
+
+    var isDateLaterInMonth: Bool? = false {
+        didSet {
+            if let isDateLaterInMonth = self.isDateLaterInMonth,
+                isDateLaterInMonth {
+                    self.dateLabel.textColor = ditloLightGrey
+                    roundedFocusView.backgroundColor = UIColor.clear
+            }
+        }
+    }
+
+    var isDateToday: Bool? = false {
+        didSet {
+            if let isDateToday = self.isDateToday {
+                self.roundedFocusView.backgroundColor = isDateToday ? ditloVeryLightGrey : UIColor.clear
+            }
+        }
+    }
+
+    var isDateSelected: Bool? = false {
+        didSet {
+            if let isDateSelected = self.isDateSelected,
+                let isDateToday = self.isDateToday,
+                let isDateInMonth = self.isDateInMonth,
+                let isDateLaterInMonth = self.isDateLaterInMonth {
+                let defaultColor = isDateInMonth && isDateToday ? ditloVeryLightGrey : UIColor.clear
+                self.roundedFocusView.backgroundColor = isDateSelected ? ditloRed : defaultColor
+                if isDateInMonth && !isDateLaterInMonth {
+                    self.dateLabel.textColor = isDateSelected ? UIColor.white : ditloOffBlack
+                }
+            }
+        }
+    }
+    
+    let roundedFocusView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 14.0
+        return view
+    }()
 
     let dateLabel: UILabel = {
         let label = UILabel()
+        label.font = calendarCellLabelFont
+        label.textColor = ditloOffBlack
+        label.textAlignment = .center
         return label
     }()
     
@@ -33,7 +88,18 @@ class CustomCalendarCell: JTAppleCell {
     }
     
     func setupViews() {
-        self.addSubview(dateLabel)
-        dateLabel.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: centerXAnchor, centreYAnchor: centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 6.0, left: 6.0, bottom: -6.0, right: -6.0))
+        self.addSubview(roundedFocusView)
+        roundedFocusView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: centerXAnchor, centreYAnchor: centerYAnchor, widthAnchor: 28.0, heightAnchor: 28.0)
+        
+        roundedFocusView.addSubview(dateLabel)
+        dateLabel.fillSuperview()
+    }
+    
+    override func prepareForReuse() {
+        roundedFocusView.backgroundColor = UIColor.clear
+        dateLabel.textColor = ditloOffBlack
+        dateLabel.text = nil
+        isDateToday = nil
+        isDateSelected = nil
     }
 }

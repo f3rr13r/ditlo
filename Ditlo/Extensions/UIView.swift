@@ -151,3 +151,18 @@ extension UIView {
     }
     
 }
+
+
+// gradient
+extension UIView {
+    func applyGradient(withEndColour endColour: UIColor = ditloVeryLightGrey) {
+        let gradient = CAGradientLayer()
+        let starterColour = UIColor.white
+        let endingColour = endColour.withAlphaComponent(endColour != defaultGradientEndColour ? 0.2 : 1.0)
+        let middleColour = endingColour.withAlphaComponent(0.5)
+        gradient.colors = [starterColour.cgColor, middleColour.cgColor, endingColour.cgColor]
+        gradient.locations = [0.0, 1.0]
+        gradient.frame = self.bounds
+        self.layer.insertSublayer(gradient, at: 0)
+    }
+}

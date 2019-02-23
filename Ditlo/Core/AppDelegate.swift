@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         
-    SharedModalsService.instance.initializeSharedModalsMethodsClass(withAppDelegate: self, andNavigationController: self.navigationController!)
+        SharedModalsService.instance.initializeSharedModalsMethodsClass(withAppDelegate: self, andNavigationController: self.navigationController!)
     }
 
 

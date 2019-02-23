@@ -24,3 +24,11 @@ let infoWindowModalLogoFont: UIFont = UIFont.systemFont(ofSize: 16.0, weight: he
 
 let forgotPasswordButtonFont: UIFont = UIFont.systemFont(ofSize: 12.0, weight: mediumFont)
 let customInputFont: UIFont = UIFont.systemFont(ofSize: 14.0, weight: mediumFont)
+let calendarCellLabelFont: UIFont = UIFont.systemFont(ofSize: 12.0, weight: mediumFont)
+
+let largeProfileInfoNameFont: UIFont = UIFont.systemFont(ofSize: 12.0, weight: heavyFont)
+let largeProfileInfoJobFont: UIFont = UIFont.systemFont(ofSize: 10.0, weight: mediumFont)
+
+let smallProfileInfoNameFont: UIFont = UIFont.systemFont(ofSize: 10.0, weight: heavyFont)
+let smallProfileInfoJobFont: UIFont = UIFont.systemFont(ofSize: 8.0, weight: mediumFont)
+

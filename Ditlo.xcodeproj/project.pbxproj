@@ -13,10 +13,12 @@
 		4A3DA28D220107FC005207D8 /* SharedModalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA28C220107FC005207D8 /* SharedModalsService.swift */; };
 		4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA29022011428005207D8 /* CustomCalendarCell.swift */; };
 		4A3DA293220123BB005207D8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA292220123BB005207D8 /* Date.swift */; };
+		4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A734B5E222044B7005EE2CC /* MyProfileVC.swift */; };
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
 		4AB7AB9822008A1800A2A8DD /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7AB9722008A1800A2A8DD /* UILabel.swift */; };
+		4AC768A0220CDF160086FF17 /* DummyDitloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7689F220CDF160086FF17 /* DummyDitloService.swift */; };
 		4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0343421F0A43300FDA967 /* AppDelegate.swift */; };
 		4AD0343C21F0A43500FDA967 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343B21F0A43500FDA967 /* Assets.xcassets */; };
 		4AD0343F21F0A43500FDA967 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0343D21F0A43500FDA967 /* LaunchScreen.storyboard */; };
@@ -75,10 +77,12 @@
 		4A3DA28C220107FC005207D8 /* SharedModalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModalsService.swift; sourceTree = "<group>"; };
 		4A3DA29022011428005207D8 /* CustomCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarCell.swift; sourceTree = "<group>"; };
 		4A3DA292220123BB005207D8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		4A734B5E222044B7005EE2CC /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
 		4AB7AB9722008A1800A2A8DD /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		4AC7689F220CDF160086FF17 /* DummyDitloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDitloService.swift; sourceTree = "<group>"; };
 		4AD0343121F0A43300FDA967 /* Ditlo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ditlo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD0343421F0A43300FDA967 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AD0343B21F0A43500FDA967 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				4A3DA28C220107FC005207D8 /* SharedModalsService.swift */,
+				4AC7689F220CDF160086FF17 /* DummyDitloService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -165,6 +170,22 @@
 				4A3DA29022011428005207D8 /* CustomCalendarCell.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		4A734B5C2220448F005EE2CC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A734B5D22204498005EE2CC /* Controllers */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4A734B5D22204498005EE2CC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A734B5E222044B7005EE2CC /* MyProfileVC.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4A9F4B3821F3B0F400EDDE8B /* Views */ = {
@@ -490,6 +511,7 @@
 		4AD034B721F2056100FDA967 /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
+				4A734B5C2220448F005EE2CC /* Profile */,
 				4A3DA2812200A873005207D8 /* Views */,
 				4AD034BD21F2078D00FDA967 /* Camera */,
 				4AD034BC21F2078500FDA967 /* Categories */,
@@ -779,11 +801,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/BouncyLayout/BouncyLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/DGCollectionViewLeftAlignFlowLayout/DGCollectionViewLeftAlignFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -793,11 +816,12 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BouncyLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCollectionViewLeftAlignFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -843,10 +867,12 @@
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
+				4AC768A0220CDF160086FF17 /* DummyDitloService.swift in Sources */,
 				4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */,
 				4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */,
 				4A3DA28D220107FC005207D8 /* SharedModalsService.swift in Sources */,
 				4AD0343521F0A43300FDA967 /* AppDelegate.swift in Sources */,
+				4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */,
 				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
 				4A3DA2862200B8DA005207D8 /* RoundProfilePictureView.swift in Sources */,
 				4AB7AB9822008A1800A2A8DD /* UILabel.swift in Sources */,

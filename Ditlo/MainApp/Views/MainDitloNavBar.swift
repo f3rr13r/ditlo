@@ -11,40 +11,24 @@ import UIKit
 protocol MainDitloNavBarDelegate {
     func goHomeButtonPressed()
     func openCalendarButtonPressed()
-    func profileIconButtonPressed()
+}
+
+extension MainDitloNavBarDelegate {
+    func goHomeButtonPressed() {}
 }
 
 class MainDitloNavBar: BaseView {
-
-    // injector variables
-    var profilePicture: UIImage? {
-        didSet {
-            if let profilePicture = self.profilePicture {
-                self.profilePictureImageView.profilePicture = profilePicture
-            }
-        }
-    }
-    
-    var areButtonsEnabled: Bool = false
     
     // views
-    let topRowView = UIView()
-    
-    let homeButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(homeButtonPressed), for: .touchUpInside)
-        return button
-    }()
-    
-    let ditloLogoImageView: UIImageView = {
+    let ditloImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        let ditloLogo: UIImage = #imageLiteral(resourceName: "ditlo-logo")
-        iv.image = ditloLogo
+        let ditloImage = #imageLiteral(resourceName: "ditlo-logo")
+        iv.image = ditloImage
         return iv
     }()
     
-    let ditloLogoLabel: UILabel = {
+    let ditloNameLabel: UILabel = {
         let label = UILabel()
         label.text = "DITLO"
         label.font = navBarLogoFont
@@ -58,109 +42,51 @@ class MainDitloNavBar: BaseView {
         return button
     }()
     
-    let calendarButtonLabel: UILabel = {
-        let label = UILabel()
-        label.font = navBarCalendarButtonFont
-        label.textColor = ditloGrey
-        label.text = "29 DECEMBER 18"
-        return label
-    }()
-    
-    let calendarArrowImageView: UIImageView = {
+    let calendarIconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        let arrowIcon: UIImage = #imageLiteral(resourceName: "down-arrow-icon")
-        iv.image = arrowIcon
+        let calendarImage = #imageLiteral(resourceName: "calendar-icon")
+        iv.image = calendarImage
         return iv
     }()
     
-    let profilePictureImageView = RoundProfilePictureView()
+    let calendarDateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "29 DEC 2018"
+        label.font = defaultParagraphFont
+        label.textColor = ditloOffBlack
+        label.textAlignment = .right
+        return label
+    }()
     
-    let bottomRowView = UIView()
-    var bottomRowViewHeightConstraint: NSLayoutConstraint?
-    
-    let bottomBorderView = PaddedBorderView()
-    
-    // delegate
     var delegate: MainDitloNavBarDelegate?
     
     override func setupViews() {
         super.setupViews()
-        handleChildDelegates()
-        anchorChildSubviews()
+        anchorChildViews()
     }
     
-    func handleChildDelegates() {
-        profilePictureImageView.delegate = self
-    }
-    
-    func anchorChildSubviews() {
-        // top row view
-        self.addSubview(topRowView)
-        topRowView.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: screenWidth - (horizontalPadding * 2), heightAnchor: 48.0, padding: .init(top: 18.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
+    func anchorChildViews() {
+        self.addSubview(ditloImageView)
+        ditloImageView.anchor(withTopAnchor: safeAreaLayoutGuide.topAnchor, leadingAnchor: safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 20.0, heightAnchor: 20.0, padding: .init(top: 10.0, left: horizontalPadding, bottom: 0.0, right: 0.0))
         
-        // home button
-        topRowView.addSubview(homeButton)
-        homeButton.anchor(withTopAnchor: topRowView.topAnchor, leadingAnchor: topRowView.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 20.0)
+        self.addSubview(ditloNameLabel)
+        ditloNameLabel.anchor(withTopAnchor: nil, leadingAnchor: ditloImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: ditloImageView.centerYAnchor, widthAnchor: 84.0, heightAnchor: 20.0, padding: .init(top: 0.0, left: 4.0, bottom: 0.0, right: 0.0))
         
-        // logo image view
-        homeButton.addSubview(ditloLogoImageView)
-        ditloLogoImageView.anchor(withTopAnchor: homeButton.topAnchor, leadingAnchor: homeButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 20.0, heightAnchor: 20.0)
+        self.addSubview(calendarButton)
+        calendarButton.anchor(withTopAnchor: nil, leadingAnchor: ditloNameLabel.trailingAnchor, bottomAnchor: nil, trailingAnchor: safeAreaLayoutGuide.trailingAnchor, centreXAnchor: nil, centreYAnchor: ditloNameLabel.centerYAnchor, widthAnchor: nil, heightAnchor: 20.0, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
         
-        // logo label
-        homeButton.addSubview(ditloLogoLabel)
-        ditloLogoLabel.anchor(withTopAnchor: nil, leadingAnchor: ditloLogoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: homeButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: ditloLogoLabel.centerYAnchor, widthAnchor: 82.0, heightAnchor: 20.0, padding: .init(top: 0.0, left: 6.0, bottom: 0.0, right: 0.0))
+        self.calendarButton.addSubview(calendarIconImageView)
+        calendarIconImageView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: calendarButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: 14.0, heightAnchor: 14.0)
         
-        // calendar button
-        topRowView.addSubview(calendarButton)
-        calendarButton.anchor(withTopAnchor: homeButton.bottomAnchor, leadingAnchor: topRowView.leadingAnchor, bottomAnchor: topRowView.bottomAnchor, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 20.0, padding: .init(top: 8.0, left: 0.0, bottom: 0.0, right: 0.0))
-        
-        // calendar button label
-        calendarButton.addSubview(calendarButtonLabel)
-        calendarButtonLabel.anchor(withTopAnchor: calendarButton.topAnchor, leadingAnchor: calendarButton.leadingAnchor, bottomAnchor: calendarButton.bottomAnchor, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil)
-        
-        // calendar arrow icon
-        calendarButton.addSubview(calendarArrowImageView)
-        calendarArrowImageView.anchor(withTopAnchor: nil, leadingAnchor: calendarButtonLabel.trailingAnchor, bottomAnchor: nil, trailingAnchor: calendarButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: calendarButtonLabel.centerYAnchor, widthAnchor: 20.0, heightAnchor: 20.0, padding: .init(top: 0.0, left: 6.0, bottom: 0.0, right: 0.0))
-        
-        // profile picture
-        topRowView.addSubview(profilePictureImageView)
-        profilePictureImageView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: topRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: topRowView.centerYAnchor)
-        
-        
-        // bottom row -- categories and search pages
-        self.addSubview(bottomRowView)
-        bottomRowView.backgroundColor = ditloVeryLightGrey
-        bottomRowView.anchor(withTopAnchor: topRowView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
-        bottomRowViewHeightConstraint = NSLayoutConstraint(item: bottomRowView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0.0)
-        self.addConstraint(bottomRowViewHeightConstraint!)
-        
-        // bottom border view
-        self.addSubview(bottomBorderView)
-        bottomBorderView.anchor(withTopAnchor: bottomRowView.bottomAnchor, leadingAnchor: nil, bottomAnchor: bottomAnchor, trailingAnchor: nil, centreXAnchor: centerXAnchor, centreYAnchor: nil)
+        self.calendarButton.addSubview(calendarDateLabel)
+        calendarDateLabel.anchor(withTopAnchor: nil, leadingAnchor: calendarButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: calendarIconImageView.leadingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -8.0))
     }
 }
 
 // button selector methods
 extension MainDitloNavBar {
-    @objc func homeButtonPressed() {
-        if self.areButtonsEnabled {
-            delegate?.goHomeButtonPressed()
-        }
-    }
-    
     @objc func calendarButtonPressed() {
-        if self.areButtonsEnabled {
-            delegate?.openCalendarButtonPressed()
-        }
-    }
-}
-
-// delegate methods
-extension MainDitloNavBar: RoundProfilePictureViewDelegate {
-    func roundProfilePictureButtonPressed() {
-        if self.areButtonsEnabled {
-            delegate?.profileIconButtonPressed()
-        }
+        delegate?.openCalendarButtonPressed()
     }
 }
