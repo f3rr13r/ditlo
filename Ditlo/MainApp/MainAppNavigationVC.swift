@@ -34,6 +34,7 @@ class MainAppNavigationVC: UITabBarController {
     func configureTabBar() {
         self.tabBar.tintColor = ditloRed
         self.tabBar.unselectedItemTintColor = ditloGrey
+        self.tabBar.isTranslucent = true
         
         let homeNavigationVC = UINavigationController(rootViewController: homeVC)
         homeNavigationVC.isNavigationBarHidden = true

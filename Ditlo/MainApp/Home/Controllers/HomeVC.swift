@@ -12,16 +12,18 @@ import MaterialComponents.MaterialFlexibleHeader
 class HomeVC: UIViewController {
     
     // home nav bar
-    let homeNavBar = MainDitloNavBar()
+    let homeNavBar = HomeDitloNavBar()
     
     // flexible header
     let headerViewController = MDCFlexibleHeaderViewController()
     
+    // content sections collection view
     private let testCollectionViewCellId: String = "testCollectionViewCellId"
     private let testCollectionViewHeaderId: String = "testCollectionViewHeaderId"
     lazy var testCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.backgroundColor = .white
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = .clear
@@ -32,18 +34,21 @@ class HomeVC: UIViewController {
     
     let popdownSectionHeader: UIView = {
         let view = UIView()
-        view.backgroundColor = ditloPink
+        view.backgroundColor = UIColor.white
         return view
     }()
     var popdownSectionHeaderTopConstraint: NSLayoutConstraint!
     
     let popdownSectionHeaderLabel: UILabel = {
         let label = UILabel()
-        label.text = "Example Section"
+        label.text = "MOST VIEWED"
         label.font = infoWindowModalLogoFont
         label.textColor = ditloOffBlack
         return label
     }()
+    
+    // variables
+    var navigationCategories: [String] = ["Most Viewed", "Friends", "Following", "My Events"]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -65,15 +70,20 @@ class HomeVC: UIViewController {
     
     func appHasCurrentUserData() {
         // once we have the data, we'll grab the ditlo content
+        homeNavBar.navigationSections = navigationCategories
     }
     
     func setupFlexibleHeaderVC() {
         headerViewController.view.frame = view.bounds
         headerViewController.view.backgroundColor = .white
-        headerViewController.headerView.shiftBehavior = .enabledWithStatusBar
+        headerViewController.headerView.minimumHeight = 140.0
+        headerViewController.headerView.statusBarHintCanOverlapHeader = false
+        headerViewController.headerView.shiftBehavior = .enabled
         headerViewController.headerView.trackingScrollView = testCollectionView
+        
         headerViewController.headerView.addSubview(homeNavBar)
-        homeNavBar.fillSuperview()
+        homeNavBar.anchor(withTopAnchor: headerViewController.headerView.topAnchor, leadingAnchor: headerViewController.headerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: headerViewController.headerView.trailingAnchor, centreXAnchor: headerViewController.headerView.centerXAnchor, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil)
+        
         view.addSubview(headerViewController.view)
         headerViewController.didMove(toParent: self)
     }
@@ -83,6 +93,7 @@ class HomeVC: UIViewController {
     }
     
     func anchorChildViews() {
+        //self.view.addSubview(testCollectionView)
         self.view.insertSubview(testCollectionView, belowSubview: headerViewController.headerView)
         testCollectionView.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
         
@@ -137,7 +148,11 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: screenWidth, height: 60.0)
+        if collectionView == testCollectionView {
+            return CGSize(width: screenWidth, height: 60.0)
+        }
+        
+        return CGSize.zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -160,7 +175,7 @@ class TestCollectionViewHeader: UICollectionReusableView {
     // views
     let headerTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "EXAMPLE HEADER"
+        label.text = "MOST VIEWED"
         label.font = navBarLogoFont
         label.textColor = .white
         return label
@@ -233,9 +248,13 @@ extension HomeVC: UIScrollViewDelegate {
     }
 }
 
-extension HomeVC: MainDitloNavBarDelegate {
+extension HomeVC: HomeDitloNavBarDelegate {
     func openCalendarButtonPressed() {
         SharedModalsService.instance.showCalendar()
+    }
+    
+    func navigationCellSelected(itemIndex: Int) {
+        print("Item selected at indexPath: \(itemIndex)")
     }
 }
 

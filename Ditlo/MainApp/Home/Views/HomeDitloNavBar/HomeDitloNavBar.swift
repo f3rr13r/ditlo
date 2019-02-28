@@ -1,24 +1,27 @@
 //
-//  MainDitloNavBar.swift
+//  HomeDitloNavBar.swift
 //  Ditlo
 //
-//  Created by Harry Ferrier on 1/29/19.
+//  Created by Harry Ferrier on 2/28/19.
 //  Copyright © 2019 harryferrier. All rights reserved.
 //
 
 import UIKit
 
-protocol MainDitloNavBarDelegate {
-    func goHomeButtonPressed()
+protocol HomeDitloNavBarDelegate {
     func openCalendarButtonPressed()
+    func navigationCellSelected(itemIndex: Int)
 }
 
-extension MainDitloNavBarDelegate {
-    func goHomeButtonPressed() {}
-}
-
-class MainDitloNavBar: BaseView {
+class HomeDitloNavBar: BaseView {
     
+    // injector variables
+    var navigationSections: [String] = [] {
+        didSet {
+            self.navigationCollectionView.navigationSections = navigationSections
+        }
+    }
+
     // views
     let ditloImageView: UIImageView = {
         let iv = UIImageView()
@@ -59,11 +62,18 @@ class MainDitloNavBar: BaseView {
         return label
     }()
     
-    var delegate: MainDitloNavBarDelegate?
+    let navigationCollectionView = NavigationCollectionView()
+    
+    var delegate: HomeDitloNavBarDelegate?
     
     override func setupViews() {
         super.setupViews()
+        setupChildDelegates()
         anchorChildViews()
+    }
+    
+    func setupChildDelegates() {
+        navigationCollectionView.delegate = self
     }
     
     func anchorChildViews() {
@@ -81,12 +91,22 @@ class MainDitloNavBar: BaseView {
         
         self.calendarButton.addSubview(calendarDateLabel)
         calendarDateLabel.anchor(withTopAnchor: nil, leadingAnchor: calendarButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: calendarIconImageView.leadingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -8.0))
+        
+        self.addSubview(navigationCollectionView)
+        navigationCollectionView.anchor(withTopAnchor: ditloImageView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 18.0, left: 0.0, bottom: -14.0, right: 0.0))
     }
 }
 
 // button selector methods
-extension MainDitloNavBar {
+extension HomeDitloNavBar {
     @objc func calendarButtonPressed() {
         delegate?.openCalendarButtonPressed()
+    }
+}
+
+// navigation collection view delegate methods
+extension HomeDitloNavBar: NavigationCollectionViewDelegate {
+    func navigationCellSelected(itemIndex: Int) {
+        delegate?.navigationCellSelected(itemIndex: itemIndex)
     }
 }
