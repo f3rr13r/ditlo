@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NavigationCollectionViewDelegate {
-    func navigationCellSelected(itemIndex: Int)
+    func navigationCellSelected(itemIndex: IndexPath)
 }
 
 class NavigationCollectionView: BaseView {
@@ -47,6 +47,10 @@ class NavigationCollectionView: BaseView {
         addSubview(navigationCollectionView)
         navigationCollectionView.fillSuperview()
     }
+    
+    func updateSelectedCell(withIndexPath indexPath: IndexPath) {
+        navigationCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+    }
 }
 
 // collection view delegate and data source methods
@@ -69,6 +73,7 @@ extension NavigationCollectionView: UICollectionViewDelegate, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.navigationCellSelected(itemIndex: indexPath)
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     

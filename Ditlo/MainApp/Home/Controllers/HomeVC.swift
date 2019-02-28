@@ -9,127 +9,315 @@
 import UIKit
 import MaterialComponents.MaterialFlexibleHeader
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ContentCellDelegate, HomeDitloNavBarDelegate {
     
-    // home nav bar
-    let homeNavBar = HomeDitloNavBar()
+    var contentCell: ContentCell?
     
-    // flexible header
-    let headerViewController = MDCFlexibleHeaderViewController()
-    
-    // content sections collection view
-    private let testCollectionViewCellId: String = "testCollectionViewCellId"
-    private let testCollectionViewHeaderId: String = "testCollectionViewHeaderId"
-    lazy var testCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        cv.backgroundColor = .white
+    private let headerId: String = "headerId"
+    private let cellId: String = "cellId"
+    lazy var contentCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
-        cv.backgroundColor = .clear
-        cv.register(TestCollectionViewCell.self, forCellWithReuseIdentifier: testCollectionViewCellId)
-        cv.register(TestCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: testCollectionViewHeaderId)
+        cv.backgroundColor = .white
+        cv.contentInsetAdjustmentBehavior = .never
+        cv.register(NavigationHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        cv.register(ContentCell.self, forCellWithReuseIdentifier: cellId)
         return cv
     }()
     
-    let popdownSectionHeader: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        return view
-    }()
-    var popdownSectionHeaderTopConstraint: NSLayoutConstraint!
-    
-    let popdownSectionHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "MOST VIEWED"
-        label.font = infoWindowModalLogoFont
-        label.textColor = ditloOffBlack
-        return label
-    }()
-    
     // variables
-    var navigationCategories: [String] = ["Most Viewed", "Friends", "Following", "My Events"]
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        addChild(headerViewController)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        addChild(headerViewController)
-    }
+    var navigationSections: [String] = ["Most Viewed", "Friends", "Following", "My Events"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupFlexibleHeaderVC()
-        setupChildDelegates()
-        anchorChildViews()
+        
+        self.view.addSubview(contentCollectionView)
+        contentCollectionView.anchor(withTopAnchor: view.topAnchor, leadingAnchor: view.leadingAnchor, bottomAnchor: view.bottomAnchor, trailingAnchor: view.trailingAnchor, centreXAnchor: view.centerXAnchor, centreYAnchor: view.centerYAnchor)
     }
     
     func appHasCurrentUserData() {
-        // once we have the data, we'll grab the ditlo content
-        homeNavBar.navigationSections = navigationCategories
+        // do something eventually
     }
     
-    func setupFlexibleHeaderVC() {
-        headerViewController.view.frame = view.bounds
-        headerViewController.view.backgroundColor = .white
-        headerViewController.headerView.minimumHeight = 140.0
-        headerViewController.headerView.statusBarHintCanOverlapHeader = false
-        headerViewController.headerView.shiftBehavior = .enabled
-        headerViewController.headerView.trackingScrollView = testCollectionView
-        
-        headerViewController.headerView.addSubview(homeNavBar)
-        homeNavBar.anchor(withTopAnchor: headerViewController.headerView.topAnchor, leadingAnchor: headerViewController.headerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: headerViewController.headerView.trailingAnchor, centreXAnchor: headerViewController.headerView.centerXAnchor, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil)
-        
-        view.addSubview(headerViewController.view)
-        headerViewController.didMove(toParent: self)
-    }
-    
-    func setupChildDelegates() {
-        homeNavBar.delegate = self
-    }
-    
-    func anchorChildViews() {
-        //self.view.addSubview(testCollectionView)
-        self.view.insertSubview(testCollectionView, belowSubview: headerViewController.headerView)
-        testCollectionView.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
-        
-        self.view.addSubview(popdownSectionHeader)
-        popdownSectionHeader.anchor(withTopAnchor: nil, leadingAnchor: self.view.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: (safeAreaTopPadding + 36.0))
-        popdownSectionHeaderTopConstraint = NSLayoutConstraint(item: popdownSectionHeader, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: -(safeAreaTopPadding + 36.0))
-        self.view.addConstraint(popdownSectionHeaderTopConstraint)
-        
-        popdownSectionHeader.addSubview(popdownSectionHeaderLabel)
-        popdownSectionHeaderLabel.anchor(withTopAnchor: nil, leadingAnchor: popdownSectionHeader.leadingAnchor, bottomAnchor: popdownSectionHeader.bottomAnchor, trailingAnchor: popdownSectionHeader.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: horizontalPadding, bottom: -14.0, right: -horizontalPadding))
-    }
-}
-
-extension HomeVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    // collection view stuff
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let navigationHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? NavigationHeader else {
+            return UICollectionReusableView()
+        }
+        navigationHeader.sections = navigationSections
+        navigationHeader.homeNavbar.delegate = self
+        return navigationHeader
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: screenWidth, height: 140.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ContentCell
+        contentCell?.delegate = self
+        contentCell?.sections = navigationSections
+        return contentCell ?? UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 0.0, bottom: safeAreaBottomPadding, right: 0.0)
+    }
+    
+    func scrollPositionDidUpdate(withYValue yValue: CGFloat) {
+        contentCollectionView.contentOffset.y = yValue
+    }
+    
+    func didSectionScroll(toIndexPath indexPath: IndexPath) {
+        if let navigationHeader = contentCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? NavigationHeader {
+            navigationHeader.homeNavbar.updateSelectedNavigationCollectionViewCell(withIndexPath: indexPath)
+        }
+    }
+    
+    func openCalendarButtonPressed() {
+        SharedModalsService.instance.showCalendar()
+    }
+    
+    func navigationCellSelected(itemIndex: IndexPath) {
+        if let contentCell = contentCell {
+            contentCell.isSwipingEnabled = false
+            contentCell.currentlySelectedItemIndex = itemIndex.item
+            contentCell.contentViewController.scrollToItem(at: itemIndex, at: .centeredHorizontally, animated: true)
+        }
+    }
+}
+
+//** top level **
+// header
+class NavigationHeader: BaseCollectionReusableView {
+    
+    // injector variables
+    var sections: [String] = [] {
+        didSet {
+            homeNavbar.navigationSections = sections
+        }
+    }
+    
+    // views
+    let homeNavbar = HomeDitloNavBar()
+    
+    override func setupViews() {
+        super.setupViews()
+        addSubview(homeNavbar)
+        homeNavbar.fillSuperview()
+    }
+}
+
+// content
+protocol ContentCellDelegate {
+    func scrollPositionDidUpdate(withYValue yValue: CGFloat)
+    func didSectionScroll(toIndexPath indexPath: IndexPath)
+}
+
+class ContentCell: BaseCell, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ContentSectionCellDelegate {
+    
+    // injector variables
+    var sections: [String] = [] {
+        didSet {
+            contentViewController.reloadData()
+        }
+    }
+    
+    // views
+    private let cellId: String = "cellId"
+    lazy var contentViewController: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.delegate = self
+        cv.dataSource = self
+        cv.backgroundColor = .white
+        cv.contentInsetAdjustmentBehavior = .never
+        cv.isPagingEnabled = true
+        cv.register(ContentSectionCell.self, forCellWithReuseIdentifier: cellId)
+        return cv
+    }()
+    
+    var delegate: ContentCellDelegate?
+    
+    var isScrolling: Bool = false
+    var isSwipingEnabled: Bool = true
+    var currentlySelectedItemIndex: Int = 0
+    
+    var colours: [UIColor] = [ditloRed, ditloDarkBlue, ditloOrange, ditloLightGreen]
+    
+    override func setupViews() {
+        super.setupViews()
+        backgroundColor = ditloDarkBlue
+        anchorChildViews()
+    }
+    
+    func anchorChildViews() {
+        // collection view
+        addSubview(contentViewController)
+        contentViewController.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: safeAreaLayoutGuide.bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+    }
+    
+    override func prepareForReuse() {
+        sections = []
+    }
+    
+    // collection view stuff
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let contentSectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ContentSectionCell else {
+            return UICollectionViewCell()
+        }
+        
+        contentSectionCell.backgroundColor = ditloGrey
+        contentSectionCell.delegate = self
+        contentSectionCell.sectionTitle = sections[indexPath.item]
+        contentSectionCell.colour = colours[indexPath.item]
+        
+        return contentSectionCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func scrollPositionDidUpdate(withYValue yValue: CGFloat) {
+        delegate?.scrollPositionDidUpdate(withYValue: yValue)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).x > 0 {
+            if !isScrolling {
+                isScrolling = true
+                if currentlySelectedItemIndex > 0 {
+                    currentlySelectedItemIndex -= 1
+                    if isSwipingEnabled {
+                        delegate?.didSectionScroll(toIndexPath: IndexPath(item: currentlySelectedItemIndex, section: 0))
+                    }
+                }
+            }
+        } else {
+            if !isScrolling {
+                isScrolling = true
+                if currentlySelectedItemIndex < (sections.count - 1) {
+                    currentlySelectedItemIndex += 1
+                    if isSwipingEnabled {
+                        delegate?.didSectionScroll(toIndexPath: IndexPath(item: currentlySelectedItemIndex, section: 0))
+                    }
+                }
+            }
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isScrolling = false
+        isSwipingEnabled = true
+    }
+}
+
+
+//-- mid level
+protocol ContentSectionCellDelegate {
+    func scrollPositionDidUpdate(withYValue yValue: CGFloat)
+}
+
+class ContentSectionCell: BaseCell, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    // injector variables
+    var sectionTitle: String? = "" {
+        didSet {
+            if let _ = self.sectionTitle {
+                contentViewController.invalidateIntrinsicContentSize()
+            }
+        }
+    }
+    
+    var colour: UIColor = ditloGrey {
+        didSet {
+            contentViewController.reloadData()
+        }
+    }
+    
+    // collection view
+    private let headerId: String = "headerId"
+    private let cellId: String = "cellId"
+    lazy var contentViewController: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionHeadersPinToVisibleBounds = true
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.delegate = self
+        cv.dataSource = self
+        cv.backgroundColor = .white
+        cv.contentInsetAdjustmentBehavior = .never
+        cv.register(SectionTitleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        cv.register(SectionItemCell.self, forCellWithReuseIdentifier: cellId)
+        return cv
+    }()
+    
+    var delegate: ContentSectionCellDelegate?
+    
+    override func setupViews() {
+        super.setupViews()
+        // collection view
+        addSubview(contentViewController)
+        contentViewController.fillSuperview()
+    }
+    
+    override func prepareForReuse() {
+        sectionTitle = nil
+        contentViewController.invalidateIntrinsicContentSize()
+    }
+    
+    // collection view stuff
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 29
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: testCollectionViewCellId, for: indexPath) as? TestCollectionViewCell else {
-            return UICollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let sectionTitleHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? SectionTitleHeader else {
+            return UICollectionReusableView()
         }
-        return cell
+        sectionTitleHeader.sectionTitle = sectionTitle ?? ""
+        return sectionTitleHeader
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: screenWidth, height: 180.0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: testCollectionViewHeaderId, for: indexPath) as? TestCollectionViewHeader else { return UICollectionReusableView() }
-        return header
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let sectionItemCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionItemCell else {
+            return UICollectionViewCell()
+        }
+        
+        sectionItemCell.backgroundColor = colour
+        return sectionItemCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width: CGFloat!
+        let width: CGFloat!
         let height: CGFloat!
         
         if indexPath.item == 0 || indexPath.item % 7 == 0 {
@@ -144,15 +332,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: -60.0, left: 0.0, bottom: 2.0, right: 0.0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if collectionView == testCollectionView {
-            return CGSize(width: screenWidth, height: 60.0)
-        }
-        
-        return CGSize.zero
+        return UIEdgeInsets(top: -180.0, left: 0.0, bottom: safeAreaBottomPadding, right: 0.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -162,99 +342,56 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2.0
     }
-}
-
-class TestCollectionViewCell: BaseCell {
-    override func setupViews() {
-        self.backgroundColor = ditloDarkBlue
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > -16.0 && scrollView.contentOffset.y < 140.0 {
+            delegate?.scrollPositionDidUpdate(withYValue: scrollView.contentOffset.y)
+        }
     }
 }
 
-class TestCollectionViewHeader: UICollectionReusableView {
+class SectionTitleHeader: BaseCollectionReusableView {
+    
+    // injector variables
+    var sectionTitle: String? {
+        didSet {
+            if let sectionTitle = self.sectionTitle {
+                sectionTitleLabel.text = sectionTitle.uppercased()
+            }
+        }
+    }
     
     // views
-    let headerTextLabel: UILabel = {
+    let sectionTitleGradientView: GradientView = {
+        let gradientView = GradientView()
+        gradientView.colors = [ditloOffBlack.withAlphaComponent(0.4), UIColor.clear]
+        return gradientView
+    }()
+    
+    let sectionTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "MOST VIEWED"
-        label.font = navBarLogoFont
+        label.font = defaultTitleFont
         label.textColor = .white
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupViews() {
-        addSubview(headerTextLabel)
-        headerTextLabel.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: -20.0, right: -horizontalPadding))
-    }
-}
-
-// scroll view delegate methods
-extension HomeVC: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == headerViewController.headerView.trackingScrollView {
-            headerViewController.headerView.trackingScrollDidScroll()
-        }
+    override func setupViews() {
+        super.setupViews()
         
-        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0)
-        {
-            if scrollView.contentOffset.y < 40.0 {
-                if popdownSectionHeaderTopConstraint.constant > -(safeAreaTopPadding + 36.0) {
-                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
-                        self.popdownSectionHeaderTopConstraint.constant = -(safeAreaTopPadding + 36.0)
-                        self.view.layoutIfNeeded()
-                    }, completion: nil)
-                }
-            }
-        }
-        else
-        {
-            if scrollView.contentOffset.y > 20.0 {
-                if popdownSectionHeaderTopConstraint.constant < 0 {
-                    UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-                        self.popdownSectionHeaderTopConstraint.constant = 0.0
-                        self.view.layoutIfNeeded()
-                    }, completion: nil)
-                }
-            }
-        }
+        // gradient view and section title
+        addSubview(sectionTitleGradientView)
+        sectionTitleGradientView.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 180.0)
+        sectionTitleGradientView.addSubview(sectionTitleLabel)
+        sectionTitleLabel.anchor(withTopAnchor: sectionTitleGradientView.safeAreaLayoutGuide.topAnchor, leadingAnchor: sectionTitleGradientView.leadingAnchor, bottomAnchor: nil, trailingAnchor: sectionTitleGradientView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == headerViewController.headerView.trackingScrollView {
-            headerViewController.headerView.trackingScrollDidEndDecelerating()
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let headerView = headerViewController.headerView
-        if scrollView == headerView.trackingScrollView {
-            headerView.trackingScrollDidEndDraggingWillDecelerate(decelerate)
-        }
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let headerView = headerViewController.headerView
-        if scrollView == headerView.trackingScrollView {
-            headerView.trackingScrollWillEndDragging(withVelocity: velocity, targetContentOffset: targetContentOffset)
-        }
+    override func prepareForReuse() {
+        sectionTitle = nil
+        sectionTitleLabel.text = nil
     }
 }
 
-extension HomeVC: HomeDitloNavBarDelegate {
-    func openCalendarButtonPressed() {
-        SharedModalsService.instance.showCalendar()
-    }
-    
-    func navigationCellSelected(itemIndex: Int) {
-        print("Item selected at indexPath: \(itemIndex)")
-    }
+//-- bottom level
+class SectionItemCell: BaseCell {
 }
 

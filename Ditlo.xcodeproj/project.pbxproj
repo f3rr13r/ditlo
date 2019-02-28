@@ -16,6 +16,10 @@
 		4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A734B5E222044B7005EE2CC /* MyProfileVC.swift */; };
 		4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */; };
 		4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */; };
+		4A8086E822281B380007BDEB /* ContentSectionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086E722281B380007BDEB /* ContentSectionsCollectionView.swift */; };
+		4A8086EA22281DE50007BDEB /* graveyard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086E922281DE50007BDEB /* graveyard.swift */; };
+		4A8086EC222837AD0007BDEB /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */; };
+		4A8086EE2228494D0007BDEB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086ED2228494D0007BDEB /* GradientView.swift */; };
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
@@ -82,6 +86,10 @@
 		4A734B5E222044B7005EE2CC /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
 		4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDitloNavBar.swift; sourceTree = "<group>"; };
 		4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCollectionView.swift; sourceTree = "<group>"; };
+		4A8086E722281B380007BDEB /* ContentSectionsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSectionsCollectionView.swift; sourceTree = "<group>"; };
+		4A8086E922281DE50007BDEB /* graveyard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = graveyard.swift; sourceTree = "<group>"; };
+		4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
+		4A8086ED2228494D0007BDEB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
@@ -202,6 +210,7 @@
 		4A8086D72227FE060007BDEB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A8086E622281B0E0007BDEB /* ContentSectionsViewController */,
 				4A8086DA2227FEC90007BDEB /* HomeDitloNavBar */,
 			);
 			path = Views;
@@ -230,6 +239,14 @@
 				4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */,
 			);
 			path = NavigationCollectionView;
+			sourceTree = "<group>";
+		};
+		4A8086E622281B0E0007BDEB /* ContentSectionsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A8086E722281B380007BDEB /* ContentSectionsCollectionView.swift */,
+			);
+			path = ContentSectionsViewController;
 			sourceTree = "<group>";
 		};
 		4A9F4B3821F3B0F400EDDE8B /* Views */ = {
@@ -384,6 +401,7 @@
 				4AD0346921F0B1AB00FDA967 /* BaseView.swift */,
 				4AD0348021F0D32C00FDA967 /* BaseLabel.swift */,
 				4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */,
+				4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -396,6 +414,7 @@
 				4AD0347721F0C21D00FDA967 /* PaddedBorderView.swift */,
 				4AD0348221F0D36A00FDA967 /* TitleLabel.swift */,
 				4AD0348421F0D82100FDA967 /* CustomInputView.swift */,
+				4A8086ED2228494D0007BDEB /* GradientView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -604,6 +623,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD034BF21F207C700FDA967 /* HomeVC.swift */,
+				4A8086E922281DE50007BDEB /* graveyard.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -897,6 +917,7 @@
 				4AD0349021F1416800FDA967 /* AuthenticationModels.swift in Sources */,
 				4AD034C621F2084F00FDA967 /* CategoriesVC.swift in Sources */,
 				4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */,
+				4A8086EE2228494D0007BDEB /* GradientView.swift in Sources */,
 				4AD034B921F205AF00FDA967 /* MainAppNavigationVC.swift in Sources */,
 				4AD034D121F251DB00FDA967 /* JobService.swift in Sources */,
 				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
@@ -908,6 +929,7 @@
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
 				4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */,
+				4A8086E822281B380007BDEB /* ContentSectionsCollectionView.swift in Sources */,
 				4A3DA293220123BB005207D8 /* Date.swift in Sources */,
 				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
 				4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */,
@@ -939,7 +961,9 @@
 				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
 				4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */,
 				4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */,
+				4A8086EA22281DE50007BDEB /* graveyard.swift in Sources */,
 				4AD4AF7421FE56DD001F5AEF /* CategoriesService.swift in Sources */,
+				4A8086EC222837AD0007BDEB /* BaseCollectionReusableView.swift in Sources */,
 				4AD0349421F1434200FDA967 /* AuthenticationHelperMethods.swift in Sources */,
 				4AD0347521F0B76F00FDA967 /* UIColor.swift in Sources */,
 				4AD034A221F1E59E00FDA967 /* AuthenticationService.swift in Sources */,

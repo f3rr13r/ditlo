@@ -10,7 +10,7 @@ import UIKit
 
 protocol HomeDitloNavBarDelegate {
     func openCalendarButtonPressed()
-    func navigationCellSelected(itemIndex: Int)
+    func navigationCellSelected(itemIndex: IndexPath)
 }
 
 class HomeDitloNavBar: BaseView {
@@ -95,6 +95,10 @@ class HomeDitloNavBar: BaseView {
         self.addSubview(navigationCollectionView)
         navigationCollectionView.anchor(withTopAnchor: ditloImageView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 18.0, left: 0.0, bottom: -14.0, right: 0.0))
     }
+    
+    func updateSelectedNavigationCollectionViewCell(withIndexPath indexPath: IndexPath) {
+        navigationCollectionView.updateSelectedCell(withIndexPath: indexPath)
+    }
 }
 
 // button selector methods
@@ -106,7 +110,7 @@ extension HomeDitloNavBar {
 
 // navigation collection view delegate methods
 extension HomeDitloNavBar: NavigationCollectionViewDelegate {
-    func navigationCellSelected(itemIndex: Int) {
+    func navigationCellSelected(itemIndex: IndexPath) {
         delegate?.navigationCellSelected(itemIndex: itemIndex)
     }
 }
