@@ -37,7 +37,7 @@ class MainAppNavigationVC: UITabBarController {
         self.tabBar.isTranslucent = true
         
         let homeNavigationVC = UINavigationController(rootViewController: homeVC)
-        homeNavigationVC.isNavigationBarHidden = true
+        //homeNavigationVC.isNavigationBarHidden = true
         homeNavigationVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home-icon")?.withRenderingMode(.alwaysTemplate), tag: 0)
         homeNavigationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10.0, right: 0.0)
         
