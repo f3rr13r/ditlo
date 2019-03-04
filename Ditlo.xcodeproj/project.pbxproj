@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4A028980222D7C50009D6AFE /* LargeDitloItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02897F222D7C50009D6AFE /* LargeDitloItemCell.swift */; };
 		4A028982222D7C62009D6AFE /* DefaultDitloItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A028981222D7C62009D6AFE /* DefaultDitloItemCell.swift */; };
+		4A028984222D962D009D6AFE /* DitloPlayerPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A028983222D962D009D6AFE /* DitloPlayerPopupVC.swift */; };
 		4A3DA2862200B8DA005207D8 /* RoundProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA2852200B8DA005207D8 /* RoundProfilePictureView.swift */; };
 		4A3DA28A2200D34F005207D8 /* CustomCalendarModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA2892200D34F005207D8 /* CustomCalendarModal.swift */; };
 		4A3DA28D220107FC005207D8 /* SharedModalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA28C220107FC005207D8 /* SharedModalsService.swift */; };
@@ -80,6 +81,7 @@
 		0E1DA150F4DB12B06C2DE62A /* Pods-Ditlo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.debug.xcconfig"; sourceTree = "<group>"; };
 		4A02897F222D7C50009D6AFE /* LargeDitloItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeDitloItemCell.swift; sourceTree = "<group>"; };
 		4A028981222D7C62009D6AFE /* DefaultDitloItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDitloItemCell.swift; sourceTree = "<group>"; };
+		4A028983222D962D009D6AFE /* DitloPlayerPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DitloPlayerPopupVC.swift; sourceTree = "<group>"; };
 		4A3DA2852200B8DA005207D8 /* RoundProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundProfilePictureView.swift; sourceTree = "<group>"; };
 		4A3DA2892200D34F005207D8 /* CustomCalendarModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarModal.swift; sourceTree = "<group>"; };
 		4A3DA28C220107FC005207D8 /* SharedModalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModalsService.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		4AD0344A21F0A5E700FDA967 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4A028983222D962D009D6AFE /* DitloPlayerPopupVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -892,6 +896,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SPStorkController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -928,6 +933,7 @@
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
 				4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */,
 				4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */,
+				4A028984222D962D009D6AFE /* DitloPlayerPopupVC.swift in Sources */,
 				4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */,
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,

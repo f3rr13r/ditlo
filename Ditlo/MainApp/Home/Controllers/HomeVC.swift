@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import MaterialComponents.MaterialFlexibleHeader
+import SPStorkController
 
 class HomeVC: UIViewController {
     
     var homeNavBar = HomeDitloNavBar()
-    let headerViewController = MDCFlexibleHeaderViewController()
     
     private let cellId: String = "cellId"
     lazy var contentSectionsCollectionView: UICollectionView = {
@@ -33,16 +32,6 @@ class HomeVC: UIViewController {
     var previousOffset: CGFloat = 0.0
     var currentlySelectedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
     var colours: [UIColor] = [ditloRed, ditloDarkBlue, ditloOrange, ditloLightGreen]
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        addChild(headerViewController)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        addChild(headerViewController)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +69,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, 
         guard let sectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionCell else { return UICollectionViewCell() }
         sectionCell.testColour = colours[indexPath.item]
         sectionCell.sectionTitle = navigationSections[indexPath.item]
+        sectionCell.delegate = self
         return sectionCell
     }
     
@@ -127,7 +117,16 @@ extension HomeVC: UIScrollViewDelegate {
         }
     }}
 
-extension HomeVC: HomeDitloNavBarDelegate {
+// delegates
+extension HomeVC: HomeDitloNavBarDelegate, SectionCellDelegate {
+    func ditloItemCellTapped() {
+        let controller = DitloPlayerPopupVC()
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        controller.transitioningDelegate = transitionDelegate
+        controller.modalPresentationStyle = .custom
+        self.present(controller, animated: true, completion: nil)
+    }
+    
     func openCalendarButtonPressed() {
         SharedModalsService.instance.showCalendar()
     }
@@ -136,6 +135,10 @@ extension HomeVC: HomeDitloNavBarDelegate {
         contentSectionsCollectionView.scrollToItem(at: itemIndex, at: .centeredHorizontally, animated: true)
         currentlySelectedIndexPath = itemIndex
     }
+}
+
+protocol SectionCellDelegate {
+    func ditloItemCellTapped()
 }
 
 class SectionCell: BaseCell, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -168,6 +171,8 @@ class SectionCell: BaseCell, UICollectionViewDelegate, UICollectionViewDelegateF
         cv.register(DefaultDitloItemCell.self, forCellWithReuseIdentifier: defaultDitloItemCellId)
         return cv
     }()
+    
+    var delegate: SectionCellDelegate?
     
     override func setupViews() {
         super.setupViews()
@@ -220,6 +225,10 @@ class SectionCell: BaseCell, UICollectionViewDelegate, UICollectionViewDelegateF
         }
         
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.ditloItemCellTapped()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
