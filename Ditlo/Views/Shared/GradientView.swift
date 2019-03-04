@@ -39,7 +39,6 @@ class GradientView: UIView {
     }
     
     override func layoutSubviews() {
-        
         // Ensure view has a transparent background color (not required)
         backgroundColor = UIColor.clear
     }

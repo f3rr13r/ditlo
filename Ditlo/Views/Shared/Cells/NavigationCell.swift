@@ -11,11 +11,10 @@ import UIKit
 class NavigationCell: BaseCell {
     
     // custom injector variables
-    var title: String? = "Loading..." {
+    var title: String? = "" {
         didSet {
             if let title = self.title {
                 titleLabel.text = title
-                titleLabelWidthConstraint.constant = title.widthOfString(usingFont: customInputFont) + 20.0
                 layoutIfNeeded()
             }
         }
@@ -37,7 +36,6 @@ class NavigationCell: BaseCell {
         label.textAlignment = .center
         return label
     }()
-    var titleLabelWidthConstraint: NSLayoutConstraint!
     
     override func setupViews() {
         super.setupViews()
@@ -56,16 +54,13 @@ class NavigationCell: BaseCell {
     
     func anchorChildViews() {
         addSubview(titleLabel)
-        titleLabel.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
-        titleLabelWidthConstraint = NSLayoutConstraint(item: titleLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0.0)
-        addConstraint(titleLabelWidthConstraint)
+        titleLabel.fillSuperview()
     }
     
     override func prepareForReuse() {
         title = nil
         cellColor = nil
         setupCellState()
-        titleLabelWidthConstraint.constant = 0.0
         self.layoutIfNeeded()
     }
 }

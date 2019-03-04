@@ -21,6 +21,12 @@ class HomeDitloNavBar: BaseView {
             self.navigationCollectionView.navigationSections = navigationSections
         }
     }
+    
+    var currentlySelectedSectionIndex: IndexPath = IndexPath(item: 0, section: 0) {
+        didSet {
+            navigationCollectionView.updateSelectedCell(withIndexPath: currentlySelectedSectionIndex)
+        }
+    }
 
     // views
     let ditloImageView: UIImageView = {
@@ -94,10 +100,6 @@ class HomeDitloNavBar: BaseView {
         
         self.addSubview(navigationCollectionView)
         navigationCollectionView.anchor(withTopAnchor: ditloImageView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 18.0, left: 0.0, bottom: -14.0, right: 0.0))
-    }
-    
-    func updateSelectedNavigationCollectionViewCell(withIndexPath indexPath: IndexPath) {
-        navigationCollectionView.updateSelectedCell(withIndexPath: indexPath)
     }
 }
 
