@@ -11,7 +11,7 @@ import SPStorkController
 
 class HomeVC: UIViewController {
     
-    var homeNavBar = HomeDitloNavBar()
+    let homeNavBar = HomeDitloNavBar()
     
     private let cellId: String = "cellId"
     lazy var contentSectionsCollectionView: UICollectionView = {
@@ -120,6 +120,7 @@ extension HomeVC: UIScrollViewDelegate {
 // delegates
 extension HomeVC: HomeDitloNavBarDelegate, SectionCellDelegate {
     func ditloItemCellTapped() {
+        // pass in the info for the ditlo popup VC
         let controller = DitloPlayerPopupVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         controller.transitioningDelegate = transitionDelegate
