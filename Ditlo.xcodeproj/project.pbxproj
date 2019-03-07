@@ -16,6 +16,8 @@
 		4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA29022011428005207D8 /* CustomCalendarCell.swift */; };
 		4A3DA293220123BB005207D8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DA292220123BB005207D8 /* Date.swift */; };
 		4A57EEEC22258D8D008A96D0 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57EEEB22258D8D008A96D0 /* NavigationCell.swift */; };
+		4A717DEF22316A35008DE1F8 /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DEE22316A35008DE1F8 /* SectionCell.swift */; };
+		4A717DF1223172B4008DE1F8 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DF0223172B4008DE1F8 /* UserCell.swift */; };
 		4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A734B5E222044B7005EE2CC /* MyProfileVC.swift */; };
 		4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */; };
 		4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */; };
@@ -88,6 +90,8 @@
 		4A3DA29022011428005207D8 /* CustomCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarCell.swift; sourceTree = "<group>"; };
 		4A3DA292220123BB005207D8 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4A57EEEB22258D8D008A96D0 /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
+		4A717DEE22316A35008DE1F8 /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
+		4A717DF0223172B4008DE1F8 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		4A734B5E222044B7005EE2CC /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
 		4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDitloNavBar.swift; sourceTree = "<group>"; };
 		4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCollectionView.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				4A57EEEB22258D8D008A96D0 /* NavigationCell.swift */,
 				4A02897F222D7C50009D6AFE /* LargeDitloItemCell.swift */,
 				4A028981222D7C62009D6AFE /* DefaultDitloItemCell.swift */,
+				4A717DEE22316A35008DE1F8 /* SectionCell.swift */,
+				4A717DF0223172B4008DE1F8 /* UserCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -915,6 +921,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AD0346F21F0B30900FDA967 /* UIView.swift in Sources */,
+				4A717DEF22316A35008DE1F8 /* SectionCell.swift in Sources */,
 				4AD034B621F2041100FDA967 /* SelectProfilePictureVC.swift in Sources */,
 				4A3DA28A2200D34F005207D8 /* CustomCalendarModal.swift in Sources */,
 				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
@@ -966,6 +973,7 @@
 				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,
 				4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */,
 				4AD034CD21F226B100FDA967 /* CustomInfoWindowModal.swift in Sources */,
+				4A717DF1223172B4008DE1F8 /* UserCell.swift in Sources */,
 				4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */,
 				4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */,
 				4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */,
