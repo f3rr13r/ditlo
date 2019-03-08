@@ -10,14 +10,16 @@ import UIKit
 
 class CategoryCell: BaseCell {
     
-    // injector variables    
+    // injector variables
+    var needsSelectedUnderlineState: Bool = true
+    
     var category: ChildCategory? {
         didSet {
             if let category = self.category {
                 if !category.name.contains(find: "Toggle All") {
                     backgroundColor = category.isSelected ? category.backgroundColor : category.backgroundColor.withAlphaComponent(0.65)
                     categoryNameLabel.text = category.name
-                    if category.isSelected {
+                    if category.isSelected && needsSelectedUnderlineState {
                         categoryNameLabel.underline()
                     }
                 } else {

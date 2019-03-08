@@ -171,7 +171,6 @@ extension CustomInputView: UITextFieldDelegate {
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("inputType", inputType)
         if let inputType = self.inputType {
             delegate?.inputClearButtonPressed(inputType: inputType)
         }

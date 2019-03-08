@@ -32,7 +32,6 @@ class CategoriesService {
         let categoriesRef = db.collection(_CATEGORIES)
         categoriesRef.getDocuments { (snapshot, error) in
             if error != nil {
-                print("Error", error?.localizedDescription)
             } else {
                 if let documents = snapshot?.documents,
                     documents.count > 0 {
@@ -50,7 +49,6 @@ class CategoriesService {
                             let childCategoryRef = categoriesRef.document(categoryName).collection(_CHILD_CATEGORIES)
                             childCategoryRef.getDocuments(completion: { (snapshot, error) in
                                 if error != nil {
-                                    print("Error", error?.localizedDescription)
                                 } else {
                                     if let documents = snapshot?.documents,
                                         documents.count > 0 {

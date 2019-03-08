@@ -29,7 +29,6 @@ class JobService {
         let jobsRef = db.collection(_JOBS)
         jobsRef.getDocuments { (snapshot, error) in
             if error != nil {
-                print("Error", error?.localizedDescription)
             } else {
                 if let documents = snapshot?.documents,
                     documents.count > 0 {

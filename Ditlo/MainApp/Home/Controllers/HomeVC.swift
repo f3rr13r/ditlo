@@ -38,6 +38,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        homeNavBar.navigationSections = navigationSections
         edgesForExtendedLayout = []
         setupCustomNavigation()
         anchorChildViews()
@@ -45,7 +46,7 @@ class HomeVC: UIViewController {
     }
     
     func appHasCurrentUserData() {
-        homeNavBar.navigationSections = navigationSections
+
     }
     
     func setupCustomNavigation() {
@@ -154,10 +155,18 @@ extension HomeVC: SectionCellDelegate {
     
     func ditloItemCellTapped() {
         let controller = DitloPlayerPopupVC()
+        controller.delegate = self
         let transitionDelegate = SPStorkTransitioningDelegate()
         controller.transitioningDelegate = transitionDelegate
         controller.modalPresentationStyle = .custom
         self.present(controller, animated: true, completion: nil)
+    }
+}
+
+// ditloPopup delegate
+extension HomeVC: DitloPlayerPopupActionDelegate {
+    func prepareToNavigate(toViewController viewController: UIViewController) {
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

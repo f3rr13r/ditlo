@@ -28,7 +28,6 @@ class DummyDitloService {
         
         db.collection(_DITLOS).document("0917B33B-5BA9-4A68-B481-A006AFA8F764").getDocument { (snapshot, error) in
             if error != nil {
-                print("Error ", error?.localizedDescription)
                 completion(nil, false)
             } else {
                 if let data = snapshot?.data() {

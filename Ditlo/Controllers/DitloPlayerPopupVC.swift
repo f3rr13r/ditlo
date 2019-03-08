@@ -10,6 +10,10 @@ import UIKit
 import SPStorkController
 import DGCollectionViewLeftAlignFlowLayout
 
+protocol DitloPlayerPopupActionDelegate {
+    func prepareToNavigate(toViewController viewController: UIViewController)
+}
+
 class DitloPlayerPopupVC: UIViewController {
 
     // views
@@ -34,66 +38,28 @@ class DitloPlayerPopupVC: UIViewController {
         return view
     }()
     
-    let taggedFriendsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Tagged Friends"
-        label.font = defaultTitleFont
-        label.textColor = ditloOffBlack
-        return label
-    }()
+    let taggedFriendsSectionView = TaggedFriendsSectionView()
+    let taggedEventsSectionView = TaggedEventsSectionView()
+    let taggedCategoriesSectionView = TaggedCategoriesSectionView()
+    let taggedKeywordsSectionView = TaggedKeywordsSectionView()
+    let taggedLocationSectionView = TaggedLocationSectionView()
     
-    private let userCellId: String = "userCellId"
-    lazy var taggedFriendsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 107.0, height: 141.0)
-        layout.minimumLineSpacing = 8.0
-        layout.sectionInset = UIEdgeInsets(top: 0.0, left: horizontalPadding, bottom: 0.0, right: horizontalPadding)
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .clear
-        cv.decelerationRate = .fast
-        cv.showsHorizontalScrollIndicator = false
-        cv.delegate = self
-        cv.dataSource = self
-        cv.register(UserCell.self, forCellWithReuseIdentifier: userCellId)
-        return cv
-    }()
-    
-    let taggedEventsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Tagged Events"
-        label.font = defaultTitleFont
-        label.textColor = ditloOffBlack
-        return label
-    }()
-    
-    private let eventCellId: String = "eventCellId"
-    let taggedEventCollectionViewFlowlayout = UICollectionViewFlowLayout()
-    lazy var taggedEventsCollectionView: UICollectionView = {
-        taggedEventCollectionViewFlowlayout.scrollDirection = .horizontal
-        taggedEventCollectionViewFlowlayout.itemSize.width = min((screenWidth - 20.0) - 20, 400)
-        taggedEventCollectionViewFlowlayout.itemSize.height = 60.0
-        taggedEventCollectionViewFlowlayout.minimumInteritemSpacing = 0.0
-        taggedEventCollectionViewFlowlayout.sectionInset = UIEdgeInsets(top: 0.0, left: horizontalPadding, bottom: 0.0, right: horizontalPadding)
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: taggedEventCollectionViewFlowlayout)
-        cv.backgroundColor = .clear
-        cv.decelerationRate = .fast
-        cv.showsHorizontalScrollIndicator = false
-        cv.delegate = self
-        cv.dataSource = self
-        cv.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
-        return cv
-    }()
-    
-    // Velocity is measured in points per millisecond.
-    private var snapToMostVisibleColumnVelocityThreshold: CGFloat { return 0.3 }
-    
-    let taggedEvents: Int = 20
+    // delegate
+    var delegate: DitloPlayerPopupActionDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ditloOffWhite
+        handleChildDelegates()
         anchorSubviews()
+    }
+    
+    func handleChildDelegates() {
+        taggedFriendsSectionView.delegate = self
+        taggedEventsSectionView.delegate = self
+        taggedCategoriesSectionView.delegate = self
+        taggedKeywordsSectionView.delegate = self
+        taggedLocationSectionView.delegate = self
     }
     
     func anchorSubviews() {
@@ -107,19 +73,27 @@ class DitloPlayerPopupVC: UIViewController {
         
         // bottom
         contentScrollView.addSubview(infoContentContainerView)
-        infoContentContainerView.anchor(withTopAnchor: testImageView.bottomAnchor, leadingAnchor: contentScrollView.leadingAnchor, bottomAnchor: contentScrollView.bottomAnchor, trailingAnchor: contentScrollView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: screenWidth, heightAnchor: self.view.frame.height - (safeAreaBottomPadding + safeAreaTopPadding))
+        infoContentContainerView.anchor(withTopAnchor: testImageView.bottomAnchor, leadingAnchor: contentScrollView.leadingAnchor, bottomAnchor: contentScrollView.bottomAnchor, trailingAnchor: contentScrollView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: screenWidth, heightAnchor: nil)
         
         // tagged friends
-        infoContentContainerView.addSubview(taggedFriendsLabel)
-        taggedFriendsLabel.anchor(withTopAnchor: infoContentContainerView.topAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 60.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
-        infoContentContainerView.addSubview(taggedFriendsCollectionView)
-        taggedFriendsCollectionView.anchor(withTopAnchor: taggedFriendsLabel.bottomAnchor, leadingAnchor: contentScrollView.leadingAnchor, bottomAnchor: nil, trailingAnchor: contentScrollView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 141.0, padding: .init(top: 24.0, left: 0.0, bottom: 0.0, right: 0.0))
+        infoContentContainerView.addSubview(taggedFriendsSectionView)
+        taggedFriendsSectionView.anchor(withTopAnchor: infoContentContainerView.topAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: 0.0, right: 0.0))
         
         // tagged events
-        infoContentContainerView.addSubview(taggedEventsLabel)
-        taggedEventsLabel.anchor(withTopAnchor: taggedFriendsCollectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 60.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
-        infoContentContainerView.addSubview(taggedEventsCollectionView)
-        taggedEventsCollectionView.anchor(withTopAnchor: taggedEventsLabel.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 196.0, padding: .init(top: 24.0, left: 0.0, bottom: 0.0, right: 0.0))
+        infoContentContainerView.addSubview(taggedEventsSectionView)
+        taggedEventsSectionView.anchor(withTopAnchor: taggedFriendsSectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: 0.0, right: 0.0))
+        
+        // tagged categories
+        infoContentContainerView.addSubview(taggedCategoriesSectionView)
+        taggedCategoriesSectionView.anchor(withTopAnchor: taggedEventsSectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: 0.0, right: 0.0))
+        
+        // tagged keywords
+        infoContentContainerView.addSubview(taggedKeywordsSectionView)
+        taggedKeywordsSectionView.anchor(withTopAnchor: taggedCategoriesSectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: 0.0, right: 0.0))
+        
+        // tagged location
+        infoContentContainerView.addSubview(taggedLocationSectionView)
+        taggedLocationSectionView.anchor(withTopAnchor: taggedKeywordsSectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: infoContentContainerView.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: 0.0, right: 0.0))
         
         self.updateLayout(with: self.view.frame.size)
     }
@@ -142,41 +116,6 @@ class DitloPlayerPopupVC: UIViewController {
     }
 }
 
-// collection view delegate and datasource methods
-extension DitloPlayerPopupVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == taggedFriendsCollectionView {
-            return 7
-        }
-        
-        if collectionView == taggedEventsCollectionView {
-            return 20
-        }
-        
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // user cell
-        if collectionView == taggedFriendsCollectionView {
-            guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath) as? UserCell else {
-                return UICollectionViewCell()
-            }
-            return userCell
-        }
-        
-        // event cell
-        if collectionView == taggedEventsCollectionView {
-            guard let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: eventCellId, for: indexPath) as? EventCell else {
-                return UICollectionViewCell()
-            }
-            return eventCell
-        }
-        
-        // if something went wrong, then just pass back a collection view cell
-        return UICollectionViewCell()
-    }
-}
 
 
 // scroll view delegate methods
@@ -187,34 +126,35 @@ extension DitloPlayerPopupVC: UIScrollViewDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
+}
+
+// section views delegate
+extension DitloPlayerPopupVC: SectionViewActionDelegate {
+    func taggedFriendCellSelected(withId taggedFriendId: String) {
+        transitionToTestVC(withValue: taggedFriendId)
+    }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView == taggedEventsCollectionView {
-            let layout = taggedEventCollectionViewFlowlayout
-            let bounds = scrollView.bounds
-            let xTarget = targetContentOffset.pointee.x
-            
-            // This is the max contentOffset.x to allow. With this as contentOffset.x, the right edge of the last column of cells is at the right edge of the collection view's frame.
-            let xMax = (scrollView.contentSize.width) - (scrollView.bounds.width)
-            
-            if abs(velocity.x) <= snapToMostVisibleColumnVelocityThreshold {
-                let xCenter = scrollView.bounds.midX
-                let poses = layout.layoutAttributesForElements(in: bounds) ?? []
-                // Find the column whose center is closest to the collection view's visible rect's center, then minus one section contentInset
-                let x = (poses.min(by: { abs($0.center.x - 20.0 - xCenter) < abs($1.center.x - xCenter) })?.frame.origin.x ?? 0) - 20.0
-                targetContentOffset.pointee.x = x
-            } else if velocity.x > 0 {
-                let poses = layout.layoutAttributesForElements(in: CGRect(x: xTarget, y: 0, width: bounds.size.width, height: bounds.size.height)) ?? []
-                // Find the leftmost column beyond the current position, minus one section contentInset.
-                let xCurrent = scrollView.contentOffset.x
-                let x = (poses.filter({ $0.frame.origin.x > xCurrent}).min(by: { $0.center.x < $1.center.x })?.frame.origin.x ?? xMax) - 20.0
-                targetContentOffset.pointee.x = min(x, xMax)
-            } else {
-                let poses = layout.layoutAttributesForElements(in: CGRect(x: xTarget - bounds.size.width, y: 0, width: bounds.size.width, height: bounds.size.height)) ?? []
-                // Find the rightmost column minus one section contentInset.
-                let x = ((poses.max(by: { $0.center.x < $1.center.x })?.frame.origin.x) ?? 0) - 20.0
-                targetContentOffset.pointee.x = max(x, 0)
-            }
+    func taggedEventCellSelected(withId taggedEventId: String) {
+        transitionToTestVC(withValue: taggedEventId)
+    }
+    
+    func taggedCategoryCellSelected(withId taggedCategoryId: String) {
+        transitionToTestVC(withValue: taggedCategoryId)
+    }
+    
+    func taggedKeywordCellSelected(withValue keywordValue: String) {
+        transitionToTestVC(withValue: keywordValue)
+    }
+    
+    func taggedLocationSelected(withLocationValue locationValue: Any) {
+        transitionToTestVC(withValue: locationValue as! String)
+    }
+    
+    func transitionToTestVC(withValue value: String) {
+        self.dismiss(animated: true) {
+            let testVC = TestVC()
+            testVC.incomingValue = value
+            self.delegate?.prepareToNavigate(toViewController: testVC)
         }
     }
 }
