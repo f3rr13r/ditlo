@@ -8,6 +8,7 @@
 
 import UIKit
 import SPStorkController
+import DGCollectionViewLeftAlignFlowLayout
 
 class DitloPlayerPopupVC: UIViewController {
 
@@ -50,6 +51,7 @@ class DitloPlayerPopupVC: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0.0, left: horizontalPadding, bottom: 0.0, right: horizontalPadding)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
+        cv.decelerationRate = .fast
         cv.showsHorizontalScrollIndicator = false
         cv.delegate = self
         cv.dataSource = self
@@ -64,6 +66,29 @@ class DitloPlayerPopupVC: UIViewController {
         label.textColor = ditloOffBlack
         return label
     }()
+    
+    private let eventCellId: String = "eventCellId"
+    let taggedEventCollectionViewFlowlayout = UICollectionViewFlowLayout()
+    lazy var taggedEventsCollectionView: UICollectionView = {
+        taggedEventCollectionViewFlowlayout.scrollDirection = .horizontal
+        taggedEventCollectionViewFlowlayout.itemSize.width = min((screenWidth - 20.0) - 20, 400)
+        taggedEventCollectionViewFlowlayout.itemSize.height = 60.0
+        taggedEventCollectionViewFlowlayout.minimumInteritemSpacing = 0.0
+        taggedEventCollectionViewFlowlayout.sectionInset = UIEdgeInsets(top: 0.0, left: horizontalPadding, bottom: 0.0, right: horizontalPadding)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: taggedEventCollectionViewFlowlayout)
+        cv.backgroundColor = .clear
+        cv.decelerationRate = .fast
+        cv.showsHorizontalScrollIndicator = false
+        cv.delegate = self
+        cv.dataSource = self
+        cv.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
+        return cv
+    }()
+    
+    // Velocity is measured in points per millisecond.
+    private var snapToMostVisibleColumnVelocityThreshold: CGFloat { return 0.3 }
+    
+    let taggedEvents: Int = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +118,8 @@ class DitloPlayerPopupVC: UIViewController {
         // tagged events
         infoContentContainerView.addSubview(taggedEventsLabel)
         taggedEventsLabel.anchor(withTopAnchor: taggedFriendsCollectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 60.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
+        infoContentContainerView.addSubview(taggedEventsCollectionView)
+        taggedEventsCollectionView.anchor(withTopAnchor: taggedEventsLabel.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 196.0, padding: .init(top: 24.0, left: 0.0, bottom: 0.0, right: 0.0))
         
         self.updateLayout(with: self.view.frame.size)
     }
@@ -118,14 +145,36 @@ class DitloPlayerPopupVC: UIViewController {
 // collection view delegate and datasource methods
 extension DitloPlayerPopupVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        if collectionView == taggedFriendsCollectionView {
+            return 7
+        }
+        
+        if collectionView == taggedEventsCollectionView {
+            return 20
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath) as? UserCell else {
-            return UICollectionViewCell()
+        // user cell
+        if collectionView == taggedFriendsCollectionView {
+            guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath) as? UserCell else {
+                return UICollectionViewCell()
+            }
+            return userCell
         }
-        return userCell
+        
+        // event cell
+        if collectionView == taggedEventsCollectionView {
+            guard let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: eventCellId, for: indexPath) as? EventCell else {
+                return UICollectionViewCell()
+            }
+            return eventCell
+        }
+        
+        // if something went wrong, then just pass back a collection view cell
+        return UICollectionViewCell()
     }
 }
 
@@ -136,6 +185,36 @@ extension DitloPlayerPopupVC: UIScrollViewDelegate {
         SPStorkController.scrollViewDidScroll(scrollView)
         if scrollView.contentOffset.y < -(self.view.frame.height * 0.18) {
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView == taggedEventsCollectionView {
+            let layout = taggedEventCollectionViewFlowlayout
+            let bounds = scrollView.bounds
+            let xTarget = targetContentOffset.pointee.x
+            
+            // This is the max contentOffset.x to allow. With this as contentOffset.x, the right edge of the last column of cells is at the right edge of the collection view's frame.
+            let xMax = (scrollView.contentSize.width) - (scrollView.bounds.width)
+            
+            if abs(velocity.x) <= snapToMostVisibleColumnVelocityThreshold {
+                let xCenter = scrollView.bounds.midX
+                let poses = layout.layoutAttributesForElements(in: bounds) ?? []
+                // Find the column whose center is closest to the collection view's visible rect's center, then minus one section contentInset
+                let x = (poses.min(by: { abs($0.center.x - 20.0 - xCenter) < abs($1.center.x - xCenter) })?.frame.origin.x ?? 0) - 20.0
+                targetContentOffset.pointee.x = x
+            } else if velocity.x > 0 {
+                let poses = layout.layoutAttributesForElements(in: CGRect(x: xTarget, y: 0, width: bounds.size.width, height: bounds.size.height)) ?? []
+                // Find the leftmost column beyond the current position, minus one section contentInset.
+                let xCurrent = scrollView.contentOffset.x
+                let x = (poses.filter({ $0.frame.origin.x > xCurrent}).min(by: { $0.center.x < $1.center.x })?.frame.origin.x ?? xMax) - 20.0
+                targetContentOffset.pointee.x = min(x, xMax)
+            } else {
+                let poses = layout.layoutAttributesForElements(in: CGRect(x: xTarget - bounds.size.width, y: 0, width: bounds.size.width, height: bounds.size.height)) ?? []
+                // Find the rightmost column minus one section contentInset.
+                let x = ((poses.max(by: { $0.center.x < $1.center.x })?.frame.origin.x) ?? 0) - 20.0
+                targetContentOffset.pointee.x = max(x, 0)
+            }
         }
     }
 }

@@ -75,6 +75,8 @@
 		4AD4AF7621FE5C2E001F5AEF /* CategoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */; };
 		4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */; };
 		4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */; };
+		4AF3A5F62232AADB0084479F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5F52232AADB0084479F /* EventCell.swift */; };
+		4AF3A5F82232AF3A0084479F /* TaggedFriendsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5F72232AF3A0084479F /* TaggedFriendsSectionView.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +153,8 @@
 		4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModels.swift; sourceTree = "<group>"; };
 		4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesUtilities.swift; sourceTree = "<group>"; };
 		4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		4AF3A5F52232AADB0084479F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		4AF3A5F72232AF3A0084479F /* TaggedFriendsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedFriendsSectionView.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +203,7 @@
 				4A028981222D7C62009D6AFE /* DefaultDitloItemCell.swift */,
 				4A717DEE22316A35008DE1F8 /* SectionCell.swift */,
 				4A717DF0223172B4008DE1F8 /* UserCell.swift */,
+				4AF3A5F52232AADB0084479F /* EventCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 				4AD0348221F0D36A00FDA967 /* TitleLabel.swift */,
 				4AD0348421F0D82100FDA967 /* CustomInputView.swift */,
 				4A8086ED2228494D0007BDEB /* GradientView.swift */,
+				4AF3A5F72232AF3A0084479F /* TaggedFriendsSectionView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 				4A8086E822281B380007BDEB /* ContentSectionsCollectionView.swift in Sources */,
 				4A3DA293220123BB005207D8 /* Date.swift in Sources */,
 				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
+				4AF3A5F62232AADB0084479F /* EventCell.swift in Sources */,
 				4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */,
 				4A028980222D7C50009D6AFE /* LargeDitloItemCell.swift in Sources */,
 				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
@@ -978,6 +985,7 @@
 				4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */,
 				4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */,
 				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
+				4AF3A5F82232AF3A0084479F /* TaggedFriendsSectionView.swift in Sources */,
 				4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */,
 				4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */,
 				4AD4AF7421FE56DD001F5AEF /* CategoriesService.swift in Sources */,
