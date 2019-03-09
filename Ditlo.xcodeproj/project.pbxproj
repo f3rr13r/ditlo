@@ -83,6 +83,8 @@
 		4AF3A6002232C1EB0084479F /* TaggedLocationSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5FF2232C1EB0084479F /* TaggedLocationSectionView.swift */; };
 		4AF3A6022232CDFE0084479F /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A6012232CDFE0084479F /* TestVC.swift */; };
 		4AF3A6052232CEB80084479F /* SectionViewActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A6042232CEB80084479F /* SectionViewActionDelegate.swift */; };
+		4AF3A608223336260084479F /* OtherUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A607223336260084479F /* OtherUserProfileVC.swift */; };
+		4AF3A60D223337050084479F /* OtherUserProfileNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +169,8 @@
 		4AF3A5FF2232C1EB0084479F /* TaggedLocationSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedLocationSectionView.swift; sourceTree = "<group>"; };
 		4AF3A6012232CDFE0084479F /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		4AF3A6042232CEB80084479F /* SectionViewActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewActionDelegate.swift; sourceTree = "<group>"; };
+		4AF3A607223336260084479F /* OtherUserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileVC.swift; sourceTree = "<group>"; };
+		4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileNavBar.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -544,6 +548,7 @@
 		4AD034A321F1E88100FDA967 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4AF3A606223336080084479F /* Controllers */,
 				4A3DA28E22010D4B005207D8 /* Services */,
 				4AD4AF7721FE6B39001F5AEF /* Utilities */,
 				4AD4AF6E21FE56AC001F5AEF /* Categories */,
@@ -780,6 +785,39 @@
 			path = SectionViews;
 			sourceTree = "<group>";
 		};
+		4AF3A606223336080084479F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AF3A609223336370084479F /* OtherUserProfile */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AF3A609223336370084479F /* OtherUserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				4AF3A60B223336530084479F /* Views */,
+				4AF3A60A223336460084479F /* Controllers */,
+			);
+			name = OtherUserProfile;
+			sourceTree = "<group>";
+		};
+		4AF3A60A223336460084479F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AF3A607223336260084479F /* OtherUserProfileVC.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4AF3A60B223336530084479F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		A86E6858FE17E57995713E5A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -956,6 +994,7 @@
 				4A717DEF22316A35008DE1F8 /* SectionCell.swift in Sources */,
 				4AD034B621F2041100FDA967 /* SelectProfilePictureVC.swift in Sources */,
 				4A3DA28A2200D34F005207D8 /* CustomCalendarModal.swift in Sources */,
+				4AF3A608223336260084479F /* OtherUserProfileVC.swift in Sources */,
 				4AF3A6052232CEB80084479F /* SectionViewActionDelegate.swift in Sources */,
 				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
 				4AD0347B21F0C3BC00FDA967 /* RedRoundedButton.swift in Sources */,
@@ -972,6 +1011,7 @@
 				4AF3A6022232CDFE0084479F /* TestVC.swift in Sources */,
 				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
+				4AF3A60D223337050084479F /* OtherUserProfileNavBar.swift in Sources */,
 				4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */,
 				4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */,
 				4A028984222D962D009D6AFE /* DitloPlayerPopupVC.swift in Sources */,

@@ -131,30 +131,30 @@ extension DitloPlayerPopupVC: UIScrollViewDelegate {
 // section views delegate
 extension DitloPlayerPopupVC: SectionViewActionDelegate {
     func taggedFriendCellSelected(withId taggedFriendId: String) {
-        transitionToTestVC(withValue: taggedFriendId)
+        let otherUserProfileVC = OtherUserProfileVC()
+        navigateTo(viewController: otherUserProfileVC, withLoadingMessage: "Loading Profile..")
     }
     
     func taggedEventCellSelected(withId taggedEventId: String) {
-        transitionToTestVC(withValue: taggedEventId)
+        // needs completion
     }
     
     func taggedCategoryCellSelected(withId taggedCategoryId: String) {
-        transitionToTestVC(withValue: taggedCategoryId)
+        // needs completion
     }
     
     func taggedKeywordCellSelected(withValue keywordValue: String) {
-        transitionToTestVC(withValue: keywordValue)
+        // needs completion
     }
     
     func taggedLocationSelected(withLocationValue locationValue: Any) {
-        transitionToTestVC(withValue: locationValue as! String)
+        // needs completion
     }
     
-    func transitionToTestVC(withValue value: String) {
+    func navigateTo(viewController: UIViewController, withLoadingMessage loadingMessage: String) {
+        SharedModalsService.instance.showCustomOverlayModal(withMessage: loadingMessage)
         self.dismiss(animated: true) {
-            let testVC = TestVC()
-            testVC.incomingValue = value
-            self.delegate?.prepareToNavigate(toViewController: testVC)
+            self.delegate?.prepareToNavigate(toViewController: viewController)
         }
     }
 }

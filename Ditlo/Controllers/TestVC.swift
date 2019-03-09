@@ -27,10 +27,20 @@ class TestVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = false
+        //navigationController?.isNavigationBarHidden = false
         self.view.backgroundColor = .white
         
         self.view.addSubview(testLabel)
         testLabel.fillSuperview()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let testNavigationController = self.navigationController {
+            testNavigationController.navigationBar.prefersLargeTitles = false
+            testNavigationController.hidesBarsOnSwipe = false
+        }
+        
+        SharedModalsService.instance.hideCustomOverlayModal()
     }
 }

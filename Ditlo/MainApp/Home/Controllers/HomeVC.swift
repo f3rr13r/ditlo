@@ -40,22 +40,36 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         homeNavBar.navigationSections = navigationSections
         edgesForExtendedLayout = []
-        setupCustomNavigation()
         anchorChildViews()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupCustomHomeNavigation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        destroyCustomHomeNavigation()
     }
     
     func appHasCurrentUserData() {
 
     }
     
-    func setupCustomNavigation() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        guard let navigationBar = self.navigationController?.navigationBar else { return }
-        navigationBar.addSubview(homeNavBar)
-        homeNavBar.fillSuperview()
-        homeNavBar.delegate = self
-        self.navigationController?.hidesBarsOnSwipe = true
+    func setupCustomHomeNavigation() {
+        if let homeNavigationController = self.navigationController {
+            homeNavigationController.navigationBar.prefersLargeTitles = true
+            homeNavigationController.hidesBarsOnSwipe = true
+            homeNavigationController.navigationBar.addSubview(homeNavBar)
+            homeNavBar.fillSuperview()
+            homeNavBar.delegate = self
+            
+        }
+    }
+    
+    func destroyCustomHomeNavigation() {
+        homeNavBar.removeFromSuperview()
     }
     
     func anchorChildViews() {
@@ -166,6 +180,7 @@ extension HomeVC: SectionCellDelegate {
 // ditloPopup delegate
 extension HomeVC: DitloPlayerPopupActionDelegate {
     func prepareToNavigate(toViewController viewController: UIViewController) {
+        print(viewController)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
