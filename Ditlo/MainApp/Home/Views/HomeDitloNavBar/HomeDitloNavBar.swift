@@ -74,6 +74,7 @@ class HomeDitloNavBar: BaseView {
     
     override func setupViews() {
         super.setupViews()
+        backgroundColor = .white
         setupChildDelegates()
         anchorChildViews()
     }

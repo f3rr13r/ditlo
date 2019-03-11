@@ -118,7 +118,8 @@ class AuthenticationNavBar: BaseView {
     var delegate: AuthentationNavBarDelegate?
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: authNavBarWidth, height: authNavBarHeight)
+        let navbarHeight: CGFloat = safeAreaTopPadding + 54.0
+        return CGSize(width: screenWidth, height: navbarHeight)
     }
     
     override func setupViews() {

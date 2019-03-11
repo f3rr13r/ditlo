@@ -8,6 +8,7 @@
 
 import UIKit
 import SPStorkController
+import MaterialComponents.MaterialFlexibleHeader
 
 class HomeVC: UIViewController {
     
@@ -45,12 +46,14 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupCustomHomeNavigation()
+        self.setupCustomHomeNavigation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        destroyCustomHomeNavigation()
+        DispatchQueue.main.async {
+            self.destroyCustomHomeNavigation()
+        }
     }
     
     func appHasCurrentUserData() {
@@ -61,10 +64,12 @@ class HomeVC: UIViewController {
         if let homeNavigationController = self.navigationController {
             homeNavigationController.navigationBar.prefersLargeTitles = true
             homeNavigationController.hidesBarsOnSwipe = true
+            homeNavigationController.navigationBar.shadowImage = UIImage()
+            homeNavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            homeNavigationController.navigationBar.backgroundColor = .clear
             homeNavigationController.navigationBar.addSubview(homeNavBar)
             homeNavBar.fillSuperview()
             homeNavBar.delegate = self
-            
         }
     }
     
@@ -143,7 +148,8 @@ extension HomeVC: UIScrollViewDelegate {
                 }
             }
         }
-    }}
+    }
+}
 
 // home navigation bar delegates methods
 extension HomeVC: HomeDitloNavBarDelegate {
@@ -160,11 +166,11 @@ extension HomeVC: HomeDitloNavBarDelegate {
 // section cell delegate methods
 extension HomeVC: SectionCellDelegate {
     func userSwipedContentUp() {
-        contentSectionsCollectionView.isScrollEnabled = false
+        //contentSectionsCollectionView.isScrollEnabled = false
     }
     
     func userSwipedContentDown() {
-        contentSectionsCollectionView.isScrollEnabled = true
+        //contentSectionsCollectionView.isScrollEnabled = true
     }
     
     func ditloItemCellTapped() {
@@ -180,8 +186,9 @@ extension HomeVC: SectionCellDelegate {
 // ditloPopup delegate
 extension HomeVC: DitloPlayerPopupActionDelegate {
     func prepareToNavigate(toViewController viewController: UIViewController) {
-        print(viewController)
-        self.navigationController?.pushViewController(viewController, animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 

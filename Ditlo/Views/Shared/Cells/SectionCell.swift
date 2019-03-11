@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import MaterialComponents.MDCFlexibleHeaderViewController
 
 protocol SectionCellDelegate {
     func ditloItemCellTapped()
     func userSwipedContentUp()
     func userSwipedContentDown()
+    //func updateFlexibleHeaderTrackingScrollView()
 }
 
 class SectionCell: BaseCell {
@@ -28,6 +30,8 @@ class SectionCell: BaseCell {
             sectionTitleLabel.text = sectionTitle
         }
     }
+    
+    var flexibleHeaderViewController: MDCFlexibleHeaderViewController? = nil
     
     // views
     private let largeDitloItemCellId: String = "largeDitloItemCellId"
@@ -70,7 +74,14 @@ class SectionCell: BaseCell {
     // class methods
     override func setupViews() {
         super.setupViews()
+        setupFlexibleHeaderViewDelegate()
         anchorSubviews()
+    }
+    
+    func setupFlexibleHeaderViewDelegate() {
+        if let headerViewController = self.flexibleHeaderViewController {
+            headerViewController as! UICollectionViewDelegate
+        }
     }
     
     func anchorSubviews() {
@@ -139,6 +150,10 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
         delegate?.ditloItemCellTapped()
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
     }
@@ -154,7 +169,7 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
 
 
 // scroll view delegate methods
-extension SectionCell: UIScrollViewDelegate {
+extension SectionCell: UIScrollViewDelegate {    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         // scroll swipe upwards
@@ -183,5 +198,27 @@ extension SectionCell: UIScrollViewDelegate {
         }
         
         previousContentOffset = scrollView.contentOffset.y
+        
+        if let flexibleHeaderViewController = flexibleHeaderViewController {
+            flexibleHeaderViewController.headerView.trackingScrollDidScroll()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if let flexibleHeaderViewController = flexibleHeaderViewController {
+            flexibleHeaderViewController.headerView.trackingScrollDidEndDecelerating()
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if let flexibleHeaderViewController = flexibleHeaderViewController {
+            flexibleHeaderViewController.headerView.trackingScrollDidEndDraggingWillDecelerate(decelerate)
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if let flexibleHeaderViewController = flexibleHeaderViewController {
+            flexibleHeaderViewController.headerView.trackingScrollWillEndDragging(withVelocity: velocity, targetContentOffset: targetContentOffset)
+        }
     }
 }

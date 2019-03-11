@@ -18,6 +18,7 @@
 		4A57EEEC22258D8D008A96D0 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57EEEB22258D8D008A96D0 /* NavigationCell.swift */; };
 		4A717DEF22316A35008DE1F8 /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DEE22316A35008DE1F8 /* SectionCell.swift */; };
 		4A717DF1223172B4008DE1F8 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DF0223172B4008DE1F8 /* UserCell.swift */; };
+		4A717E2B22369141008EED78 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717E2A22369141008EED78 /* Sizes.swift */; };
 		4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A734B5E222044B7005EE2CC /* MyProfileVC.swift */; };
 		4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */; };
 		4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */; };
@@ -35,7 +36,6 @@
 		4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0345021F0A7E400FDA967 /* UINavigationController.swift */; };
 		4AD0345321F0A9ED00FDA967 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0345221F0A9ED00FDA967 /* GoogleService-Info.plist */; };
 		4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0345721F0ABB900FDA967 /* LogInVC.swift */; };
-		4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346021F0AC6B00FDA967 /* Sizes.swift */; };
 		4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346221F0AE1500FDA967 /* Colours.swift */; };
 		4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346421F0AF8D00FDA967 /* Fonts.swift */; };
 		4AD0346A21F0B1AB00FDA967 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0346921F0B1AB00FDA967 /* BaseView.swift */; };
@@ -102,6 +102,7 @@
 		4A57EEEB22258D8D008A96D0 /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
 		4A717DEE22316A35008DE1F8 /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
 		4A717DF0223172B4008DE1F8 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		4A717E2A22369141008EED78 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		4A734B5E222044B7005EE2CC /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
 		4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDitloNavBar.swift; sourceTree = "<group>"; };
 		4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCollectionView.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		4AD0345021F0A7E400FDA967 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		4AD0345221F0A9ED00FDA967 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4AD0345721F0ABB900FDA967 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
-		4AD0346021F0AC6B00FDA967 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		4AD0346221F0AE1500FDA967 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		4AD0346421F0AF8D00FDA967 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		4AD0346921F0B1AB00FDA967 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -347,7 +347,6 @@
 		4AD0344721F0A45300FDA967 /* MediaAssets */ = {
 			isa = PBXGroup;
 			children = (
-				4AD0344921F0A47100FDA967 /* VideoFiles */,
 				4AD0344821F0A45D00FDA967 /* Assets */,
 			);
 			path = MediaAssets;
@@ -359,13 +358,6 @@
 				4AD0343B21F0A43500FDA967 /* Assets.xcassets */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		4AD0344921F0A47100FDA967 /* VideoFiles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VideoFiles;
 			sourceTree = "<group>";
 		};
 		4AD0344A21F0A5E700FDA967 /* Controllers */ = {
@@ -422,10 +414,10 @@
 		4AD0345C21F0AC1300FDA967 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				4AD0346021F0AC6B00FDA967 /* Sizes.swift */,
 				4AD0346221F0AE1500FDA967 /* Colours.swift */,
 				4AD0346421F0AF8D00FDA967 /* Fonts.swift */,
 				4AD034B121F1EA4100FDA967 /* Routes.swift */,
+				4A717E2A22369141008EED78 /* Sizes.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1026,8 +1018,8 @@
 				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
 				4AF3A5F62232AADB0084479F /* EventCell.swift in Sources */,
 				4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */,
+				4A717E2B22369141008EED78 /* Sizes.swift in Sources */,
 				4A028980222D7C50009D6AFE /* LargeDitloItemCell.swift in Sources */,
-				4AD0346121F0AC6B00FDA967 /* Sizes.swift in Sources */,
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,

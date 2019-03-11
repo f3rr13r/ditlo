@@ -15,30 +15,44 @@ class OtherUserProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // do stuff we need here
+        self.view.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupOtherUserProfileNavigation()
-        SharedModalsService.instance.hideCustomOverlayModal()
+        DispatchQueue.main.async {
+            self.setupOtherUserProfileNavigation()
+            SharedModalsService.instance.hideCustomOverlayModal()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        destroyOtherUserProfileNavBar()
     }
     
     func setupOtherUserProfileNavigation() {
         if let otherUserProfileNavigationController = self.navigationController {
+            otherUserProfileNavigationController.navigationBar.sizeToFit()
             otherUserProfileNavigationController.navigationBar.prefersLargeTitles = true
+            otherUserProfileNavigationController.navigationItem.hidesBackButton = true
             otherUserProfileNavigationController.hidesBarsOnSwipe = true
-            otherUserProfileNavigationController.navigationItem.backBarButtonItem?.tintColor = ditloOffBlack
-            otherUserProfileNavigationController.navigationItem.title = ""
+            otherUserProfileNavigationController.navigationBar.shadowImage = UIImage()
+            otherUserProfileNavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            otherUserProfileNavigationController.navigationBar.backgroundColor = .clear
             otherUserProfileNavigationController.navigationBar.addSubview(otherUserProfileNavBar)
             otherUserProfileNavBar.fillSuperview()
             otherUserProfileNavBar.delegate = self
         }
     }
+    
+    func destroyOtherUserProfileNavBar() {
+        otherUserProfileNavBar.removeFromSuperview()
+    }
 }
 
 extension OtherUserProfileVC: OtherUserProfileNavBarDelegate {
     func backButtonPressed() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
