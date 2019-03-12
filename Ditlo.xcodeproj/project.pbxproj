@@ -27,6 +27,7 @@
 		4A8399D72237EB5000CDC005 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399D62237EB5000CDC005 /* ProfileHeaderCell.swift */; };
 		4A8399DA2238098700CDC005 /* MyProfileNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399D92238098700CDC005 /* MyProfileNavBar.swift */; };
 		4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399DC2238167100CDC005 /* CategoriesNavBar.swift */; };
+		4A8399DF2238780300CDC005 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399DE2238780300CDC005 /* UITabBarController.swift */; };
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
@@ -113,6 +114,7 @@
 		4A8399D62237EB5000CDC005 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
 		4A8399D92238098700CDC005 /* MyProfileNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileNavBar.swift; sourceTree = "<group>"; };
 		4A8399DC2238167100CDC005 /* CategoriesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNavBar.swift; sourceTree = "<group>"; };
+		4A8399DE2238780300CDC005 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				4AD0347C21F0C7D000FDA967 /* String.swift */,
 				4AB7AB9722008A1800A2A8DD /* UILabel.swift */,
 				4A3DA292220123BB005207D8 /* Date.swift */,
+				4A8399DE2238780300CDC005 /* UITabBarController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1009,6 +1012,7 @@
 				4AD034B921F205AF00FDA967 /* MainAppNavigationVC.swift in Sources */,
 				4AD034D121F251DB00FDA967 /* JobService.swift in Sources */,
 				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
+				4A8399DF2238780300CDC005 /* UITabBarController.swift in Sources */,
 				4AF3A6022232CDFE0084479F /* TestVC.swift in Sources */,
 				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
 				4A8399D72237EB5000CDC005 /* ProfileHeaderCell.swift in Sources */,
