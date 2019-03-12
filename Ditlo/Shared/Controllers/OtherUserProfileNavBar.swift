@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MarqueeLabel
 
 protocol OtherUserProfileNavBarDelegate {
     func backButtonPressed()
@@ -71,37 +72,35 @@ class OtherUserProfileNavBar: BaseView {
         return button
     }()
     var interactionButtonWidthConstraint: NSLayoutConstraint!
+    let centreInfoContainerView = UIView()
     
-    let centreStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.backgroundColor = ditloLightGreen
-        stackView.alignment = .center
-        stackView.distribution = .equalCentering
-        return stackView
-    }()
-    
-    let profileNameLabel: UILabel = {
-        let label = UILabel()
+    let profileNameLabel: MarqueeLabel = {
+        let label = MarqueeLabel()
         label.numberOfLines = 1
-        //label.text = "Gareth Bale"
-        label.text = "Christopher Greenwood"
+        label.text = "Gareth Bale"
         label.font = smallTitleFont
         label.textColor = ditloOffBlack
+        label.trailingBuffer = 8.0
+        label.fadeLength = 6.0
         return label
     }()
     
     let profileJobButton: UIButton = {
         let button = UIButton()
-        button.contentEdgeInsets = UIEdgeInsets(top: 0.001, left: 0.001, bottom: 0.001, right: 0.001)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0.001, left: 0.001, bottom: 0.001, right: 0.001)
-        button.contentHorizontalAlignment = .left
-        button.setTitle("Professional Footballer", for: .normal)
-        button.setTitleColor(ditloOffBlack, for: .normal)
-        button.titleLabel?.textAlignment = .left
-        button.titleLabel?.font = largeProfileInfoJobFont
-        
         // do selector
         return button
+    }()
+    
+    let profileJobLabel: MarqueeLabel = {
+        let label = MarqueeLabel()
+        label.numberOfLines = 1
+        label.text = "Professional Football Player"
+        label.font = largeProfileInfoJobFont
+        label.textColor = ditloOffBlack
+        label.textAlignment = .left
+        label.trailingBuffer = 8.0
+        label.fadeLength = 6.0
+        return label
     }()
     
     let bottomRowView = UIView()
@@ -114,7 +113,6 @@ class OtherUserProfileNavBar: BaseView {
         let label = UILabel()
         label.text = "32"
         label.textColor = ditloOffBlack
-        //label.font = defaultParagraphFont
         label.font = smallTitleFont
         label.textAlignment = .center
         return label
@@ -123,7 +121,6 @@ class OtherUserProfileNavBar: BaseView {
     let friendsNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Friends"
-        //label.textColor = ditloGrey
         label.textColor = ditloOffBlack
         label.font = largeProfileInfoJobFont
         label.textAlignment = .center
@@ -138,7 +135,6 @@ class OtherUserProfileNavBar: BaseView {
         let label = UILabel()
         label.text = "123"
         label.textColor = ditloOffBlack
-        //label.font = defaultParagraphFont
         label.font = smallTitleFont
         label.textAlignment = .center
         return label
@@ -147,7 +143,6 @@ class OtherUserProfileNavBar: BaseView {
     let followingNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Following"
-        //label.textColor = ditloGrey
         label.textColor = ditloOffBlack
         label.font = largeProfileInfoJobFont
         label.textAlignment = .center
@@ -162,7 +157,6 @@ class OtherUserProfileNavBar: BaseView {
         let label = UILabel()
         label.text = "7.2K"
         label.textColor = ditloOffBlack
-        //label.font = defaultParagraphFont
         label.font = smallTitleFont
         label.textAlignment = .center
         return label
@@ -171,7 +165,6 @@ class OtherUserProfileNavBar: BaseView {
     let followersNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Followers"
-        //label.textColor = ditloGrey
         label.textColor = ditloOffBlack
         label.font = largeProfileInfoJobFont
         label.textAlignment = .center
@@ -186,7 +179,6 @@ class OtherUserProfileNavBar: BaseView {
         let label = UILabel()
         label.text = "11"
         label.textColor = ditloOffBlack
-        //label.font = defaultParagraphFont
         label.font = smallTitleFont
         label.textAlignment = .center
         return label
@@ -195,7 +187,6 @@ class OtherUserProfileNavBar: BaseView {
     let eventsNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Events"
-        //label.textColor = ditloGrey
         label.textColor = ditloOffBlack
         label.font = largeProfileInfoJobFont
         label.textAlignment = .center
@@ -243,12 +234,17 @@ class OtherUserProfileNavBar: BaseView {
         interactionButtonWidthConstraint = NSLayoutConstraint(item: interactionButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: interactionButtonWidth)
         addConstraint(interactionButtonWidthConstraint)
         
-        topRowView.addSubview(centreStackView)
-        centreStackView.anchor(withTopAnchor: nil, leadingAnchor: roundedBorderView.trailingAnchor, bottomAnchor: nil, trailingAnchor: interactionButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: topRowView.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 12.0, bottom: 0.0, right: -12.0))
-        centreStackView.addSubview(profileNameLabel)
-        profileNameLabel.anchor(withTopAnchor: centreStackView.topAnchor, leadingAnchor: centreStackView.leadingAnchor, bottomAnchor: nil, trailingAnchor: centreStackView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
-        centreStackView.addSubview(profileJobButton)
-        profileJobButton.anchor(withTopAnchor: profileNameLabel.bottomAnchor, leadingAnchor: centreStackView.leadingAnchor, bottomAnchor: centreStackView.bottomAnchor, trailingAnchor: centreStackView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil)
+        topRowView.addSubview(centreInfoContainerView)
+        centreInfoContainerView.anchor(withTopAnchor: nil, leadingAnchor: roundedBorderView.trailingAnchor, bottomAnchor: nil, trailingAnchor: interactionButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: topRowView.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 12.0, bottom: 0.0, right: -12.0))
+        
+        centreInfoContainerView.addSubview(profileNameLabel)
+        profileNameLabel.anchor(withTopAnchor: centreInfoContainerView.topAnchor, leadingAnchor: centreInfoContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: centreInfoContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 14.0)
+        
+        centreInfoContainerView.addSubview(profileJobButton)
+        profileJobButton.anchor(withTopAnchor: profileNameLabel.bottomAnchor, leadingAnchor: centreInfoContainerView.leadingAnchor, bottomAnchor: centreInfoContainerView.bottomAnchor, trailingAnchor: centreInfoContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 11.0, padding: .init(top: 2.0, left: 0.0, bottom: 0.0, right: 0.0))
+        
+        profileJobButton.addSubview(profileJobLabel)
+        profileJobLabel.anchor(withTopAnchor: profileJobButton.topAnchor, leadingAnchor: profileJobButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: profileJobButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 11.0)
         
         // bottom row
         addSubview(bottomRowView)
