@@ -11,9 +11,29 @@ import MarqueeLabel
 
 protocol CategoriesNavBarDelegate {
     func calendarButtonPressed()
+    func navigationCellSelected(itemIndex: IndexPath)
 }
 
 class CategoriesNavBar: BaseView {
+    
+    // injector variables
+    var categorySections: [String] = [] {
+        didSet {
+            categoriesNavigationCollectionView.navigationSections = categorySections
+        }
+    }
+    
+    var categoryColours: [UIColor] = [] {
+        didSet {
+            categoriesNavigationCollectionView.cellColours = categoryColours
+        }
+    }
+    
+    var currentlySelectedSectionIndex: IndexPath = IndexPath(item: 0, section: 0) {
+        didSet {
+            categoriesNavigationCollectionView.updateSelectedCell(withIndexPath: currentlySelectedSectionIndex)
+        }
+    }
     
     // views
     let logoContainerRowView: UIView = {
@@ -39,7 +59,7 @@ class CategoriesNavBar: BaseView {
     
     let topContentRowView: UIView = {
         let view = UIView()
-        view.backgroundColor = ditloOrange
+        view.backgroundColor = .white
         return view
     }()
     
@@ -70,7 +90,7 @@ class CategoriesNavBar: BaseView {
         let label = MarqueeLabel()
         label.numberOfLines = 1
         label.text = "Categories"
-        label.font = smallTitleFont
+        label.font = defaultTitleFont
         label.textColor = ditloOffBlack
         label.trailingBuffer = 8.0
         label.fadeLength = 6.0
@@ -85,7 +105,12 @@ class CategoriesNavBar: BaseView {
     override func setupViews() {
         super.setupViews()
         backgroundColor = .white
+        setupChildDelegates()
         anchorSubviews()
+    }
+    
+    func setupChildDelegates() {
+        categoriesNavigationCollectionView.delegate = self
     }
     
     func anchorSubviews() {
@@ -99,16 +124,24 @@ class CategoriesNavBar: BaseView {
         
         // top content
         addSubview(topContentRowView)
-        topContentRowView.anchor(withTopAnchor: logoContainerRowView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 32.0, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: 0.0))
+        topContentRowView.anchor(withTopAnchor: logoContainerRowView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 32.0, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0))
         topContentRowView.addSubview(calendarButton)
         calendarButton.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: topContentRowView.centerYAnchor, widthAnchor: nil, heightAnchor: 20.0)
         calendarButton.addSubview(calendarIconImageView)
         calendarIconImageView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: calendarButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: 14.0, heightAnchor: 14.0, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
         calendarButton.addSubview(calendarDateLabel)
         calendarDateLabel.anchor(withTopAnchor: nil, leadingAnchor: calendarButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: calendarIconImageView.leadingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -8.0))
+        topContentRowView.addSubview(categoriesTitleLabel)
+        categoriesTitleLabel.anchor(withTopAnchor: topContentRowView.topAnchor, leadingAnchor: topContentRowView.leadingAnchor, bottomAnchor: topContentRowView.bottomAnchor, trailingAnchor: calendarButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -12.0))
         
         // navigation controller
         addSubview(categoriesNavigationCollectionView)
-        categoriesNavigationCollectionView.anchor(withTopAnchor: topContentRowView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: -0.0, right: 0.0))
+        categoriesNavigationCollectionView.anchor(withTopAnchor: topContentRowView.bottomAnchor, leadingAnchor: leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: 0.0))
+    }
+}
+
+extension CategoriesNavBar: NavigationCollectionViewDelegate {
+    func navigationCellSelected(itemIndex: IndexPath) {
+        delegate?.navigationCellSelected(itemIndex: itemIndex)
     }
 }

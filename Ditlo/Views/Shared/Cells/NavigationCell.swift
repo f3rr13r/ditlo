@@ -44,7 +44,7 @@ class NavigationCell: BaseCell {
     }
     
     func setupCellState(toSelectedState isSelected: Bool = false) {
-        let cellColor = self.cellColor ?? ditloGrey
+        let cellColor = self.cellColor != nil ? self.cellColor! : ditloGrey
         layer.cornerRadius = 4.0
         layer.borderWidth = isSelected ? 0.0 : 1.0
         layer.borderColor = isSelected ? nil : cellColor.cgColor

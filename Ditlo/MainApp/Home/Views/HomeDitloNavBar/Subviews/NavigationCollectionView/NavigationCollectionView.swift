@@ -22,6 +22,13 @@ class NavigationCollectionView: BaseView {
         }
     }
     
+    var cellColours: [UIColor] = [] {
+        didSet {
+            navigationCollectionView.reloadData()
+            navigationCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        }
+    }
+    
     // views
     private let navigationCellId: String = "navigationCellId"
     lazy var navigationCollectionView: UICollectionView = {
@@ -64,6 +71,7 @@ extension NavigationCollectionView: UICollectionViewDelegate, UICollectionViewDe
             return UICollectionViewCell()
         }
         navigationCell.title = navigationSections[indexPath.item]
+        navigationCell.cellColor = cellColours.count > 0 ? cellColours[indexPath.item] : nil
         return navigationCell
     }
     
