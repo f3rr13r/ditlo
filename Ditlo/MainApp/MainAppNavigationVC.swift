@@ -54,12 +54,10 @@ class MainAppNavigationVC: UITabBarController {
         cameraNavigationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10.0, right: 0.0)
         
         let categoriesNavigationVC = UINavigationController(rootViewController: categoriesVC)
-        categoriesNavigationVC.isNavigationBarHidden = true
         categoriesNavigationVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "categories-icon")?.withRenderingMode(.alwaysTemplate), tag: 3)
         categoriesNavigationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10.0, right: 0.0)
         
         let profileNavigationVC = UINavigationController(rootViewController: profileVC)
-        profileNavigationVC.isNavigationBarHidden = true
         profileNavigationVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-icon")?.withRenderingMode(.alwaysTemplate), tag: 4)
         profileNavigationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10.0, right: 0.0)
 

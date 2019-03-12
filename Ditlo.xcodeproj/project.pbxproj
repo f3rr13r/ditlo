@@ -25,6 +25,9 @@
 		4A8086E822281B380007BDEB /* ContentSectionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086E722281B380007BDEB /* ContentSectionsCollectionView.swift */; };
 		4A8086EC222837AD0007BDEB /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */; };
 		4A8086EE2228494D0007BDEB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086ED2228494D0007BDEB /* GradientView.swift */; };
+		4A8399D72237EB5000CDC005 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399D62237EB5000CDC005 /* ProfileHeaderCell.swift */; };
+		4A8399DA2238098700CDC005 /* MyProfileNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399D92238098700CDC005 /* MyProfileNavBar.swift */; };
+		4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8399DC2238167100CDC005 /* CategoriesNavBar.swift */; };
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
@@ -109,6 +112,9 @@
 		4A8086E722281B380007BDEB /* ContentSectionsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSectionsCollectionView.swift; sourceTree = "<group>"; };
 		4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		4A8086ED2228494D0007BDEB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		4A8399D62237EB5000CDC005 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
+		4A8399D92238098700CDC005 /* MyProfileNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileNavBar.swift; sourceTree = "<group>"; };
+		4A8399DC2238167100CDC005 /* CategoriesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNavBar.swift; sourceTree = "<group>"; };
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
@@ -186,13 +192,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A3DA2812200A873005207D8 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		4A3DA28E22010D4B005207D8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +219,7 @@
 				4A717DEE22316A35008DE1F8 /* SectionCell.swift */,
 				4A717DF0223172B4008DE1F8 /* UserCell.swift */,
 				4AF3A5F52232AADB0084479F /* EventCell.swift */,
+				4A8399D62237EB5000CDC005 /* ProfileHeaderCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -227,6 +227,7 @@
 		4A734B5C2220448F005EE2CC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				4A8399D82238096800CDC005 /* Views */,
 				4A734B5D22204498005EE2CC /* Controllers */,
 			);
 			path = Profile;
@@ -280,6 +281,22 @@
 				4A8086E722281B380007BDEB /* ContentSectionsCollectionView.swift */,
 			);
 			path = ContentSectionsViewController;
+			sourceTree = "<group>";
+		};
+		4A8399D82238096800CDC005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A8399D92238098700CDC005 /* MyProfileNavBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A8399DB2238160E00CDC005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A8399DC2238167100CDC005 /* CategoriesNavBar.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4A9F4B3821F3B0F400EDDE8B /* Views */ = {
@@ -605,7 +622,6 @@
 			isa = PBXGroup;
 			children = (
 				4A734B5C2220448F005EE2CC /* Profile */,
-				4A3DA2812200A873005207D8 /* Views */,
 				4AD034BD21F2078D00FDA967 /* Camera */,
 				4AD034BC21F2078500FDA967 /* Categories */,
 				4AD034BB21F2076A00FDA967 /* Search */,
@@ -635,6 +651,7 @@
 		4AD034BC21F2078500FDA967 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4A8399DB2238160E00CDC005 /* Views */,
 				4AD034C421F2084000FDA967 /* Controllers */,
 			);
 			path = Categories;
@@ -995,6 +1012,7 @@
 				4AD034CB21F2258000FDA967 /* SelectJobPositionVC.swift in Sources */,
 				4AD034B421F1F05F00FDA967 /* CustomErrorMessageModal.swift in Sources */,
 				4A57EEEC22258D8D008A96D0 /* NavigationCell.swift in Sources */,
+				4A8399DA2238098700CDC005 /* MyProfileNavBar.swift in Sources */,
 				4AD0349021F1416800FDA967 /* AuthenticationModels.swift in Sources */,
 				4AD034C621F2084F00FDA967 /* CategoriesVC.swift in Sources */,
 				4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */,
@@ -1004,6 +1022,7 @@
 				4AD0347321F0B4AB00FDA967 /* AuthenticationNavBar.swift in Sources */,
 				4AF3A6022232CDFE0084479F /* TestVC.swift in Sources */,
 				4AD0348821F0FB3A00FDA967 /* GreyBorderRoundedButton.swift in Sources */,
+				4A8399D72237EB5000CDC005 /* ProfileHeaderCell.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
 				4AF3A60D223337050084479F /* OtherUserProfileNavBar.swift in Sources */,
 				4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */,
@@ -1023,6 +1042,7 @@
 				4A717E2B22369141008EED78 /* Sizes.swift in Sources */,
 				4A028980222D7C50009D6AFE /* LargeDitloItemCell.swift in Sources */,
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
+				4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
 				4AC768A0220CDF160086FF17 /* DummyDitloService.swift in Sources */,

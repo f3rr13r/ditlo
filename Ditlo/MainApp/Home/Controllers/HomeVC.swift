@@ -66,9 +66,9 @@ class HomeVC: UIViewController {
             homeNavigationController.hidesBarsOnSwipe = true
             homeNavigationController.navigationBar.shadowImage = UIImage()
             homeNavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            homeNavigationController.navigationBar.backgroundColor = .clear
+            homeNavigationController.navigationBar.backgroundColor = .white
             homeNavigationController.navigationBar.addSubview(homeNavBar)
-            homeNavBar.fillSuperview()
+            homeNavBar.anchor(withTopAnchor: homeNavigationController.navigationBar.topAnchor, leadingAnchor: homeNavigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: homeNavigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
             homeNavBar.delegate = self
         }
     }
