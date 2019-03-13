@@ -87,6 +87,8 @@ extension CategoriesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
         return mainCategorySections.count
     }
     
+    // comment add for pushing to gitlab
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionCell else { return UICollectionViewCell() }
         sectionCell.testColour = mainCategoryColours[indexPath.item]
