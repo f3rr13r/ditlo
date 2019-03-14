@@ -18,7 +18,7 @@ class NavigationCollectionView: BaseView {
     var sections: [NavigationCellContent] = [] {
         didSet {
             navigationCollectionView.reloadData()
-            navigationCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+            navigationCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
         }
     }
     

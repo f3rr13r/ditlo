@@ -90,6 +90,7 @@
 		4AF3A60D223337050084479F /* OtherUserProfileNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */; };
 		4AF55E19223A8D45004AD7BC /* NavigationCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF55E18223A8D45004AD7BC /* NavigationCellContent.swift */; };
 		4AF55E1E223A9C0A004AD7BC /* SubCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF55E1D223A9C0A004AD7BC /* SubCategoryVC.swift */; };
+		4AF55E20223AA777004AD7BC /* SubCategoryNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF55E1F223AA777004AD7BC /* SubCategoryNavBar.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +182,7 @@
 		4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileNavBar.swift; sourceTree = "<group>"; };
 		4AF55E18223A8D45004AD7BC /* NavigationCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCellContent.swift; sourceTree = "<group>"; };
 		4AF55E1D223A9C0A004AD7BC /* SubCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryVC.swift; sourceTree = "<group>"; };
+		4AF55E1F223AA777004AD7BC /* SubCategoryNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryNavBar.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,18 +258,9 @@
 		4A8086DA2227FEC90007BDEB /* HomeDitloNavBar */ = {
 			isa = PBXGroup;
 			children = (
-				4A8086DB2227FEE30007BDEB /* Subviews */,
 				4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */,
 			);
 			path = HomeDitloNavBar;
-			sourceTree = "<group>";
-		};
-		4A8086DB2227FEE30007BDEB /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				4A8086DE2227FF160007BDEB /* NavigationCollectionView */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		4A8086DE2227FF160007BDEB /* NavigationCollectionView */ = {
@@ -309,6 +302,15 @@
 				4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		4AA887EB223AB9860037BF5B /* SubCategoryVC */ = {
+			isa = PBXGroup;
+			children = (
+				4AF55E1C223A9BDD004AD7BC /* Controllers */,
+				4AF55E1B223A9BD7004AD7BC /* Views */,
+			);
+			name = SubCategoryVC;
 			sourceTree = "<group>";
 		};
 		4AD0342821F0A43300FDA967 = {
@@ -449,6 +451,7 @@
 		4AD0347621F0C20300FDA967 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4A8086DE2227FF160007BDEB /* NavigationCollectionView */,
 				4AF3A6032232CE9F0084479F /* SectionViews */,
 				4A57EEEA22258D35008A96D0 /* Cells */,
 				4AD0348621F0FACC00FDA967 /* Buttons */,
@@ -673,7 +676,6 @@
 		4AD034C421F2084000FDA967 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4AF55E1A223A9BCF004AD7BC /* SubPages */,
 				4AD034C521F2084F00FDA967 /* CategoriesVC.swift */,
 			);
 			path = Controllers;
@@ -786,18 +788,19 @@
 		4AF3A606223336080084479F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4AF3A609223336370084479F /* OtherUserProfile */,
+				4AA887EB223AB9860037BF5B /* SubCategoryVC */,
+				4AF3A609223336370084479F /* OtherUserProfileVC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		4AF3A609223336370084479F /* OtherUserProfile */ = {
+		4AF3A609223336370084479F /* OtherUserProfileVC */ = {
 			isa = PBXGroup;
 			children = (
 				4AF3A60B223336530084479F /* Views */,
 				4AF3A60A223336460084479F /* Controllers */,
 			);
-			name = OtherUserProfile;
+			name = OtherUserProfileVC;
 			sourceTree = "<group>";
 		};
 		4AF3A60A223336460084479F /* Controllers */ = {
@@ -825,18 +828,10 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		4AF55E1A223A9BCF004AD7BC /* SubPages */ = {
-			isa = PBXGroup;
-			children = (
-				4AF55E1C223A9BDD004AD7BC /* Controllers */,
-				4AF55E1B223A9BD7004AD7BC /* Views */,
-			);
-			path = SubPages;
-			sourceTree = "<group>";
-		};
 		4AF55E1B223A9BD7004AD7BC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4AF55E1F223AA777004AD7BC /* SubCategoryNavBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1068,6 +1063,7 @@
 				4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
+				4AF55E20223AA777004AD7BC /* SubCategoryNavBar.swift in Sources */,
 				4AF55E19223A8D45004AD7BC /* NavigationCellContent.swift in Sources */,
 				4AC768A0220CDF160086FF17 /* DummyDitloService.swift in Sources */,
 				4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */,

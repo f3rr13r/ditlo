@@ -59,6 +59,7 @@ class OtherUserProfileVC: UIViewController {
             otherUserProfileNavigationController.navigationBar.addSubview(otherUserProfileNavBar)
             otherUserProfileNavBar.anchor(withTopAnchor: otherUserProfileNavigationController.navigationBar.topAnchor, leadingAnchor: otherUserProfileNavigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: otherUserProfileNavigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
             otherUserProfileNavBar.delegate = self
+            otherUserProfileNavigationController.navigationBar.layoutIfNeeded()
         }
     }
     
