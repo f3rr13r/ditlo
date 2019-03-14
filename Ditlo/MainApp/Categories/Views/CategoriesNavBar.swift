@@ -17,15 +17,9 @@ protocol CategoriesNavBarDelegate {
 class CategoriesNavBar: BaseView {
     
     // injector variables
-    var categorySections: [String] = [] {
+    var sections: [NavigationCellContent] = [] {
         didSet {
-            categoriesNavigationCollectionView.navigationSections = categorySections
-        }
-    }
-    
-    var categoryColours: [UIColor] = [] {
-        didSet {
-            categoriesNavigationCollectionView.cellColours = categoryColours
+            categoriesNavigationCollectionView.sections = sections
         }
     }
     

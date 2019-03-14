@@ -15,14 +15,7 @@ protocol NavigationCollectionViewDelegate {
 class NavigationCollectionView: BaseView {
 
     // injector variables
-    var navigationSections: [String] = [] {
-        didSet {
-            navigationCollectionView.reloadData()
-            navigationCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
-        }
-    }
-    
-    var cellColours: [UIColor] = [] {
+    var sections: [NavigationCellContent] = [] {
         didSet {
             navigationCollectionView.reloadData()
             navigationCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
@@ -63,20 +56,19 @@ class NavigationCollectionView: BaseView {
 // collection view delegate and data source methods
 extension NavigationCollectionView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return navigationSections.count
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let navigationCell = collectionView.dequeueReusableCell(withReuseIdentifier: navigationCellId, for: indexPath) as? NavigationCell else {
             return UICollectionViewCell()
         }
-        navigationCell.title = navigationSections[indexPath.item]
-        navigationCell.cellColor = cellColours.count > 0 ? cellColours[indexPath.item] : nil
+        navigationCell.cellContent = sections[indexPath.item]
         return navigationCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let navigationCellWidth: CGFloat = navigationSections[indexPath.item].widthOfString(usingFont: navigationCellFont) + 20.0
+        let navigationCellWidth: CGFloat = sections[indexPath.item].name.widthOfString(usingFont: navigationCellFont) + 20.0
         return CGSize(width: navigationCellWidth, height: 30.0)
     }
     

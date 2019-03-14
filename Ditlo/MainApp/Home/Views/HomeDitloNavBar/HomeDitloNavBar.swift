@@ -16,9 +16,9 @@ protocol HomeDitloNavBarDelegate {
 class HomeDitloNavBar: BaseView {
     
     // injector variables
-    var navigationSections: [String] = [] {
+    var sections: [NavigationCellContent] = [] {
         didSet {
-            self.navigationCollectionView.navigationSections = navigationSections
+            self.navigationCollectionView.sections = sections
         }
     }
     

@@ -29,8 +29,8 @@ class CategoriesVC: UIViewController {
     }()
 
     // variables
-    let mainCategorySections: [String] = ["Arts", "Sports", "Music", "Fashion", "Business", "Lifestyle", "Social", "Outdoors", "Politics"]
-    let mainCategoryColours: [UIColor] = [ditloDarkGreen, ditloRed, ditloPurple, ditloOrange, ditloDarkBlue, ditloPink, ditloYellow, ditloLightGreen, ditloLightBlue]
+    var categories: [Category] = []
+    var categoryNavSections: [NavigationCellContent] = []
     var isCalculatingScrollDirection: Bool = false
     var previousOffset: CGFloat = 0.0
     var currentlySelectedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
@@ -39,12 +39,8 @@ class CategoriesVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         edgesForExtendedLayout = []
+        getMainCategories()
         anchorSubviews()
-        
-        // Mark:-
-        // test stuff that will need refactoring
-        categoriesNavBar.categorySections = mainCategorySections
-        categoriesNavBar.categoryColours = mainCategoryColours
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,25 +71,47 @@ class CategoriesVC: UIViewController {
         categoriesNavBar.removeFromSuperview()
     }
     
+    func getMainCategories() {
+        CategoriesService.instance.getCategoriesList { (categories) in
+            self.categories = categories
+            for category in self.categories {
+                let navigationCategory = NavigationCellContent(name: category.name, colour: category.backgroundColor)
+                self.categoryNavSections.append(navigationCategory)
+            }
+            self.categoriesNavBar.sections = self.categoryNavSections
+            self.contentSectionsCollectionView.reloadData()
+        }
+    }
+    
     func anchorSubviews() {
         self.view.addSubview(contentSectionsCollectionView)
         contentSectionsCollectionView.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: self.view.centerXAnchor, centreYAnchor: self.view.centerYAnchor)
+    }
+    
+    
+    @objc func showAllButtonPressed() {
+        let selectedCategory = categories[currentlySelectedIndexPath.item]
+        let subCategoryVC = SubCategoryVC()
+        subCategoryVC.category = selectedCategory
+        self.navigationController?.pushViewController(subCategoryVC, animated: true)
     }
 }
 
 // collection view delegate and datasource methods
 extension CategoriesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mainCategorySections.count
+        return categories.count
     }
-    
-    // comment add for pushing to gitlab
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionCell else { return UICollectionViewCell() }
-        sectionCell.testColour = mainCategoryColours[indexPath.item]
-        sectionCell.sectionTitle = mainCategorySections[indexPath.item]
+        sectionCell.testColour = categories[indexPath.item].backgroundColor
+        sectionCell.sectionTitle = categories[indexPath.item].name
+        sectionCell.needsShowAllButton = true
         sectionCell.delegate = self
+        if sectionCell.needsShowAllButton {
+            sectionCell.showAllButton.addTarget(self, action: #selector(showAllButtonPressed), for: .touchUpInside)
+        }
         return sectionCell
     }
     
@@ -133,7 +151,7 @@ extension CategoriesVC: UIScrollViewDelegate {
                     isCalculatingScrollDirection = false
                     
                     if diff > 0 {
-                        if currentlySelectedIndexPath.item < (mainCategorySections.count - 1) {
+                        if currentlySelectedIndexPath.item < (categories.count - 1) {
                             currentlySelectedIndexPath.item += 1
                         }
                     } else {
@@ -162,6 +180,6 @@ extension CategoriesVC: CategoriesNavBarDelegate {
 
 extension CategoriesVC: SectionCellDelegate {
     func ditloItemCellTapped() {
-        // show popup here
+        print("ditlo item cell tapped")
     }
 }

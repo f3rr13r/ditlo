@@ -31,7 +31,12 @@ class HomeVC: UIViewController {
     }()
     
     // variables
-    var navigationSections: [String] = ["Most Viewed", "Friends", "Following", "My Events"]
+    var homeSections: [NavigationCellContent] = [
+        NavigationCellContent(name: "Most Viewed", colour: ditloGrey),
+        NavigationCellContent(name: "Friends", colour: ditloGrey),
+        NavigationCellContent(name: "Following", colour: ditloGrey),
+        NavigationCellContent(name: "My Events", colour: ditloGrey),
+    ]
     var isCalculatingScrollDirection: Bool = false
     var previousOffset: CGFloat = 0.0
     var currentlySelectedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
@@ -39,7 +44,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeNavBar.navigationSections = navigationSections
+        homeNavBar.sections = homeSections
         edgesForExtendedLayout = []
         anchorChildViews()
     }
@@ -87,13 +92,13 @@ class HomeVC: UIViewController {
 // collection view delegate and datasource methods
 extension HomeVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return navigationSections.count
+        return homeSections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionCell else { return UICollectionViewCell() }
-        sectionCell.testColour = colours[indexPath.item]
-        sectionCell.sectionTitle = navigationSections[indexPath.item]
+        sectionCell.testColour = homeSections[indexPath.item].colour
+        sectionCell.sectionTitle = homeSections[indexPath.item].name
         sectionCell.delegate = self
         return sectionCell
     }
@@ -135,7 +140,7 @@ extension HomeVC: UIScrollViewDelegate {
                     isCalculatingScrollDirection = false
                     
                     if diff > 0 {
-                        if currentlySelectedIndexPath.item < (navigationSections.count - 1) {
+                        if currentlySelectedIndexPath.item < (homeSections.count - 1) {
                             currentlySelectedIndexPath.item += 1
                         }
                     } else {

@@ -75,7 +75,7 @@
 		4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD034D321F2523D00FDA967 /* JobModels.swift */; };
 		4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF6C21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift */; };
 		4AD4AF7421FE56DD001F5AEF /* CategoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7321FE56DD001F5AEF /* CategoriesService.swift */; };
-		4AD4AF7621FE5C2E001F5AEF /* CategoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */; };
+		4AD4AF7621FE5C2E001F5AEF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7521FE5C2E001F5AEF /* Category.swift */; };
 		4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */; };
 		4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */; };
 		4AF3A5F62232AADB0084479F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5F52232AADB0084479F /* EventCell.swift */; };
@@ -88,6 +88,8 @@
 		4AF3A6052232CEB80084479F /* SectionViewActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A6042232CEB80084479F /* SectionViewActionDelegate.swift */; };
 		4AF3A608223336260084479F /* OtherUserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A607223336260084479F /* OtherUserProfileVC.swift */; };
 		4AF3A60D223337050084479F /* OtherUserProfileNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */; };
+		4AF55E19223A8D45004AD7BC /* NavigationCellContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF55E18223A8D45004AD7BC /* NavigationCellContent.swift */; };
+		4AF55E1E223A9C0A004AD7BC /* SubCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF55E1D223A9C0A004AD7BC /* SubCategoryVC.swift */; };
 		B6CE3C0EFB0DAAEB394AF310 /* Pods_Ditlo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094A326AF3003C651BFD23F5 /* Pods_Ditlo.framework */; };
 /* End PBXBuildFile section */
 
@@ -164,7 +166,7 @@
 		4AD034D321F2523D00FDA967 /* JobModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModels.swift; sourceTree = "<group>"; };
 		4AD4AF6C21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFavouriteCategoriesVC.swift; sourceTree = "<group>"; };
 		4AD4AF7321FE56DD001F5AEF /* CategoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesService.swift; sourceTree = "<group>"; };
-		4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModels.swift; sourceTree = "<group>"; };
+		4AD4AF7521FE5C2E001F5AEF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesUtilities.swift; sourceTree = "<group>"; };
 		4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		4AF3A5F52232AADB0084479F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -177,6 +179,8 @@
 		4AF3A6042232CEB80084479F /* SectionViewActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewActionDelegate.swift; sourceTree = "<group>"; };
 		4AF3A607223336260084479F /* OtherUserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileVC.swift; sourceTree = "<group>"; };
 		4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileNavBar.swift; sourceTree = "<group>"; };
+		4AF55E18223A8D45004AD7BC /* NavigationCellContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCellContent.swift; sourceTree = "<group>"; };
+		4AF55E1D223A9C0A004AD7BC /* SubCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryVC.swift; sourceTree = "<group>"; };
 		619C304BBF4A8D9C23D1C63B /* Pods-Ditlo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ditlo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ditlo/Pods-Ditlo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -549,6 +553,7 @@
 		4AD034A321F1E88100FDA967 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4AF55E13223A8ADC004AD7BC /* Models */,
 				4AF3A606223336080084479F /* Controllers */,
 				4A3DA28E22010D4B005207D8 /* Services */,
 				4AD4AF7721FE6B39001F5AEF /* Utilities */,
@@ -556,7 +561,6 @@
 				4AD034CE21F2519F00FDA967 /* Jobs */,
 				4AD0349521F150A300FDA967 /* Modals */,
 				4AD034AB21F1E95E00FDA967 /* User */,
-				4AD034AA21F1E94400FDA967 /* Models */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -567,13 +571,6 @@
 				4AD034A521F1E89F00FDA967 /* UserService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		4AD034AA21F1E94400FDA967 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		4AD034AB21F1E95E00FDA967 /* User */ = {
@@ -676,6 +673,7 @@
 		4AD034C421F2084000FDA967 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4AF55E1A223A9BCF004AD7BC /* SubPages */,
 				4AD034C521F2084F00FDA967 /* CategoriesVC.swift */,
 			);
 			path = Controllers;
@@ -744,7 +742,6 @@
 		4AD4AF7121FE56C2001F5AEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4AD4AF7521FE5C2E001F5AEF /* CategoryModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -817,6 +814,39 @@
 				4AF3A60C223337050084479F /* OtherUserProfileNavBar.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		4AF55E13223A8ADC004AD7BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AD4AF7521FE5C2E001F5AEF /* Category.swift */,
+				4AF55E18223A8D45004AD7BC /* NavigationCellContent.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AF55E1A223A9BCF004AD7BC /* SubPages */ = {
+			isa = PBXGroup;
+			children = (
+				4AF55E1C223A9BDD004AD7BC /* Controllers */,
+				4AF55E1B223A9BD7004AD7BC /* Views */,
+			);
+			path = SubPages;
+			sourceTree = "<group>";
+		};
+		4AF55E1B223A9BD7004AD7BC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4AF55E1C223A9BDD004AD7BC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AF55E1D223A9C0A004AD7BC /* SubCategoryVC.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		A86E6858FE17E57995713E5A /* Pods */ = {
@@ -1024,6 +1054,7 @@
 				4AF3A5FE2232BD020084479F /* TaggedKeywordsSectionView.swift in Sources */,
 				4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */,
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
+				4AF55E1E223A9C0A004AD7BC /* SubCategoryVC.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
 				4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */,
 				4AF3A5FC2232B6990084479F /* TaggedCategoriesSectionView.swift in Sources */,
@@ -1037,6 +1068,7 @@
 				4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
+				4AF55E19223A8D45004AD7BC /* NavigationCellContent.swift in Sources */,
 				4AC768A0220CDF160086FF17 /* DummyDitloService.swift in Sources */,
 				4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */,
 				4AD0347F21F0CE9400FDA967 /* ForgotPasswordVC.swift in Sources */,
@@ -1051,7 +1083,7 @@
 				4AD034C921F208B300FDA967 /* CameraVC.swift in Sources */,
 				4AD0348521F0D82100FDA967 /* CustomInputView.swift in Sources */,
 				4AD034A921F1E8CB00FDA967 /* UserServiceHelperMethods.swift in Sources */,
-				4AD4AF7621FE5C2E001F5AEF /* CategoryModels.swift in Sources */,
+				4AD4AF7621FE5C2E001F5AEF /* Category.swift in Sources */,
 				4AD034C321F2082000FDA967 /* SearchVC.swift in Sources */,
 				4AD0347821F0C21D00FDA967 /* PaddedBorderView.swift in Sources */,
 				4AD0348321F0D36A00FDA967 /* TitleLabel.swift in Sources */,

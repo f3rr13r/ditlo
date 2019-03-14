@@ -11,20 +11,15 @@ import UIKit
 class NavigationCell: BaseCell {
     
     // custom injector variables
-    var title: String? = "" {
+    var cellContent: NavigationCellContent? {
         didSet {
-            if let title = self.title {
-                titleLabel.text = title
-                layoutIfNeeded()
-            }
+            updateCellUIState()
         }
     }
     
-    var cellColor: UIColor?
-    
     override var isSelected: Bool {
         didSet {
-            setupCellState(toSelectedState: isSelected)
+            updateCellUIState(withIsSelectedState: isSelected)
         }
     }
     
@@ -39,17 +34,22 @@ class NavigationCell: BaseCell {
     
     override func setupViews() {
         super.setupViews()
-        setupCellState()
+        setupBaseCellStyling()
         anchorChildViews()
     }
     
-    func setupCellState(toSelectedState isSelected: Bool = false) {
-        let cellColor = self.cellColor != nil ? self.cellColor! : ditloGrey
+    func setupBaseCellStyling() {
         layer.cornerRadius = 4.0
+        backgroundColor = ditloLightGrey
+    }
+    
+    func updateCellUIState(withIsSelectedState isSelected: Bool = false) {
+        guard let cellContent = self.cellContent else { return }
+        titleLabel.text = cellContent.name
+        titleLabel.textColor = isSelected ? .white : cellContent.colour
         layer.borderWidth = isSelected ? 0.0 : 1.0
-        layer.borderColor = isSelected ? nil : cellColor.cgColor
-        backgroundColor = isSelected ? cellColor : UIColor.clear
-        titleLabel.textColor = isSelected ? UIColor.white : cellColor
+        layer.borderColor = isSelected ? nil : cellContent.colour.cgColor
+        backgroundColor = isSelected ? cellContent.colour : .white
     }
     
     func anchorChildViews() {
@@ -58,9 +58,11 @@ class NavigationCell: BaseCell {
     }
     
     override func prepareForReuse() {
-        title = nil
-        cellColor = nil
-        setupCellState()
-        self.layoutIfNeeded()
+        cellContent = nil
+        titleLabel.text = nil
+        titleLabel.textColor = .clear
+        layer.borderWidth = 0.0
+        layer.borderColor = UIColor.clear.cgColor
+        backgroundColor = ditloLightGrey
     }
 }

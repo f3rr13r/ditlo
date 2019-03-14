@@ -12,11 +12,13 @@ protocol SectionCellDelegate {
     func ditloItemCellTapped()
     func userSwipedContentUp()
     func userSwipedContentDown()
+    func showAllButtonPressed()
 }
 
 extension SectionCellDelegate {
     func userSwipedContentUp() {}
     func userSwipedContentDown() {}
+    func showAllButtonPressed() {}
 }
 
 class SectionCell: BaseCell {
@@ -34,6 +36,13 @@ class SectionCell: BaseCell {
         }
     }
     
+    var needsShowAllButton: Bool = false {
+        didSet {
+            showAllButton.layer.borderColor = testColour.cgColor
+            showAllButton.isHidden = !needsShowAllButton
+        }
+    }
+    
     // views
     private let largeDitloItemCellId: String = "largeDitloItemCellId"
     private let defaultDitloItemCellId: String = "defaultDitloItemCellId"
@@ -43,6 +52,7 @@ class SectionCell: BaseCell {
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = .white
+        cv.canCancelContentTouches = true
         cv.contentInsetAdjustmentBehavior = .never
         cv.register(LargeDitloItemCell.self, forCellWithReuseIdentifier: largeDitloItemCellId)
         cv.register(DefaultDitloItemCell.self, forCellWithReuseIdentifier: defaultDitloItemCellId)
@@ -62,6 +72,20 @@ class SectionCell: BaseCell {
         return label
     }()
     var sectionTitleLabelTopConstraint: NSLayoutConstraint!
+    
+    let showAllButton: UIButton = {
+        let button = UIButton()
+        button.isHidden = true
+        button.layer.cornerRadius = 4.0
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.backgroundColor = UIColor.clear.cgColor
+        button.setTitle("Show all", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = smallParagraphFont
+        //button.addTarget(self, action: #selector(showAllButtonPressed), for: .touchUpInside)
+        return button
+    }()
     
     
     // delegate
@@ -90,11 +114,18 @@ class SectionCell: BaseCell {
         sectionTitleLabel.anchor(withTopAnchor: nil, leadingAnchor: gradientView.leadingAnchor, bottomAnchor: nil, trailingAnchor: gradientView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
         sectionTitleLabelTopConstraint = NSLayoutConstraint(item: sectionTitleLabel, attribute: .top, relatedBy: .equal, toItem: gradientView, attribute: .top, multiplier: 1.0, constant: 20.0)
         gradientView.addConstraint(sectionTitleLabelTopConstraint)
+        
+        gradientView.addSubview(showAllButton)
+        showAllButton.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: gradientView.trailingAnchor, centreXAnchor: nil, centreYAnchor: sectionTitleLabel.centerYAnchor, widthAnchor: 66.0, heightAnchor: 24.0, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
     }
     
     func resetCollectionViewPosition() {
         let startIndexPath = IndexPath(item: 0, section: 0)
         contentViewController.scrollToItem(at: startIndexPath, at: .top, animated: false)
+    }
+    
+    @objc func showAllButtonPressed() {
+        delegate?.showAllButtonPressed()
     }
 }
 
@@ -146,10 +177,6 @@ extension SectionCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.ditloItemCellTapped()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
