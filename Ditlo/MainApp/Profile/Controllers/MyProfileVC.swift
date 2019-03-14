@@ -56,6 +56,7 @@ class MyProfileVC: UIViewController {
             myProfileNavigationController.navigationBar.addSubview(myProfileNavBar)
             myProfileNavBar.anchor(withTopAnchor: myProfileNavigationController.navigationBar.topAnchor, leadingAnchor: myProfileNavigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: myProfileNavigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
             myProfileNavBar.delegate = self
+            myProfileNavigationController.navigationBar.layoutIfNeeded()
         }
     }
     

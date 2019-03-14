@@ -17,6 +17,7 @@ class NavigationCollectionView: BaseView {
     // injector variables
     var sections: [NavigationCellContent] = [] {
         didSet {
+            print("sections")
             navigationCollectionView.reloadData()
             navigationCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
         }

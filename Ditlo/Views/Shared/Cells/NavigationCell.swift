@@ -13,13 +13,15 @@ class NavigationCell: BaseCell {
     // custom injector variables
     var cellContent: NavigationCellContent? {
         didSet {
+            print("updating cell content")
             updateCellUIState()
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            updateCellUIState(withIsSelectedState: isSelected)
+            print("Cell selected")
+            updateCellUIState()
         }
     }
     
@@ -43,7 +45,7 @@ class NavigationCell: BaseCell {
         backgroundColor = ditloLightGrey
     }
     
-    func updateCellUIState(withIsSelectedState isSelected: Bool = false) {
+    func updateCellUIState() {
         guard let cellContent = self.cellContent else { return }
         titleLabel.text = cellContent.name
         titleLabel.textColor = isSelected ? .white : cellContent.colour

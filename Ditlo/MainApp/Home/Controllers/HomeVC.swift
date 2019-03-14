@@ -75,6 +75,7 @@ class HomeVC: UIViewController {
             homeNavigationController.navigationBar.addSubview(homeNavBar)
             homeNavBar.anchor(withTopAnchor: homeNavigationController.navigationBar.topAnchor, leadingAnchor: homeNavigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: homeNavigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
             homeNavBar.delegate = self
+            homeNavigationController.navigationBar.layoutIfNeeded()
         }
     }
     
