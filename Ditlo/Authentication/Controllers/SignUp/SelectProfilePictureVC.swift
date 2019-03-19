@@ -111,7 +111,7 @@ class SelectProfilePictureVC: UIViewController {
     func anchorChildViews() {
         // custom navbar
         self.view.addSubview(selectProfilePictureNavBar)
-        selectProfilePictureNavBar.anchor(withTopAnchor: self.view.safeAreaLayoutGuide.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
+        selectProfilePictureNavBar.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
         
         // title label
         let titleConfig = TitleLabelConfiguration(titleText: "PROFILE PICTURE", titleFont: defaultTitleFont)

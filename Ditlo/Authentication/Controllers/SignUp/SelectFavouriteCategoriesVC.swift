@@ -206,7 +206,7 @@ class SelectFavouriteCategoriesVC: UIViewController {
     func anchorChildViews() {
         // custom navbar
         self.view.addSubview(selectFavouriteCategoriesNavBar)
-        selectFavouriteCategoriesNavBar.anchor(withTopAnchor: self.view.safeAreaLayoutGuide.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
+        selectFavouriteCategoriesNavBar.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
         
         // title label
         let titleConfig = TitleLabelConfiguration(titleText: "PREFERRED CATEGORIES", titleFont: defaultTitleFont)

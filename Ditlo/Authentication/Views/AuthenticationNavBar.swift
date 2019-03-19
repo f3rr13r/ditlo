@@ -142,7 +142,7 @@ class AuthenticationNavBar: BaseView {
         
         // logo image view
         self.addSubview(ditloLogoImageView)
-        ditloLogoImageView.anchor(withTopAnchor: topAnchor, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 20.0, heightAnchor: 20.0, padding: .init(top: 18.0, left: 0.0, bottom: 0.0, right: 0.0))
+        ditloLogoImageView.anchor(withTopAnchor: safeAreaLayoutGuide.topAnchor, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 20.0, heightAnchor: 20.0, padding: .init(top: 18.0, left: 0.0, bottom: 0.0, right: 0.0))
         ditloLogoImageViewLeadingConstraint = NSLayoutConstraint(item: ditloLogoImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 20.0)
         self.addConstraint(ditloLogoImageViewLeadingConstraint!)
         

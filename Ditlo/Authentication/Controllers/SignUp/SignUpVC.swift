@@ -103,7 +103,7 @@ class SignUpVC: UIViewController {
     func anchorChildViews() {
         // custom navbar
         self.view.addSubview(signUpNavBar)
-        signUpNavBar.anchor(withTopAnchor: self.view.safeAreaLayoutGuide.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
+        signUpNavBar.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
         
         // title label
         let titleConfig = TitleLabelConfiguration(titleText: "SIGN UP", titleFont: defaultTitleFont)

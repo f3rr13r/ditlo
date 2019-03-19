@@ -185,7 +185,7 @@ class SelectJobPositionVC: UIViewController {
     func anchorChildViews() {
         // custom navbar
         self.view.addSubview(selectJobPositionNavBar)
-        selectJobPositionNavBar.anchor(withTopAnchor: self.view.safeAreaLayoutGuide.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
+        selectJobPositionNavBar.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.safeAreaLayoutGuide.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.safeAreaLayoutGuide.trailingAnchor, centreXAnchor: self.view.safeAreaLayoutGuide.centerXAnchor, centreYAnchor: nil)
         
         // title label
         let titleConfig = TitleLabelConfiguration(titleText: "JOB POSITION", titleFont: defaultTitleFont)
