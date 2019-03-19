@@ -108,7 +108,8 @@ extension MyProfileVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
 
 extension MyProfileVC: MyProfileNavBarDelegate {
     func settingsButtonPressed() {
-        // do something
+        let profileSettingsVC = SettingsHomeVC()
+        self.navigationController?.pushViewController(profileSettingsVC, animated: true)
     }
 }
 

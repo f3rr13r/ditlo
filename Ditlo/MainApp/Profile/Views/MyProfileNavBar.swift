@@ -42,6 +42,7 @@ class MyProfileNavBar: BaseView {
     
     let settingsButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(settingsButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -265,6 +266,9 @@ class MyProfileNavBar: BaseView {
         eventsCountLabel.anchor(withTopAnchor: eventsButton.topAnchor, leadingAnchor: eventsButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: eventsButton.trailingAnchor, centreXAnchor: eventsButton.centerXAnchor, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 12.0, left: 0.0, bottom: 0.0, right: 0.0))
         eventsButton.addSubview(eventsNameLabel)
         eventsNameLabel.anchor(withTopAnchor: eventsCountLabel.bottomAnchor, leadingAnchor: eventsButton.leadingAnchor, bottomAnchor: eventsButton.bottomAnchor, trailingAnchor: eventsButton.trailingAnchor, centreXAnchor: eventsButton.centerXAnchor, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: -10.0, right: 0.0))
-        
+    }
+    
+    @objc func settingsButtonPressed() {
+        delegate?.settingsButtonPressed()
     }
 }
