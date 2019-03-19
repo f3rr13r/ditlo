@@ -13,14 +13,12 @@ class NavigationCell: BaseCell {
     // custom injector variables
     var cellContent: NavigationCellContent? {
         didSet {
-            print("updating cell content")
             updateCellUIState()
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            print("Cell selected")
             updateCellUIState()
         }
     }

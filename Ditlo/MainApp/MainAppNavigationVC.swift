@@ -44,7 +44,6 @@ class MainAppNavigationVC: UITabBarController {
         homeNavigationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10.0, right: 0.0)
         
         let searchNavigationVC = UINavigationController(rootViewController: searchVC)
-        searchNavigationVC.isNavigationBarHidden = true
         searchNavigationVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "search-icon")?.withRenderingMode(.alwaysTemplate), tag: 1)
         searchNavigationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: -10.0, right: 0.0)
         
