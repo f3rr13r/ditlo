@@ -11,6 +11,11 @@ import MarqueeLabel
 
 protocol MyProfileNavBarDelegate {
     func settingsButtonPressed()
+    func notificationsButtonPressed()
+    func friendsButtonPressed()
+    func followingButtonPressed()
+    func followersButtonPressed()
+    func eventsButtonPressed()
 }
 
 class MyProfileNavBar: BaseView {
@@ -104,6 +109,7 @@ class MyProfileNavBar: BaseView {
     
     let friendsButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(friendsButtonPressed), for: .touchUpInside)
         return button
     }()
     let friendsCountLabel: UILabel = {
@@ -126,6 +132,7 @@ class MyProfileNavBar: BaseView {
     
     let followingButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(followingButtonPressed), for: .touchUpInside)
         return button
     }()
     let followingCountLabel: UILabel = {
@@ -148,6 +155,7 @@ class MyProfileNavBar: BaseView {
     
     let followersButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(followersButtonPressed), for: .touchUpInside)
         return button
     }()
     let followersCountLabel: UILabel = {
@@ -170,6 +178,7 @@ class MyProfileNavBar: BaseView {
     
     let eventsButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(eventsButtonPressed), for: .touchUpInside)
         return button
     }()
     let eventsCountLabel: UILabel = {
@@ -270,5 +279,25 @@ class MyProfileNavBar: BaseView {
     
     @objc func settingsButtonPressed() {
         delegate?.settingsButtonPressed()
+    }
+    
+    @objc func notificationsButtonPressed() {
+        delegate?.notificationsButtonPressed()
+    }
+    
+    @objc func friendsButtonPressed() {
+        delegate?.friendsButtonPressed()
+    }
+    
+    @objc func followingButtonPressed() {
+        delegate?.followingButtonPressed()
+    }
+    
+    @objc func followersButtonPressed() {
+        delegate?.followersButtonPressed()
+    }
+    
+    @objc func eventsButtonPressed() {
+        delegate?.eventsButtonPressed()
     }
 }

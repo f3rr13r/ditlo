@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPStorkController
 
 class MyProfileVC: UIViewController {
     
@@ -32,6 +33,7 @@ class MyProfileVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         edgesForExtendedLayout = []
+        setupChildDelegates()
         anchorSubviews()
     }
     
@@ -55,13 +57,16 @@ class MyProfileVC: UIViewController {
             myProfileNavigationController.navigationBar.backgroundColor = .white
             myProfileNavigationController.navigationBar.addSubview(myProfileNavBar)
             myProfileNavBar.anchor(withTopAnchor: myProfileNavigationController.navigationBar.topAnchor, leadingAnchor: myProfileNavigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: myProfileNavigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
-            myProfileNavBar.delegate = self
             myProfileNavigationController.navigationBar.layoutIfNeeded()
         }
     }
     
     func destroyMyProfileNavBar() {
         myProfileNavBar.removeFromSuperview()
+    }
+    
+    func setupChildDelegates() {
+        myProfileNavBar.delegate = self
     }
     
     func anchorSubviews() {
@@ -111,10 +116,52 @@ extension MyProfileVC: MyProfileNavBarDelegate {
         let profileSettingsVC = SettingsHomeVC()
         self.navigationController?.pushViewController(profileSettingsVC, animated: true)
     }
+    
+    func notificationsButtonPressed() {
+        
+    }
+    
+    func friendsButtonPressed() {
+        navigateToUserListVC(withListType: .friends)
+    }
+    
+    func followingButtonPressed() {
+        navigateToUserListVC(withListType: .following)
+    }
+    
+    func followersButtonPressed() {
+        navigateToUserListVC(withListType: .followers)
+    }
+    
+    func eventsButtonPressed() {
+        let eventsVC = EventsVC()
+        self.navigationController?.pushViewController(eventsVC, animated: true)
+    }
+    
+    func navigateToUserListVC(withListType userListType: UserListType) {
+        let userListConfig = UserListConfiguration(userId: "exampleUserId", isOwnProfile: true, userListType: userListType)
+        let userListVC = UserListVC()
+        userListVC.userListConfiguration = userListConfig
+        self.navigationController?.pushViewController(userListVC, animated: true)
+    }
 }
 
 extension MyProfileVC: SectionCellDelegate {
     func ditloItemCellTapped() {
-    // do something here
+        let controller = DitloPlayerPopupVC()
+        controller.delegate = self
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        controller.transitioningDelegate = transitionDelegate
+        controller.modalPresentationStyle = .custom
+        self.present(controller, animated: true, completion: nil)
+    }
+}
+
+// ditlo player delegate methods
+extension MyProfileVC: DitloPlayerPopupActionDelegate {
+    func prepareToNavigate(toViewController viewController: UIViewController) {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }

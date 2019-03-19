@@ -1,5 +1,5 @@
 //
-//  EventProfileVC.swift
+//  EventsVC.swift
 //  Ditlo
 //
 //  Created by Harry Ferrier on 3/19/19.
@@ -9,10 +9,10 @@
 import UIKit
 import SPStorkController
 
-class EventProfileVC: UIViewController {
-    
+class EventsVC: UIViewController {
+
     // views
-    let eventProfileNavBar = EventProfileNavBar()
+    let eventsNavBar = EventsNavBar()
     
     private let cellId: String = "cellId"
     lazy var contentSectionsCollectionView: UICollectionView = {
@@ -29,23 +29,17 @@ class EventProfileVC: UIViewController {
         return cv
     }()
     
-    // variables
-    var exampleSections: [String] = ["February 2019", "Members Section"]
-    var currentlySelectedIndexPath = IndexPath(item: 0, section: 0)
-    var isCalculatingScrollDirection: Bool = false
-    var previousOffset: CGFloat = 0.0
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         edgesForExtendedLayout = []
+        setupChildDelegates()
         anchorSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupCustomNavigationBarContent()
-        SharedModalsService.instance.hideCustomOverlayModal()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,15 +55,18 @@ class EventProfileVC: UIViewController {
             navigationController.navigationBar.shadowImage = UIImage()
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationController.navigationBar.backgroundColor = .white
-            navigationController.navigationBar.addSubview(eventProfileNavBar)
-            eventProfileNavBar.anchor(withTopAnchor: navigationController.navigationBar.topAnchor, leadingAnchor: navigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: navigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
-            eventProfileNavBar.delegate = self
+            navigationController.navigationBar.addSubview(eventsNavBar)
+            eventsNavBar.anchor(withTopAnchor: navigationController.navigationBar.topAnchor, leadingAnchor: navigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: navigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
             navigationController.navigationBar.layoutIfNeeded()
         }
     }
     
     func destroyCustomNavigationBarContent() {
-        eventProfileNavBar.removeFromSuperview()
+        eventsNavBar.removeFromSuperview()
+    }
+    
+    func setupChildDelegates() {
+        eventsNavBar.delegate = self
     }
     
     func anchorSubviews() {
@@ -78,40 +75,34 @@ class EventProfileVC: UIViewController {
     }
 }
 
-// navigation bar delegate methods
-extension EventProfileVC: EventProfileNavBarDelegate {
-    func customPickerDidChange(toItemIndexValue itemIndex: Int) {
-        currentlySelectedIndexPath.item = itemIndex
-        contentSectionsCollectionView.scrollToItem(at: currentlySelectedIndexPath, at: .centeredHorizontally, animated: true)
-    }
-    
+// nav bar delegate methods
+extension EventsVC: EventsNavBarDelegate {
     func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func rightButtonPressed() {
-        // check here if we are a member or not, and handle accordingly
+    func createEventButtonPressed() {
+        //
+    }
+    
+    func notificationsButtonPressed() {
+        //
     }
 }
 
 // collection view delegate and datasource methods
-extension EventProfileVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension EventsVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return exampleSections.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionCell else { return UICollectionViewCell() }
-        sectionCell.testColour = ditloPurple
-        sectionCell.sectionTitle = exampleSections[indexPath.item]
+        sectionCell.testColour = ditloRed
+        // figure out a better way to do this
+        sectionCell.sectionTitle = ""
         sectionCell.delegate = self
         return sectionCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let dissapearingCell = cell as? SectionCell {
-            dissapearingCell.resetCollectionViewPosition()
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -127,40 +118,8 @@ extension EventProfileVC: UICollectionViewDelegate, UICollectionViewDelegateFlow
     }
 }
 
-// scroll view delegate methods
-extension EventProfileVC: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        isCalculatingScrollDirection = true
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isCalculatingScrollDirection {
-            if previousOffset == 0 {
-                previousOffset = scrollView.contentOffset.x
-            } else {
-                let diff: CGFloat = scrollView.contentOffset.x - previousOffset
-                if diff != 0 {
-                    previousOffset = 0
-                    isCalculatingScrollDirection = false
-                    
-                    if diff > 0 {
-                        if currentlySelectedIndexPath.item < (exampleSections.count - 1) {
-                            currentlySelectedIndexPath.item += 1
-                        }
-                    } else {
-                        if currentlySelectedIndexPath.item > 0 {
-                            currentlySelectedIndexPath.item -= 1
-                        }
-                    }
-                    
-                    eventProfileNavBar.currentlySelectedSectionIndex = currentlySelectedIndexPath.item
-                }
-            }
-        }
-    }
-}
-
-extension EventProfileVC: SectionCellDelegate {
+// section cell delegate methods
+extension EventsVC: SectionCellDelegate {
     func ditloItemCellTapped() {
         let controller = DitloPlayerPopupVC()
         controller.delegate = self
@@ -172,10 +131,11 @@ extension EventProfileVC: SectionCellDelegate {
 }
 
 // ditlo player delegate methods
-extension EventProfileVC: DitloPlayerPopupActionDelegate {
+extension EventsVC: DitloPlayerPopupActionDelegate {
     func prepareToNavigate(toViewController viewController: UIViewController) {
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }
+

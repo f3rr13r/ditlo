@@ -171,11 +171,11 @@ extension HomeVC: HomeDitloNavBarDelegate {
 // section cell delegate methods
 extension HomeVC: SectionCellDelegate {
     func userSwipedContentUp() {
-        //contentSectionsCollectionView.isScrollEnabled = false
+        contentSectionsCollectionView.isScrollEnabled = false
     }
     
     func userSwipedContentDown() {
-        //contentSectionsCollectionView.isScrollEnabled = true
+        contentSectionsCollectionView.isScrollEnabled = true
     }
     
     func ditloItemCellTapped() {

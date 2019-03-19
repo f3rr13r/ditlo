@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPStorkController
 
 class SubCategoryVC: UIViewController {
 
@@ -177,6 +178,20 @@ extension SubCategoryVC: SubCategoryNavBarDelegate {
 
 extension SubCategoryVC: SectionCellDelegate {
     func ditloItemCellTapped() {
-        print("ditlo item cell tapped")
+        let controller = DitloPlayerPopupVC()
+        controller.delegate = self
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        controller.transitioningDelegate = transitionDelegate
+        controller.modalPresentationStyle = .custom
+        self.present(controller, animated: true, completion: nil)
+    }
+}
+
+// ditlo player delegate methods
+extension SubCategoryVC: DitloPlayerPopupActionDelegate {
+    func prepareToNavigate(toViewController viewController: UIViewController) {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }

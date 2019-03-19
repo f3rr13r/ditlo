@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPStorkController
 
 class OtherUserProfileVC: UIViewController {
 
@@ -114,10 +115,52 @@ extension OtherUserProfileVC: OtherUserProfileNavBarDelegate {
     func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func threeDotButtonPressed() {
+        // print three dots button pressed
+    }
+    
+    func friendsButtonPressed() {
+        navigateToUserListVC(withListType: .friends)
+    }
+    
+    func followingButtonPressed() {
+        navigateToUserListVC(withListType: .following)
+    }
+    
+    func followersButtonPressed() {
+        navigateToUserListVC(withListType: .followers)
+    }
+    
+    func eventsButtonPressed() {
+        let eventsVC = EventsVC()
+        self.navigationController?.pushViewController(eventsVC, animated: true)
+    }
+    
+    func navigateToUserListVC(withListType userListType: UserListType) {
+        let userListConfig = UserListConfiguration(userId: "exampleUserId", isOwnProfile: false, userListType: userListType)
+        let userListVC = UserListVC()
+        userListVC.userListConfiguration = userListConfig
+        self.navigationController?.pushViewController(userListVC, animated: true)
+    }
 }
 
 extension OtherUserProfileVC: SectionCellDelegate {
     func ditloItemCellTapped() {
-        // do something here
+        let controller = DitloPlayerPopupVC()
+        controller.delegate = self
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        controller.transitioningDelegate = transitionDelegate
+        controller.modalPresentationStyle = .custom
+        self.present(controller, animated: true, completion: nil)
+    }
+}
+
+// ditlo player delegate methods
+extension OtherUserProfileVC: DitloPlayerPopupActionDelegate {
+    func prepareToNavigate(toViewController viewController: UIViewController) {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }

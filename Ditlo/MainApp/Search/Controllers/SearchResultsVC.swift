@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPStorkController
 
 class SearchResultsVC: UIViewController {
 
@@ -171,7 +172,21 @@ extension SearchResultsVC: SearchResultsNavBarDelegate {
 // section cell delegate methods
 extension SearchResultsVC: SectionCellDelegate {
     func ditloItemCellTapped() {
-        print("ditlo item cell tapped")
+        let controller = DitloPlayerPopupVC()
+        controller.delegate = self
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        controller.transitioningDelegate = transitionDelegate
+        controller.modalPresentationStyle = .custom
+        self.present(controller, animated: true, completion: nil)
+    }
+}
+
+// ditlo player delegate methods
+extension SearchResultsVC: DitloPlayerPopupActionDelegate {
+    func prepareToNavigate(toViewController viewController: UIViewController) {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 
