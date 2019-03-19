@@ -57,19 +57,18 @@ class LogInVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        
-        // check the user defaults
+        // check if user is already logged in. if they are then go straight into
+        // main app
+        if UserDefaults.standard.object(forKey: "userId") != nil {
+            self.navigationController?.navigateIntoMainApp(withAnimation: false)
+        }
     }
     
     override func viewDidLoad() {
-        if UserDefaults.standard.object(forKey: "userId") != nil {
-            self.navigationController?.navigateIntoMainApp(withAnimation: false)
-        } else {
-            self.view.backgroundColor = .white
-            setupChildDelegates()
-            addDismissKeyboardGesture()
-            anchorChildViews()
-        }
+        self.view.backgroundColor = .white
+        setupChildDelegates()
+        addDismissKeyboardGesture()
+        anchorChildViews()
     }
     
     func setupChildDelegates() {

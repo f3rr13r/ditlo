@@ -136,7 +136,7 @@ class AuthenticationNavBar: BaseView {
     func anchorSubviews() {
         // back arrow button
         self.addSubview(backArrowButton)
-        backArrowButton.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 26.0, padding: .init(top: 16.0, left: 6.0, bottom: 0.0, right: 0.0))
+        backArrowButton.anchor(withTopAnchor: safeAreaLayoutGuide.topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 26.0, padding: .init(top: 16.0, left: 6.0, bottom: 0.0, right: 0.0))
         backArrowButtonWidthConstraint = NSLayoutConstraint(item: backArrowButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0.0)
         self.addConstraint(backArrowButtonWidthConstraint!)
         

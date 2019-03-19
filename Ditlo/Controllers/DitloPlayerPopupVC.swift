@@ -136,7 +136,8 @@ extension DitloPlayerPopupVC: SectionViewActionDelegate {
     }
     
     func taggedEventCellSelected(withId taggedEventId: String) {
-        // needs completion
+        let eventProfileVC = EventProfileVC()
+        navigateTo(viewController: eventProfileVC, withLoadingMessage: "Loading Event..")
     }
     
     func taggedCategoryCellSelected(withId taggedCategoryId: String) {

@@ -269,7 +269,7 @@ class SelectFavouriteCategoriesVC: UIViewController {
 // custom nav bar delegate methods
 extension SelectFavouriteCategoriesVC: AuthentationNavBarDelegate {
     func greyBorderRoundedButtonPressed(buttonType: GreyBorderRoundedButtonType?) {
-        
+        self.navigationController?.navigateIntoMainApp(withAnimation: true)
     }
     
     func redRoundedButtonPressed() {

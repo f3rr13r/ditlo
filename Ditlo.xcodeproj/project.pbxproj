@@ -21,6 +21,8 @@
 		4A5D459D22410BD3000AB2D0 /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D459C22410BD3000AB2D0 /* SearchResultsVC.swift */; };
 		4A5D45A22241165B000AB2D0 /* SettingsHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D45A12241165B000AB2D0 /* SettingsHomeVC.swift */; };
 		4A5D45A422411677000AB2D0 /* SettingsHomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D45A322411677000AB2D0 /* SettingsHomeNavBar.swift */; };
+		4A5D45A922413788000AB2D0 /* EventProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D45A822413788000AB2D0 /* EventProfileVC.swift */; };
+		4A5D45AB224137AF000AB2D0 /* EventProfileNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5D45AA224137AF000AB2D0 /* EventProfileNavBar.swift */; };
 		4A717DEF22316A35008DE1F8 /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DEE22316A35008DE1F8 /* SectionCell.swift */; };
 		4A717DF1223172B4008DE1F8 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DF0223172B4008DE1F8 /* UserCell.swift */; };
 		4A717E2B22369141008EED78 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717E2A22369141008EED78 /* Sizes.swift */; };
@@ -116,6 +118,8 @@
 		4A5D459C22410BD3000AB2D0 /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
 		4A5D45A12241165B000AB2D0 /* SettingsHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHomeVC.swift; sourceTree = "<group>"; };
 		4A5D45A322411677000AB2D0 /* SettingsHomeNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHomeNavBar.swift; sourceTree = "<group>"; };
+		4A5D45A822413788000AB2D0 /* EventProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfileVC.swift; sourceTree = "<group>"; };
+		4A5D45AA224137AF000AB2D0 /* EventProfileNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfileNavBar.swift; sourceTree = "<group>"; };
 		4A717DEE22316A35008DE1F8 /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
 		4A717DF0223172B4008DE1F8 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		4A717E2A22369141008EED78 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
@@ -272,6 +276,31 @@
 				4A5D45A12241165B000AB2D0 /* SettingsHomeVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4A5D45A52241374C000AB2D0 /* EventVC */ = {
+			isa = PBXGroup;
+			children = (
+				4A5D45A722413761000AB2D0 /* Controllers */,
+				4A5D45A62241375B000AB2D0 /* Views */,
+			);
+			name = EventVC;
+			sourceTree = "<group>";
+		};
+		4A5D45A62241375B000AB2D0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A5D45AA224137AF000AB2D0 /* EventProfileNavBar.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4A5D45A722413761000AB2D0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4A5D45A822413788000AB2D0 /* EventProfileVC.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		4A734B5C2220448F005EE2CC /* Profile */ = {
@@ -835,6 +864,7 @@
 		4AF3A606223336080084479F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4A5D45A52241374C000AB2D0 /* EventVC */,
 				4AA887EB223AB9860037BF5B /* SubCategoryVC */,
 				4AF3A609223336370084479F /* OtherUserProfileVC */,
 			);
@@ -1105,11 +1135,13 @@
 				4AF3A5FC2232B6990084479F /* TaggedCategoriesSectionView.swift in Sources */,
 				4A3DA293220123BB005207D8 /* Date.swift in Sources */,
 				4AD034B021F1E9BA00FDA967 /* UserModels.swift in Sources */,
+				4A5D45AB224137AF000AB2D0 /* EventProfileNavBar.swift in Sources */,
 				4AF3A5F62232AADB0084479F /* EventCell.swift in Sources */,
 				4AD034C021F207C700FDA967 /* HomeVC.swift in Sources */,
 				4A717E2B22369141008EED78 /* Sizes.swift in Sources */,
 				4A028980222D7C50009D6AFE /* LargeDitloItemCell.swift in Sources */,
 				4AD0346321F0AE1500FDA967 /* Colours.swift in Sources */,
+				4A5D45A922413788000AB2D0 /* EventProfileVC.swift in Sources */,
 				4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
