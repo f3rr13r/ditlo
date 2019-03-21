@@ -78,22 +78,6 @@ class EventProfileVC: UIViewController {
     }
 }
 
-// navigation bar delegate methods
-extension EventProfileVC: EventProfileNavBarDelegate {
-    func customPickerDidChange(toItemIndexValue itemIndex: Int) {
-        currentlySelectedIndexPath.item = itemIndex
-        contentSectionsCollectionView.scrollToItem(at: currentlySelectedIndexPath, at: .centeredHorizontally, animated: true)
-    }
-    
-    func backButtonPressed() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func rightButtonPressed() {
-        // check here if we are a member or not, and handle accordingly
-    }
-}
-
 // collection view delegate and datasource methods
 extension EventProfileVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -157,6 +141,33 @@ extension EventProfileVC: UIScrollViewDelegate {
                 }
             }
         }
+    }
+}
+
+// navigation bar delegate methods
+extension EventProfileVC: EventProfileNavBarDelegate {
+    func customPickerDidChange(toItemIndexValue itemIndex: Int) {
+        currentlySelectedIndexPath.item = itemIndex
+        contentSectionsCollectionView.scrollToItem(at: currentlySelectedIndexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func rightButtonPressed() {
+        // check here if we are a member or not, and handle accordingly
+    }
+    
+    func membersButtonPressed() {
+        let userListConfig = UserListConfiguration(userId: "exampleUserId", isOwnProfile: false, userListType: .members)
+        let userListVC = UserListVC()
+        userListVC.userListConfiguration = userListConfig
+        self.navigationController?.pushViewController(userListVC, animated: true)
+    }
+    
+    func notificationsButtonPressed() {
+        // notifications
     }
 }
 

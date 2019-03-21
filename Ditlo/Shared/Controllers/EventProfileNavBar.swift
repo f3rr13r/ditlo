@@ -13,6 +13,8 @@ protocol EventProfileNavBarDelegate {
     func backButtonPressed()
     func rightButtonPressed()
     func customPickerDidChange(toItemIndexValue itemIndex: Int)
+    func membersButtonPressed()
+    func notificationsButtonPressed()
 }
 
 class EventProfileNavBar: BaseView {
@@ -100,11 +102,7 @@ class EventProfileNavBar: BaseView {
         return label
     }()
     
-    let eventDetailButton: UIButton = {
-        let button = UIButton()
-        // do selector
-        return button
-    }()
+    let eventDetailContainer = UIView()
     
     let eventDetailLabel: MarqueeLabel = {
         let label = MarqueeLabel()
@@ -126,6 +124,7 @@ class EventProfileNavBar: BaseView {
     
     let membersButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(membersButtonPressed), for: .touchUpInside)
         return button
     }()
     let membersCountLabel: UILabel = {
@@ -148,6 +147,7 @@ class EventProfileNavBar: BaseView {
     
     let notificationsButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(notificationsButtonPressed), for: .touchUpInside)
         return button
     }()
     let notificationsCountLabel: UILabel = {
@@ -300,11 +300,11 @@ class EventProfileNavBar: BaseView {
         centreInfoContainerView.addSubview(eventNameLabel)
         eventNameLabel.anchor(withTopAnchor: centreInfoContainerView.topAnchor, leadingAnchor: centreInfoContainerView.leadingAnchor, bottomAnchor: nil, trailingAnchor: centreInfoContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 14.0)
         
-        centreInfoContainerView.addSubview(eventDetailButton)
-        eventDetailButton.anchor(withTopAnchor: eventNameLabel.bottomAnchor, leadingAnchor: centreInfoContainerView.leadingAnchor, bottomAnchor: centreInfoContainerView.bottomAnchor, trailingAnchor: centreInfoContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 11.0, padding: .init(top: 2.0, left: 0.0, bottom: 0.0, right: 0.0))
+        centreInfoContainerView.addSubview(eventDetailContainer)
+        eventDetailContainer.anchor(withTopAnchor: eventNameLabel.bottomAnchor, leadingAnchor: centreInfoContainerView.leadingAnchor, bottomAnchor: centreInfoContainerView.bottomAnchor, trailingAnchor: centreInfoContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 11.0, padding: .init(top: 2.0, left: 0.0, bottom: 0.0, right: 0.0))
         
-        eventDetailButton.addSubview(eventDetailLabel)
-        eventDetailLabel.anchor(withTopAnchor: eventDetailButton.topAnchor, leadingAnchor: eventDetailButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: eventDetailButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 11.0)
+        eventDetailContainer.addSubview(eventDetailLabel)
+        eventDetailLabel.anchor(withTopAnchor: eventDetailContainer.topAnchor, leadingAnchor: eventDetailContainer.leadingAnchor, bottomAnchor: nil, trailingAnchor: eventDetailContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 11.0)
         
         // bottom row
         addSubview(bottomRowView)
@@ -352,5 +352,17 @@ class EventProfileNavBar: BaseView {
     
     @objc func backButtonPressed() {
         delegate?.backButtonPressed()
+    }
+    
+    @objc func rightButtonPressed() {
+        
+    }
+    
+    @objc func membersButtonPressed() {
+        delegate?.membersButtonPressed()
+    }
+    
+    @objc func notificationsButtonPressed() {
+        delegate?.notificationsButtonPressed()
     }
 }

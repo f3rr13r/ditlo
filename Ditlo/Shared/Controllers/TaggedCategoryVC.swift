@@ -1,26 +1,18 @@
 //
-//  SearchResultsVC.swift
+//  TaggedCategoryVC.swift
 //  Ditlo
 //
-//  Created by Harry Ferrier on 3/19/19.
+//  Created by Harry Ferrier on 3/21/19.
 //  Copyright © 2019 harryferrier. All rights reserved.
 //
 
 import UIKit
 import SPStorkController
 
-class SearchResultsVC: UIViewController {
+class TaggedCategoryVC: UIViewController {
 
-    // injector variables
-    var searchResult: String = "" {
-        didSet {
-            searchResultNavBar.searchResult = searchResult
-            searchResultNavBar.sections = searchResultSections
-        }
-    }
-    
     // views
-    let searchResultNavBar = SearchResultsNavBar()
+    let taggedCategoryNavBar = TaggedCategoryNavBar()
     
     private let cellId: String = "cellId"
     lazy var contentSectionsCollectionView: UICollectionView = {
@@ -37,18 +29,6 @@ class SearchResultsVC: UIViewController {
         return cv
     }()
     
-    // variables
-    var searchResultSections: [NavigationCellContent] = [
-        NavigationCellContent(name: "By Name", colour: ditloGrey),
-        NavigationCellContent(name: "By Profession", colour: ditloGrey),
-        NavigationCellContent(name: "By Category", colour: ditloGrey),
-        NavigationCellContent(name: "By Keyword", colour: ditloGrey),
-        NavigationCellContent(name: "By Location", colour: ditloGrey)
-    ]
-    var isCalculatingScrollDirection: Bool = false
-    var previousOffset: CGFloat = 0.0
-    var currentlySelectedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -59,6 +39,7 @@ class SearchResultsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupCustomNavigationBarContent()
+        SharedModalsService.instance.hideCustomOverlayModal()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,15 +55,15 @@ class SearchResultsVC: UIViewController {
             navigationController.navigationBar.shadowImage = UIImage()
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationController.navigationBar.backgroundColor = .white
-            navigationController.navigationBar.addSubview(searchResultNavBar)
-            searchResultNavBar.anchor(withTopAnchor: navigationController.navigationBar.topAnchor, leadingAnchor: navigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: navigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
-            searchResultNavBar.delegate = self
+            navigationController.navigationBar.addSubview(taggedCategoryNavBar)
+            taggedCategoryNavBar.anchor(withTopAnchor: navigationController.navigationBar.topAnchor, leadingAnchor: navigationController.navigationBar.leadingAnchor, bottomAnchor: nil, trailingAnchor: navigationController.navigationBar.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+            taggedCategoryNavBar.delegate = self
             navigationController.navigationBar.layoutIfNeeded()
         }
     }
     
     func destroyCustomNavigationBarContent() {
-        searchResultNavBar.removeFromSuperview()
+        taggedCategoryNavBar.removeFromSuperview()
     }
     
     func anchorSubviews() {
@@ -91,20 +72,23 @@ class SearchResultsVC: UIViewController {
     }
 }
 
-// collection view delegate and data source methods
-extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+// collection view data source methods
+extension TaggedCategoryVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResultSections.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? SectionCell else { return UICollectionViewCell() }
-        sectionCell.testColour = searchResultSections[indexPath.item].colour
-        sectionCell.sectionTitle = searchResultSections[indexPath.item].name
+        sectionCell.testColour = ditloDarkBlue
+        sectionCell.sectionTitle = ""
         sectionCell.delegate = self
         return sectionCell
     }
-    
+}
+
+// collection view delegate and flow layout methods
+extension TaggedCategoryVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let dissapearingCell = cell as? SectionCell {
             dissapearingCell.resetCollectionViewPosition()
@@ -124,53 +108,8 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDelegateFlo
     }
 }
 
-// scroll view delegate methods
-extension SearchResultsVC: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        isCalculatingScrollDirection = true
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isCalculatingScrollDirection {
-            if previousOffset == 0 {
-                previousOffset = scrollView.contentOffset.x
-            } else {
-                let diff: CGFloat = scrollView.contentOffset.x - previousOffset
-                if diff != 0 {
-                    previousOffset = 0
-                    isCalculatingScrollDirection = false
-                    
-                    if diff > 0 {
-                        if currentlySelectedIndexPath.item < (searchResultSections.count - 1) {
-                            currentlySelectedIndexPath.item += 1
-                        }
-                    } else {
-                        if currentlySelectedIndexPath.item > 0 {
-                            currentlySelectedIndexPath.item -= 1
-                        }
-                    }
-                    
-                    searchResultNavBar.currentlySelectedSectionIndex = currentlySelectedIndexPath
-                }
-            }
-        }
-    }
-}
-
-// search bar delegate methods
-extension SearchResultsVC: SearchResultsNavBarDelegate {
-    func backButtonPressed() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func navigationCellSelected(itemIndex: IndexPath) {
-        contentSectionsCollectionView.scrollToItem(at: itemIndex, at: .centeredHorizontally, animated: true)
-        currentlySelectedIndexPath = itemIndex
-    }
-}
-
 // section cell delegate methods
-extension SearchResultsVC: SectionCellDelegate {
+extension TaggedCategoryVC: SectionCellDelegate {
     func ditloItemCellTapped() {
         let controller = DitloPlayerPopupVC()
         controller.delegate = self
@@ -182,7 +121,7 @@ extension SearchResultsVC: SectionCellDelegate {
 }
 
 // ditlo player delegate methods
-extension SearchResultsVC: DitloPlayerPopupActionDelegate {
+extension TaggedCategoryVC: DitloPlayerPopupActionDelegate {
     func prepareToNavigate(toViewController viewController: UIViewController) {
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(viewController, animated: true)
@@ -190,4 +129,9 @@ extension SearchResultsVC: DitloPlayerPopupActionDelegate {
     }
 }
 
-
+// nav bar delegate methods
+extension TaggedCategoryVC: TaggedCategoryNavBarDelegate {
+    func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
+}

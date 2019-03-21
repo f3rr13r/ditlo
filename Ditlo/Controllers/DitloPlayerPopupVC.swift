@@ -132,24 +132,27 @@ extension DitloPlayerPopupVC: UIScrollViewDelegate {
 extension DitloPlayerPopupVC: SectionViewActionDelegate {
     func taggedFriendCellSelected(withId taggedFriendId: String) {
         let otherUserProfileVC = OtherUserProfileVC()
-        navigateTo(viewController: otherUserProfileVC, withLoadingMessage: "Loading Profile..")
+        navigateTo(viewController: otherUserProfileVC, withLoadingMessage: "Loading Profile...")
     }
     
     func taggedEventCellSelected(withId taggedEventId: String) {
         let eventProfileVC = EventProfileVC()
-        navigateTo(viewController: eventProfileVC, withLoadingMessage: "Loading Event..")
+        navigateTo(viewController: eventProfileVC, withLoadingMessage: "Loading Event...")
     }
     
     func taggedCategoryCellSelected(withId taggedCategoryId: String) {
-        // needs completion
+        let taggedCategoryVC = TaggedCategoryVC()
+        navigateTo(viewController: taggedCategoryVC, withLoadingMessage: "Loading Tagged Category...")
     }
     
     func taggedKeywordCellSelected(withValue keywordValue: String) {
-        // needs completion
+        let taggedKeywordVC = TaggedKeywordVC()
+        navigateTo(viewController: taggedKeywordVC, withLoadingMessage: "Loading Tagged Keyword...")
     }
     
     func taggedLocationSelected(withLocationValue locationValue: Any) {
-        // needs completion
+        let taggedLocationVC = TaggedLocationVC()
+        navigateTo(viewController: taggedLocationVC, withLoadingMessage: "Loading Tagged Location...")
     }
     
     func navigateTo(viewController: UIViewController, withLoadingMessage loadingMessage: String) {
