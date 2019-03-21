@@ -93,7 +93,7 @@ class DitloPlayerPopupVC: UIViewController {
         
         // tagged location
         infoContentContainerView.addSubview(taggedLocationSectionView)
-        taggedLocationSectionView.anchor(withTopAnchor: taggedKeywordsSectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: infoContentContainerView.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: 0.0, right: 0.0))
+        taggedLocationSectionView.anchor(withTopAnchor: taggedKeywordsSectionView.bottomAnchor, leadingAnchor: infoContentContainerView.leadingAnchor, bottomAnchor: infoContentContainerView.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: infoContentContainerView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 42.0, left: 0.0, bottom: -20.0, right: 0.0))
         
         self.updateLayout(with: self.view.frame.size)
     }
