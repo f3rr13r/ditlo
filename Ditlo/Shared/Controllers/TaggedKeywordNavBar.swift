@@ -27,7 +27,7 @@ class TaggedKeywordNavBar: BaseView {
         let label = UILabel()
         label.text = "DITLO"
         label.textColor = ditloOffBlack
-        label.font = smallTitleFont
+        label.font = largeProfileInfoNameFont
         return label
     }()
     
@@ -73,19 +73,33 @@ class TaggedKeywordNavBar: BaseView {
         return label
     }()
     
-    let taggedKeywordLabel: MarqueeLabel = {
+    let taggedKeywordTitleLabel: MarqueeLabel = {
         let label = MarqueeLabel()
+        label.numberOfLines = 1
         label.text = "Tagged Keyword"
+        label.font = taggedVCTitleFont
         label.textColor = ditloOffBlack
-        label.font = smallTitleFont
+        label.trailingBuffer = 8.0
+        label.fadeLength = 6.0
         return label
     }()
+    
+    let keywordNameContainer: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 4.0
+        view.backgroundColor = ditloLightGrey
+        return view
+    }()
+    var keywordNameContainerMaxWidthConstraint: NSLayoutConstraint!
     
     let keywordNameLabel: MarqueeLabel = {
         let label = MarqueeLabel()
         label.text = "Superbowl"
-        label.textColor = ditloOffBlack
-        label.font = defaultTitleFont
+        label.textColor = .white
+        label.font = defaultParagraphFont
+        label.textAlignment = .center
+        label.trailingBuffer = 8.0
+        label.fadeLength = 6.0
         return label
     }()
     
@@ -100,29 +114,32 @@ class TaggedKeywordNavBar: BaseView {
     
     func anchorSubviews() {
         addSubview(topContentRowView)
-        topContentRowView.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 2.0, left: 0.0, bottom: 0.0, right: 0.0))
+        topContentRowView.anchor(withTopAnchor: topAnchor, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 44.0, padding: .init(top: 2.0, left: 0.0, bottom: 0.0, right: 0.0))
         
         topContentRowView.addSubview(backButton)
         backButton.anchor(withTopAnchor: topContentRowView.topAnchor, leadingAnchor: topContentRowView.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 44.0, heightAnchor: 44.0)
         backButton.addSubview(backButtonImageView)
         backButtonImageView.anchor(withTopAnchor: backButton.topAnchor, leadingAnchor: backButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 26.0, heightAnchor: 26.0, padding: .init(top: 6.0, left: 14.0, bottom: 0.0, right: 0.0))
         topContentRowView.addSubview(calendarButton)
-        calendarButton.anchor(withTopAnchor: topContentRowView.topAnchor, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 20.0, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: 0.0))
+        calendarButton.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: topContentRowView.centerYAnchor, widthAnchor: nil, heightAnchor: 20.0)
         calendarButton.addSubview(calendarIconImageView)
         calendarIconImageView.anchor(withTopAnchor: nil, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: calendarButton.trailingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: 14.0, heightAnchor: 14.0, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
         calendarButton.addSubview(calendarDateLabel)
         calendarDateLabel.anchor(withTopAnchor: nil, leadingAnchor: calendarButton.leadingAnchor, bottomAnchor: nil, trailingAnchor: calendarIconImageView.leadingAnchor, centreXAnchor: nil, centreYAnchor: calendarButton.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -8.0))
         
         topContentRowView.addSubview(logoImageView)
-        logoImageView.anchor(withTopAnchor: topContentRowView.topAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 12.0, heightAnchor: 12.0, padding: .init(top: 12.0, left: 0.0, bottom: 0.0, right: 0.0))
+        logoImageView.anchor(withTopAnchor: topContentRowView.topAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: 10.0, heightAnchor: 10.0)
         topContentRowView.addSubview(logoLabel)
         logoLabel.anchor(withTopAnchor: nil, leadingAnchor: logoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: calendarButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: logoImageView.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 2.0, bottom: 0.0, right: 0.0))
+        topContentRowView.addSubview(taggedKeywordTitleLabel)
+        taggedKeywordTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: calendarButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -12.0))
         
-        topContentRowView.addSubview(taggedKeywordLabel)
-        taggedKeywordLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: logoImageView.leadingAnchor, bottomAnchor: nil, trailingAnchor: calendarButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: -12.0))
-        
-        topContentRowView.addSubview(keywordNameLabel)
-        keywordNameLabel.anchor(withTopAnchor: taggedKeywordLabel.bottomAnchor, leadingAnchor: taggedKeywordLabel.leadingAnchor, bottomAnchor: topContentRowView.bottomAnchor, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
+        addSubview(keywordNameContainer)
+        keywordNameContainer.anchor(withTopAnchor: topContentRowView.bottomAnchor, leadingAnchor: taggedKeywordTitleLabel.leadingAnchor, bottomAnchor: bottomAnchor, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 36.0, padding: .init(top: 2.0, left: 0.0, bottom: 0.0, right: 0.0))
+        keywordNameContainerMaxWidthConstraint = NSLayoutConstraint(item: keywordNameContainer, attribute: .trailing, relatedBy: .lessThanOrEqual, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -horizontalPadding)
+        addConstraint(keywordNameContainerMaxWidthConstraint)
+        keywordNameContainer.addSubview(keywordNameLabel)
+        keywordNameLabel.anchor(withTopAnchor: nil, leadingAnchor: keywordNameContainer.leadingAnchor, bottomAnchor: nil, trailingAnchor: keywordNameContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: keywordNameContainer.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 16.0, bottom: 0.0, right: -16.0))
     }
     
     @objc func backButtonPressed() {

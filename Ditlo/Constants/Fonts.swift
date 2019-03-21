@@ -17,6 +17,7 @@ let navBarCalendarButtonFont = UIFont.systemFont(ofSize: 22.0, weight: heavyFont
 let redButtonFont: UIFont = UIFont.systemFont(ofSize: 12.0, weight: heavyFont)
 
 let defaultTitleFont: UIFont = UIFont.systemFont(ofSize: 24.0, weight: heavyFont)
+let taggedVCTitleFont: UIFont = UIFont.systemFont(ofSize: 20.0, weight: heavyFont)
 let smallTitleFont: UIFont = UIFont.systemFont(ofSize: 14.0, weight: heavyFont)
 let defaultParagraphFont: UIFont = UIFont.systemFont(ofSize: 14.0, weight: mediumFont)
 let smallParagraphFont: UIFont = UIFont.systemFont(ofSize: 12.0, weight: mediumFont)

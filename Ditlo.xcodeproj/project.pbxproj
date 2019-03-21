@@ -45,6 +45,7 @@
 		4A9771082243D5AE00A932DF /* TaggedKeywordNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9771072243D5AE00A932DF /* TaggedKeywordNavBar.swift */; };
 		4A97710C2243DB1600A932DF /* TaggedLocationNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97710B2243DB1600A932DF /* TaggedLocationNavBar.swift */; };
 		4A97710E2243DB2900A932DF /* TaggedLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97710D2243DB2900A932DF /* TaggedLocationVC.swift */; };
+		4A9771102243EE8300A932DF /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97710F2243EE8300A932DF /* NoDataView.swift */; };
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
@@ -153,6 +154,7 @@
 		4A9771072243D5AE00A932DF /* TaggedKeywordNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedKeywordNavBar.swift; sourceTree = "<group>"; };
 		4A97710B2243DB1600A932DF /* TaggedLocationNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedLocationNavBar.swift; sourceTree = "<group>"; };
 		4A97710D2243DB2900A932DF /* TaggedLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedLocationVC.swift; sourceTree = "<group>"; };
+		4A97710F2243EE8300A932DF /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 				4AD0348221F0D36A00FDA967 /* TitleLabel.swift */,
 				4AD0348421F0D82100FDA967 /* CustomInputView.swift */,
 				4A8086ED2228494D0007BDEB /* GradientView.swift */,
+				4A97710F2243EE8300A932DF /* NoDataView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1337,6 +1340,7 @@
 				4A97710E2243DB2900A932DF /* TaggedLocationVC.swift in Sources */,
 				4A028982222D7C62009D6AFE /* DefaultDitloItemCell.swift in Sources */,
 				4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */,
+				4A9771102243EE8300A932DF /* NoDataView.swift in Sources */,
 				4AD0345821F0ABB900FDA967 /* LogInVC.swift in Sources */,
 				4A5D45992240F97C000AB2D0 /* SearchNavBar.swift in Sources */,
 				4A5D45B5224156B5000AB2D0 /* UserListVC.swift in Sources */,

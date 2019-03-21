@@ -12,6 +12,7 @@ class SearchVC: UIViewController {
     
     // views
     let searchNavBar = SearchNavBar()
+    let noDataView = NoDataView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,12 +66,19 @@ class SearchVC: UIViewController {
     }
     
     func anchorSubviews() {
-        // some stuff
+        self.view.addSubview(noDataView)
+        noDataView.fillSuperview()
     }
 }
 
 // search nav bar delegates
 extension SearchVC: SearchNavBarDelegate {
+    func searchInputWasTapped() {
+        if noDataView.isVisible() {
+            noDataView.hide()
+        }
+    }
+    
     func searchButtonPressed(withValue searchValue: String) {
         search(withValue: searchValue)
     }
@@ -83,8 +91,9 @@ extension SearchVC: SearchNavBarDelegate {
                 searchResultsVC.searchResult = searchValue
                 self.navigationController?.pushViewController(searchResultsVC, animated: true)
             } else {
-                // show no data state
                 SharedModalsService.instance.hideCustomOverlayModal()
+                let noDataMessage = "No results found for '\(searchValue)'"
+                self.noDataView.show(withMessage: noDataMessage)
             }
         }
     }

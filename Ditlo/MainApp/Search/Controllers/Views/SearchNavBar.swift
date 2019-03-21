@@ -10,6 +10,7 @@ import UIKit
 import MarqueeLabel
 
 protocol SearchNavBarDelegate {
+    func searchInputWasTapped()
     func searchButtonPressed(withValue searchValue: String)
 }
 
@@ -182,6 +183,10 @@ class SearchNavBar: BaseView {
 
 // text field delegate methods
 extension SearchNavBar: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.searchInputWasTapped()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchButtonPressed()
         return true
