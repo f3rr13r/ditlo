@@ -41,7 +41,7 @@ class CustomInfoWindowModal: BaseView {
     
     let infoWindowTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = smallTitleFont
+        label.font = infoWindowModalLogoFont
         label.textColor = ditloOffBlack
         label.numberOfLines = 0
         return label
@@ -50,7 +50,7 @@ class CustomInfoWindowModal: BaseView {
     let infoWindowBodyLabel: UILabel = {
         let label = UILabel()
         label.font = defaultParagraphFont
-        label.textColor = ditloGrey
+        label.textColor = ditloOffBlack
         label.numberOfLines = 0
         return label
     }()
@@ -82,10 +82,10 @@ class CustomInfoWindowModal: BaseView {
         ditloLogoNameLabel.anchor(withTopAnchor: nil, leadingAnchor: miniDitloLogoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: miniDitloLogoImageView.centerYAnchor, widthAnchor: 60.0, heightAnchor: nil, padding: .init(top: 0.0, left: 4.0, bottom: 0.0, right: 0.0))
         
         infoWindowContainer.addSubview(infoWindowTitleLabel)
-        infoWindowTitleLabel.anchor(withTopAnchor: miniDitloLogoImageView.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 20.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
+        infoWindowTitleLabel.anchor(withTopAnchor: miniDitloLogoImageView.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: nil, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 6.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
         
         infoWindowContainer.addSubview(infoWindowBodyLabel)
-        infoWindowBodyLabel.anchor(withTopAnchor: infoWindowTitleLabel.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: infoWindowContainer.bottomAnchor, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 14.0, left: horizontalPadding, bottom: -20.0, right: -horizontalPadding))
+        infoWindowBodyLabel.anchor(withTopAnchor: infoWindowTitleLabel.bottomAnchor, leadingAnchor: infoWindowContainer.leadingAnchor, bottomAnchor: infoWindowContainer.bottomAnchor, trailingAnchor: infoWindowContainer.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 12.0, left: horizontalPadding, bottom: -20.0, right: -horizontalPadding))
     }
     
     func showInfoWindowModal(withInfoWindowConfig infoWindowConfig: CustomInfoMessageConfig, andAnimation needsAnimation: Bool = false) {
