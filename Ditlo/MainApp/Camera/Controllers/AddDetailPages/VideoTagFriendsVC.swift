@@ -23,6 +23,7 @@ class VideoTagFriendsVC: UIViewController {
         self.view.backgroundColor = .white
         anchorSubviews()
         setupChildDelegates()
+        setupKeyboardDismissTapGesture()
     }
     
     func anchorSubviews() {
@@ -38,15 +39,30 @@ class VideoTagFriendsVC: UIViewController {
     func setupChildDelegates() {
         videoTagFriendsNavBar.delegate = self
     }
+    
+    func setupKeyboardDismissTapGesture() {
+        let keyboardDismissTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardDismissTapGesture.numberOfTapsRequired = 1
+        self.view.addGestureRecognizer(keyboardDismissTapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        videoTagFriendsNavBar.dismissKeyboard()
+    }
 }
 
 // nav bar delegate methods
 extension VideoTagFriendsVC: VideoTagFriendsNavBarDelegate {
+    
     func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
     }
     
     func searchValueChanged(withValue searchValue: String) {
+        // do stuff here
+    }
+    
+    func searchValueCleared() {
         // do stuff here
     }
     

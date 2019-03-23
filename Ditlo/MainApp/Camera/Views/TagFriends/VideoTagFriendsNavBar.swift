@@ -174,6 +174,12 @@ class VideoTagFriendsNavBar: BaseView {
         }
     }
     
+    func dismissKeyboard() {
+        if searchInputView.isFirstResponder && searchInputView.canResignFirstResponder {
+            searchInputView.resignFirstResponder()
+        }
+    }
+    
     @objc func skipButtonPressed() {
         delegate?.skipButtonPressed()
     }
