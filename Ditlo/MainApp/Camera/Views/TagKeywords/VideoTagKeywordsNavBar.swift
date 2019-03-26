@@ -289,6 +289,7 @@ class VideoTagKeywordsNavBar: BaseView {
         if let keywordValue = keywordInputView.text,
             !keywordValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             delegate?.addKeyword(withValue: keywordValue)
+            keywordInputView.text = nil
         }
     }
 }

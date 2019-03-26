@@ -22,6 +22,7 @@ class NoDataView: BaseView {
     override func setupViews() {
         super.setupViews()
         isHidden = true
+        isUserInteractionEnabled = false
         addSubview(noDataLabel)
         noDataLabel.anchor(withTopAnchor: nil, leadingAnchor: leadingAnchor, bottomAnchor: nil, trailingAnchor: trailingAnchor, centreXAnchor: nil, centreYAnchor: centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
     }
@@ -36,7 +37,7 @@ class NoDataView: BaseView {
     }
     
     func hide() {
-        noDataLabel.isHidden = true
+        self.isHidden = true
         noDataLabel.text = nil
     }
 }

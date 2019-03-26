@@ -16,7 +16,7 @@ class SubCategoryVC: UIViewController {
         didSet {
             if let category = self.category {
                 var subCategorySections: [NavigationCellContent] = []
-                for i in 1..<category.childCategories.count {
+                for i in 0..<category.childCategories.count {
                     subCategories.append(category.childCategories[i])
                     
                     let subCategorySection = NavigationCellContent(name: category.childCategories[i].name, colour: category.childCategories[i].backgroundColor)

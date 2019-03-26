@@ -170,6 +170,7 @@ class VideoTagCategoriesNavBar: BaseView {
             !searchValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             delegate?.searchValueChanged(withValue: searchValue)
         } else {
+            print("search value cleared")
             delegate?.searchValueCleared()
         }
     }
@@ -192,6 +193,7 @@ class VideoTagCategoriesNavBar: BaseView {
 // textfield delegate methods
 extension VideoTagCategoriesNavBar: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("text field should return")
         dismissKeyboard()
         return true
     }

@@ -83,7 +83,7 @@ class SectionCell: BaseCell {
         button.setTitle("Show all", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = smallParagraphFont
-        //button.addTarget(self, action: #selector(showAllButtonPressed), for: .touchUpInside)
+        /*-- this button target will have to be handled by the parent --*/
         return button
     }()
     
@@ -122,10 +122,6 @@ class SectionCell: BaseCell {
     func resetCollectionViewPosition() {
         let startIndexPath = IndexPath(item: 0, section: 0)
         contentViewController.scrollToItem(at: startIndexPath, at: .top, animated: false)
-    }
-    
-    @objc func showAllButtonPressed() {
-        delegate?.showAllButtonPressed()
     }
 }
 
