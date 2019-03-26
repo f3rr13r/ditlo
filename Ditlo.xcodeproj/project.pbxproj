@@ -55,6 +55,8 @@
 		4A9F4B3B21F3B12500EDDE8B /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */; };
 		4A9F4B3D21F3B1A500EDDE8B /* JobSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */; };
 		4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */; };
+		4AABC10B224A626200F250B5 /* VideoTagKeywordsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABC10A224A626200F250B5 /* VideoTagKeywordsVC.swift */; };
+		4AABC10D224A62DB00F250B5 /* VideoTagKeywordsNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABC10C224A62DB00F250B5 /* VideoTagKeywordsNavBar.swift */; };
 		4AB7AB9822008A1800A2A8DD /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7AB9722008A1800A2A8DD /* UILabel.swift */; };
 		4AC31EA122419854003820C1 /* EventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC31EA022419854003820C1 /* EventsVC.swift */; };
 		4AC31EA32241988D003820C1 /* EventsNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC31EA22241988D003820C1 /* EventsNavBar.swift */; };
@@ -175,6 +177,8 @@
 		4A9F4B3A21F3B12500EDDE8B /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		4A9F4B3C21F3B1A500EDDE8B /* JobSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectorCell.swift; sourceTree = "<group>"; };
 		4A9F4B4721F3F5F500EDDE8B /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
+		4AABC10A224A626200F250B5 /* VideoTagKeywordsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagKeywordsVC.swift; sourceTree = "<group>"; };
+		4AABC10C224A62DB00F250B5 /* VideoTagKeywordsNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagKeywordsNavBar.swift; sourceTree = "<group>"; };
 		4AB7AB9722008A1800A2A8DD /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		4AC31EA022419854003820C1 /* EventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsVC.swift; sourceTree = "<group>"; };
 		4AC31EA22241988D003820C1 /* EventsNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsNavBar.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 				4A3246DF2246786900E53ABF /* VideoTagFriendsVC.swift */,
 				4AEC5307224A3D8C000AB29D /* VideoTagEventsVC.swift */,
 				4AEC5309224A4362000AB29D /* VideoTagCategoriesVC.swift */,
+				4AABC10A224A626200F250B5 /* VideoTagKeywordsVC.swift */,
 			);
 			path = AddDetailPages;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 		4A3246D4224663FF00E53ABF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4AABC109224A622700F250B5 /* TagKeywords */,
 				4AEC530B224A4375000AB29D /* TagCategories */,
 				4AEC5304224A3CFC000AB29D /* TagEvents */,
 				4A3246E12246786E00E53ABF /* TagFriends */,
@@ -593,6 +599,14 @@
 				4AF55E1B223A9BD7004AD7BC /* Views */,
 			);
 			name = SubCategoryVC;
+			sourceTree = "<group>";
+		};
+		4AABC109224A622700F250B5 /* TagKeywords */ = {
+			isa = PBXGroup;
+			children = (
+				4AABC10C224A62DB00F250B5 /* VideoTagKeywordsNavBar.swift */,
+			);
+			path = TagKeywords;
 			sourceTree = "<group>";
 		};
 		4AC31E9D224197F9003820C1 /* EventsVC */ = {
@@ -1375,6 +1389,7 @@
 				4AD034C621F2084F00FDA967 /* CategoriesVC.swift in Sources */,
 				4AD034B221F1EA4100FDA967 /* Routes.swift in Sources */,
 				4A8086EE2228494D0007BDEB /* GradientView.swift in Sources */,
+				4AABC10D224A62DB00F250B5 /* VideoTagKeywordsNavBar.swift in Sources */,
 				4AD034B921F205AF00FDA967 /* MainAppNavigationVC.swift in Sources */,
 				4AD034D121F251DB00FDA967 /* JobService.swift in Sources */,
 				4A5D45B7224156D1000AB2D0 /* UserListNavBar.swift in Sources */,
@@ -1386,6 +1401,7 @@
 				4A5D459B22410BBE000AB2D0 /* SearchResultsNavBar.swift in Sources */,
 				4A8399D72237EB5000CDC005 /* ProfileHeaderCell.swift in Sources */,
 				4AEC5306224A3D28000AB29D /* VideoTagEventsNavBar.swift in Sources */,
+				4AABC10B224A626200F250B5 /* VideoTagKeywordsVC.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
 				4A9771062243D57300A932DF /* TaggedKeywordVC.swift in Sources */,
 				4A97710C2243DB1600A932DF /* TaggedLocationNavBar.swift in Sources */,

@@ -201,11 +201,16 @@ extension VideoTagCategoriesVC: VideoTagCategoriesNavBarDelegate {
     }
     
     func skipButtonPressed() {
-        // do stuff here
+        navigateToKeywordsVC()
     }
     
     func nextButtonPressed() {
-        // do stuff here
+        navigateToKeywordsVC()
+    }
+    
+    func navigateToKeywordsVC() {
+        let tagKeywordsVC = VideoTagKeywordsVC()
+        self.navigationController?.pushViewController(tagKeywordsVC, animated: true)
     }
 }
 
