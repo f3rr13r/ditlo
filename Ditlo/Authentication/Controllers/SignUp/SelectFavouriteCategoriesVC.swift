@@ -160,8 +160,8 @@ class SelectFavouriteCategoriesVC: UIViewController {
         self.searchCategoriesInput.delegate = self
     }
     
-    func getCategoriesData() {        
-        CategoriesService.instance.getCategoriesList { (categoriesData) in
+    func getCategoriesData() {
+        CategoriesService.instance.getCategoriesList(withToggleAll: true) { (categoriesData) in
             if categoriesData.count > 0 {
                 self.isCategoriesDataLoaded = true
                 self.categories = categoriesData

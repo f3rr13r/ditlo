@@ -74,14 +74,16 @@ class CategoriesVC: UIViewController {
     }
     
     func getMainCategories() {
-        CategoriesService.instance.getCategoriesList { (categories) in
-            self.categories = categories
-            for category in self.categories {
-                let navigationCategory = NavigationCellContent(name: category.name, colour: category.backgroundColor)
-                self.categoryNavSections.append(navigationCategory)
+        CategoriesService.instance.getCategoriesList(withToggleAll: false) { (categoriesData) in
+            if categoriesData.count > 0 {
+                self.categories = categoriesData
+                for category in self.categories {
+                    let navigationCategory = NavigationCellContent(name: category.name, colour: category.backgroundColor)
+                    self.categoryNavSections.append(navigationCategory)
+                }
+                self.categoriesNavBar.sections = self.categoryNavSections
+                self.contentSectionsCollectionView.reloadData()
             }
-            self.categoriesNavBar.sections = self.categoryNavSections
-            self.contentSectionsCollectionView.reloadData()
         }
     }
     

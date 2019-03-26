@@ -24,10 +24,9 @@ class CategoriesService {
         db.settings = settings
     }
     
-    func getCategoriesList(withUserId userId: String? = nil, completion: @escaping categoryListCompletion) {
+    func getCategoriesList(withUserId userId: String? = nil, withToggleAll includeToggleAll: Bool, completion: @escaping categoryListCompletion) {
         var categories: [Category] = []
         var numberOfDatabaseCategories: Int = 0
-        let getCategoriesDispatchGroup = DispatchGroup()
         
         let categoriesRef = db.collection(_CATEGORIES)
         categoriesRef.getDocuments { (snapshot, error) in
@@ -54,8 +53,8 @@ class CategoriesService {
                                         documents.count > 0 {
                                         let numberOfDatabaseChildCategories: Int = documents.count
                                         for childCategory in documents {
-                                            // prefix an ALL setting to the childCategories
-                                            if category.childCategories.count == 0 {
+                                            // prefix an optional 'Toggle all' setting to the childCategories
+                                            if category.childCategories.count == 0 && includeToggleAll {
                                                 let allCategory = ChildCategory(id: 0, name: "Toggle All \(category.name)", backgroundColor: category.backgroundColor, isSelected: false)
                                                 category.childCategories.append(allCategory)
                                             }
@@ -73,7 +72,7 @@ class CategoriesService {
                                         }
                                         categories.append(category)
                                         
-                                        if categories.count == numberOfDatabaseCategories && category.childCategories.count == (numberOfDatabaseChildCategories + 1) {
+                                        if categories.count == numberOfDatabaseCategories && category.childCategories.count == (numberOfDatabaseChildCategories + (includeToggleAll ? 1 : 0)) {
                                             completion(categories)
                                         }
                                     }

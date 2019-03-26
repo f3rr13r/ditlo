@@ -105,6 +105,10 @@
 		4AD4AF7621FE5C2E001F5AEF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7521FE5C2E001F5AEF /* Category.swift */; };
 		4AD4AF7A21FE6B6B001F5AEF /* CategoriesUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */; };
 		4AD4AF7C21FE7210001F5AEF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */; };
+		4AEC5306224A3D28000AB29D /* VideoTagEventsNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC5305224A3D28000AB29D /* VideoTagEventsNavBar.swift */; };
+		4AEC5308224A3D8C000AB29D /* VideoTagEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC5307224A3D8C000AB29D /* VideoTagEventsVC.swift */; };
+		4AEC530A224A4362000AB29D /* VideoTagCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC5309224A4362000AB29D /* VideoTagCategoriesVC.swift */; };
+		4AEC530D224A438D000AB29D /* VideoTagCategoriesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEC530C224A438D000AB29D /* VideoTagCategoriesNavBar.swift */; };
 		4AF3A5F62232AADB0084479F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5F52232AADB0084479F /* EventCell.swift */; };
 		4AF3A5F82232AF3A0084479F /* TaggedFriendsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5F72232AF3A0084479F /* TaggedFriendsSectionView.swift */; };
 		4AF3A5FA2232B1850084479F /* TaggedEventsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A5F92232B1850084479F /* TaggedEventsSectionView.swift */; };
@@ -223,6 +227,10 @@
 		4AD4AF7521FE5C2E001F5AEF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		4AD4AF7921FE6B6B001F5AEF /* CategoriesUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesUtilities.swift; sourceTree = "<group>"; };
 		4AD4AF7B21FE7210001F5AEF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		4AEC5305224A3D28000AB29D /* VideoTagEventsNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagEventsNavBar.swift; sourceTree = "<group>"; };
+		4AEC5307224A3D8C000AB29D /* VideoTagEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagEventsVC.swift; sourceTree = "<group>"; };
+		4AEC5309224A4362000AB29D /* VideoTagCategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagCategoriesVC.swift; sourceTree = "<group>"; };
+		4AEC530C224A438D000AB29D /* VideoTagCategoriesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagCategoriesNavBar.swift; sourceTree = "<group>"; };
 		4AF3A5F52232AADB0084479F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		4AF3A5F72232AF3A0084479F /* TaggedFriendsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedFriendsSectionView.swift; sourceTree = "<group>"; };
 		4AF3A5F92232B1850084479F /* TaggedEventsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedEventsSectionView.swift; sourceTree = "<group>"; };
@@ -255,6 +263,8 @@
 			children = (
 				4A3246D52246649D00E53ABF /* VideoPrivacyVC.swift */,
 				4A3246DF2246786900E53ABF /* VideoTagFriendsVC.swift */,
+				4AEC5307224A3D8C000AB29D /* VideoTagEventsVC.swift */,
+				4AEC5309224A4362000AB29D /* VideoTagCategoriesVC.swift */,
 			);
 			path = AddDetailPages;
 			sourceTree = "<group>";
@@ -262,6 +272,8 @@
 		4A3246D4224663FF00E53ABF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4AEC530B224A4375000AB29D /* TagCategories */,
+				4AEC5304224A3CFC000AB29D /* TagEvents */,
 				4A3246E12246786E00E53ABF /* TagFriends */,
 				4A3246DE2246751A00E53ABF /* Privacy */,
 			);
@@ -1074,6 +1086,22 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		4AEC5304224A3CFC000AB29D /* TagEvents */ = {
+			isa = PBXGroup;
+			children = (
+				4AEC5305224A3D28000AB29D /* VideoTagEventsNavBar.swift */,
+			);
+			path = TagEvents;
+			sourceTree = "<group>";
+		};
+		4AEC530B224A4375000AB29D /* TagCategories */ = {
+			isa = PBXGroup;
+			children = (
+				4AEC530C224A438D000AB29D /* VideoTagCategoriesNavBar.swift */,
+			);
+			path = TagCategories;
+			sourceTree = "<group>";
+		};
 		4AF3A6032232CE9F0084479F /* SectionViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1357,18 +1385,22 @@
 				4A3246DD22466D0300E53ABF /* DitloPrivacy.swift in Sources */,
 				4A5D459B22410BBE000AB2D0 /* SearchResultsNavBar.swift in Sources */,
 				4A8399D72237EB5000CDC005 /* ProfileHeaderCell.swift in Sources */,
+				4AEC5306224A3D28000AB29D /* VideoTagEventsNavBar.swift in Sources */,
 				4AD0348121F0D32C00FDA967 /* BaseLabel.swift in Sources */,
 				4A9771062243D57300A932DF /* TaggedKeywordVC.swift in Sources */,
 				4A97710C2243DB1600A932DF /* TaggedLocationNavBar.swift in Sources */,
+				4AEC5308224A3D8C000AB29D /* VideoTagEventsVC.swift in Sources */,
 				4AF3A60D223337050084479F /* OtherUserProfileNavBar.swift in Sources */,
 				4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */,
 				4A3DA29122011428005207D8 /* CustomCalendarCell.swift in Sources */,
 				4A028984222D962D009D6AFE /* DitloPlayerPopupVC.swift in Sources */,
+				4AEC530D224A438D000AB29D /* VideoTagCategoriesNavBar.swift in Sources */,
 				4AF3A5FE2232BD020084479F /* TaggedKeywordsSectionView.swift in Sources */,
 				4AD0349721F150CD00FDA967 /* CustomModalOverlay.swift in Sources */,
 				4AD0346521F0AF8D00FDA967 /* Fonts.swift in Sources */,
 				4AF55E1E223A9C0A004AD7BC /* SubCategoryVC.swift in Sources */,
 				4A5D45A22241165B000AB2D0 /* SettingsHomeVC.swift in Sources */,
+				4AEC530A224A4362000AB29D /* VideoTagCategoriesVC.swift in Sources */,
 				4A3246E02246786900E53ABF /* VideoTagFriendsVC.swift in Sources */,
 				4AD0348A21F0FF6700FDA967 /* SignUpVC.swift in Sources */,
 				4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */,

@@ -1,14 +1,14 @@
 //
-//  VideoTagFriendsVC.swift
+//  VideoTagEventsVC.swift
 //  Ditlo
 //
-//  Created by Harry Ferrier on 3/23/19.
+//  Created by Harry Ferrier on 3/26/19.
 //  Copyright © 2019 harryferrier. All rights reserved.
 //
 
 import UIKit
 
-class VideoTagFriendsVC: UIViewController {
+class VideoTagEventsVC: UIViewController {
 
     let topPaddingView: UIView = {
         let view = UIView()
@@ -16,10 +16,10 @@ class VideoTagFriendsVC: UIViewController {
         return view
     }()
     
-    let videoTagFriendsNavBar = VideoTagFriendsNavBar()
+    let videoTagEventsNavBar = VideoTagEventsNavBar()
     
     private let cellId: String = "cellId"
-    lazy var userListCollectionView: UICollectionView = {
+    lazy var eventsListCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -27,7 +27,7 @@ class VideoTagFriendsVC: UIViewController {
         cv.dataSource = self
         cv.backgroundColor = .white
         cv.contentInsetAdjustmentBehavior = .never
-        cv.register(UserCell.self, forCellWithReuseIdentifier: cellId)
+        cv.register(EventCell.self, forCellWithReuseIdentifier: cellId)
         return cv
     }()
     
@@ -46,16 +46,16 @@ class VideoTagFriendsVC: UIViewController {
         topPaddingView.anchor(withTopAnchor: self.view.topAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: safeAreaTopPadding)
         
         // nav bar
-        self.view.addSubview(videoTagFriendsNavBar)
-        videoTagFriendsNavBar.anchor(withTopAnchor: topPaddingView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        self.view.addSubview(videoTagEventsNavBar)
+        videoTagEventsNavBar.anchor(withTopAnchor: topPaddingView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
         
-        // user list collection view
-        self.view.addSubview(userListCollectionView)
-        userListCollectionView.anchor(withTopAnchor: videoTagFriendsNavBar.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
+        // events list collection view
+        self.view.addSubview(eventsListCollectionView)
+        eventsListCollectionView.anchor(withTopAnchor: videoTagEventsNavBar.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
     }
     
     func setupChildDelegates() {
-        videoTagFriendsNavBar.delegate = self
+        videoTagEventsNavBar.delegate = self
     }
     
     func setupKeyboardDismissTapGesture() {
@@ -65,35 +65,30 @@ class VideoTagFriendsVC: UIViewController {
     }
     
     @objc func dismissKeyboard() {
-        videoTagFriendsNavBar.dismissKeyboard()
+        videoTagEventsNavBar.dismissKeyboard()
     }
 }
 
 // collection view delegate and datasource methods
-extension VideoTagFriendsVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension VideoTagEventsVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 93
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? UserCell else {
+        guard let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? EventCell else {
             return UICollectionViewCell()
         }
-        return userCell
+        return eventCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = (screenWidth - 56) / 3
-        let height: CGFloat = width * 1.24
-        return CGSize(width: width, height: height)
+        let cellWidth = screenWidth - (horizontalPadding * 2)
+        return CGSize(width: cellWidth, height: 60.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 12.0, left: 20.0, bottom: 24.0, right: 20.0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8.0
+        return UIEdgeInsets(top: 20.0, left: horizontalPadding, bottom: 20.0, right: horizontalPadding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -101,9 +96,9 @@ extension VideoTagFriendsVC: UICollectionViewDelegate, UICollectionViewDelegateF
     }
 }
 
+
 // nav bar delegate methods
-extension VideoTagFriendsVC: VideoTagFriendsNavBarDelegate {
-    
+extension VideoTagEventsVC: VideoTagEventsNavBarDelegate {
     func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -117,15 +112,15 @@ extension VideoTagFriendsVC: VideoTagFriendsNavBarDelegate {
     }
     
     func skipButtonPressed() {
-        navigateToEventsVC()
+        navigateToCategoriesVC()
     }
     
     func nextButtonPressed() {
-        navigateToEventsVC()
+        navigateToCategoriesVC()
     }
     
-    func navigateToEventsVC() {
-        let tagEventsVC = VideoTagEventsVC()
-        self.navigationController?.pushViewController(tagEventsVC, animated: true)
+    func navigateToCategoriesVC() {
+        let tagCategoriesVC = VideoTagCategoriesVC()
+        self.navigationController?.pushViewController(tagCategoriesVC, animated: true)
     }
 }

@@ -1,15 +1,15 @@
 //
-//  VideoTagFriendsNavBar.swift
+//  VideoTagCategoriesNavBar.swift
 //  Ditlo
 //
-//  Created by Harry Ferrier on 3/23/19.
+//  Created by Harry Ferrier on 3/26/19.
 //  Copyright © 2019 harryferrier. All rights reserved.
 //
 
 import UIKit
 import MarqueeLabel
 
-protocol VideoTagFriendsNavBarDelegate {
+protocol VideoTagCategoriesNavBarDelegate {
     func backButtonPressed()
     func searchValueChanged(withValue searchValue: String)
     func searchValueCleared()
@@ -17,7 +17,7 @@ protocol VideoTagFriendsNavBarDelegate {
     func nextButtonPressed()
 }
 
-class VideoTagFriendsNavBar: BaseView {
+class VideoTagCategoriesNavBar: BaseView {
 
     // views
     let logoImageView: UIImageView = {
@@ -79,10 +79,10 @@ class VideoTagFriendsNavBar: BaseView {
         return button
     }()
     
-    let tagFriendsTitleLabel: MarqueeLabel = {
+    let tagCategoriesTitleLabel: MarqueeLabel = {
         let label = MarqueeLabel()
         label.numberOfLines = 1
-        label.text = "Tag Friends"
+        label.text = "Tag Categories"
         label.font = defaultTitleFont
         label.textColor = ditloOffBlack
         label.trailingBuffer = 8.0
@@ -99,10 +99,10 @@ class VideoTagFriendsNavBar: BaseView {
         input.textColor = ditloOffBlack
         input.clearButtonMode = .whileEditing
         input.adjustsFontSizeToFitWidth = true
-        input.returnKeyType = .search
+        input.returnKeyType = .done
         input.keyboardAppearance = .dark
         input.attributedPlaceholder = NSAttributedString(
-            string: "What friend are you looking for?", attributes: [NSAttributedString.Key.foregroundColor: ditloGrey])
+            string: "What category are you looking for?", attributes: [NSAttributedString.Key.foregroundColor: ditloGrey])
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 12.0, height: 36))
         input.leftView = paddingView
         input.leftViewMode = .always
@@ -117,7 +117,7 @@ class VideoTagFriendsNavBar: BaseView {
     }()
     
     // delegate
-    var delegate: VideoTagFriendsNavBarDelegate?
+    var delegate: VideoTagCategoriesNavBarDelegate?
     
     override func setupViews() {
         super.setupViews()
@@ -151,11 +151,11 @@ class VideoTagFriendsNavBar: BaseView {
         topContentRowView.addSubview(logoLabel)
         logoLabel.anchor(withTopAnchor: nil, leadingAnchor: logoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: logoImageView.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 2.0, bottom: 0.0, right: -12.0))
         
-        topContentRowView.addSubview(tagFriendsTitleLabel)
-        tagFriendsTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: -12.0))
+        topContentRowView.addSubview(tagCategoriesTitleLabel)
+        tagCategoriesTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: -12.0))
         
         topContentRowView.addSubview(searchInputView)
-        searchInputView.anchor(withTopAnchor: tagFriendsTitleLabel.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 36.0, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
+        searchInputView.anchor(withTopAnchor: tagCategoriesTitleLabel.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 36.0, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
         
         topContentRowView.addSubview(bottomBorderView)
         bottomBorderView.anchor(withTopAnchor: searchInputView.bottomAnchor, leadingAnchor: topContentRowView.leadingAnchor, bottomAnchor: topContentRowView.bottomAnchor, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 1.0, padding: .init(top: 12.0, left: 0.0, bottom: 0.0, right: 0.0))
@@ -190,7 +190,7 @@ class VideoTagFriendsNavBar: BaseView {
 }
 
 // textfield delegate methods
-extension VideoTagFriendsNavBar: UITextFieldDelegate {
+extension VideoTagCategoriesNavBar: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         dismissKeyboard()
         return true
