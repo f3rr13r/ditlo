@@ -72,6 +72,7 @@ class CategoriesService {
                                         }
                                         categories.append(category)
                                         
+                                        /*-- we check here for whether a toggle all cell has been added to the childCategories. If it as then we need to add 1 to the numberOfDatabase child categories --*/
                                         if categories.count == numberOfDatabaseCategories && category.childCategories.count == (numberOfDatabaseChildCategories + (includeToggleAll ? 1 : 0)) {
                                             completion(categories)
                                         }
