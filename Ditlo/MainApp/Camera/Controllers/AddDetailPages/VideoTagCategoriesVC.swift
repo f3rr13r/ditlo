@@ -54,11 +54,18 @@ class VideoTagCategoriesVC: UIViewController {
     
     let loadingContentView: LoadingContentView = {
         let view = LoadingContentView()
-        view.loadingContentMessage = "LOADING CATEGORIES LIST"
+        view.loadingContentMessage = "Loading Categories List"
         return view
     }()
     
     let noCategoriesDataView = NoDataView()
+    
+    let dismissKeyboardView: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
+        button.alpha = 0
+        return button
+    }()
     
     // variables
     var isCategoriesDataLoaded: Bool = false
@@ -76,7 +83,30 @@ class VideoTagCategoriesVC: UIViewController {
         getCategoriesData()
         anchorSubviews()
         setupChildDelegates()
-        setupKeyboardDismissTapGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func animateWithKeyboard(_ notification: NSNotification) {
+        let moveUp = (notification.name == UIResponder.keyboardWillShowNotification)
+        dismissKeyboardView.alpha = moveUp ? 1.0 : 0.0
+    }
+    
+    @objc func dismissKeyboard() {
+        videoTagCategoriesNavBar.dismissKeyboard()
     }
     
     func getCategoriesData() {
@@ -111,9 +141,11 @@ class VideoTagCategoriesVC: UIViewController {
     
     func updateCustomNavBarButtonState() {
         if selectedCategoriesCount > 0 {
-            // hide navbar skip button and show next button
+            videoTagCategoriesNavBar.skipButton.isHidden = true
+            videoTagCategoriesNavBar.nextButton.isHidden = false
         } else {
-            // hide next button and show skip button
+            videoTagCategoriesNavBar.nextButton.isHidden = true
+            videoTagCategoriesNavBar.skipButton.isHidden = false
         }
     }
     
@@ -145,13 +177,15 @@ class VideoTagCategoriesVC: UIViewController {
         // no data state
         self.view.addSubview(noCategoriesDataView)
         noCategoriesDataView.anchor(withTopAnchor: self.videoTagCategoriesNavBar.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil)
+        
+        // dismiss keyboard view
+        self.view.addSubview(dismissKeyboardView)
+        dismissKeyboardView.fillSuperview()
     }
     
     func setupChildDelegates() {
         videoTagCategoriesNavBar.delegate = self
     }
-    
-    func setupKeyboardDismissTapGesture() {}
 }
 
 // nav bar delegate methods
@@ -161,6 +195,11 @@ extension VideoTagCategoriesVC: VideoTagCategoriesNavBarDelegate {
     }
     
     func searchValueChanged(withValue searchValue: String) {
+        /*-- something funky is happening in here which is causing the
+             keyboard to dismiss and reappear. needs to look into
+             what part is breaking, and how we can solve it, possibly
+             using the Dispatch.main branch from Grand Centre Dispatch --*/
+        
         searchedCategories = []
         for i in 0..<categories.count {
             for a in 0..<categories[i].childCategories.count {

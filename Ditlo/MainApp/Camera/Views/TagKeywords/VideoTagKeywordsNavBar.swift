@@ -292,6 +292,14 @@ class VideoTagKeywordsNavBar: BaseView {
             keywordInputView.text = nil
         }
     }
+    
+    func dismissKeyboard() {
+        if keywordInputView.isFirstResponder {
+            if keywordInputView.canResignFirstResponder {
+                keywordInputView.resignFirstResponder()
+            }
+        }
+    }
 }
 
 // text field delegate

@@ -43,6 +43,13 @@ class VideoTagKeywordsVC: UIViewController {
     
     let noSelectedKeywordsView = NoDataView()
     
+    let dismissKeyboardView: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
+        button.alpha = 0
+        return button
+    }()
+    
     
     /*-- variables --*/
     var remainingNumber: Int = 5 {
@@ -70,7 +77,27 @@ class VideoTagKeywordsVC: UIViewController {
         edgesForExtendedLayout = []
         handleChildDelegates()
         anchorSubviews()
-        setupKeyboardDismissTapGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(animateWithKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func animateWithKeyboard(_ notification: NSNotification) {
+        let moveUp = (notification.name == UIResponder.keyboardWillShowNotification)
+        dismissKeyboardView.alpha = moveUp ? 1.0 : 0.0
+        
     }
     
     func handleChildDelegates() {
@@ -103,10 +130,14 @@ class VideoTagKeywordsVC: UIViewController {
         // no keywords view
         mainContentView.addSubview(noSelectedKeywordsView)
         noSelectedKeywordsView.fillSuperview()
+        
+        // dismiss keyboard view
+        self.view.addSubview(dismissKeyboardView)
+        dismissKeyboardView.anchor(withTopAnchor: videoTagKeywordsNavBar.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
     }
     
-    func setupKeyboardDismissTapGesture() {
-        
+    @objc func dismissKeyboard() {
+        videoTagKeywordsNavBar.dismissKeyboard()
     }
 }
 
