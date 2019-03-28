@@ -26,14 +26,12 @@ class KeywordSelectorCell: BaseCell {
         view.layer.cornerRadius = 4.0
         view.layer.borderWidth = 1.0
         view.layer.borderColor = ditloOffBlack.cgColor
-        view.backgroundColor = ditloLightBlue
         return view
     }()
     var keywordContainerMaxWidthConstraint: NSLayoutConstraint!
     
     let deleteButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = ditloOrange
         button.isUserInteractionEnabled = true
         button.isEnabled = true
         /*-- we'll handle this target on the parent - silly xcode bug --*/

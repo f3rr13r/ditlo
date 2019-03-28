@@ -204,7 +204,8 @@ class VideoTagKeywordsNavBar: BaseView {
         
         /*-- title label --*/
         topContentRowView.addSubview(tagKeywordsTitleLabel)
-        tagKeywordsTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: -12.0))
+        let keywordTitleHeightAnchor = (tagKeywordsTitleLabel.text?.heightOfString(usingFont: tagKeywordsTitleLabel.font))! + 0.1
+        tagKeywordsTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: keywordTitleHeightAnchor, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: -12.0))
         
         /*-- search bar --*/
         topContentRowView.addSubview(addKeywordButton)
@@ -225,7 +226,8 @@ class VideoTagKeywordsNavBar: BaseView {
         
         /*-- suggested keywords label --*/
         bottomContentRowView.addSubview(suggestedKeywordsLabel)
-        suggestedKeywordsLabel.anchor(withTopAnchor: bottomContentRowView.topAnchor, leadingAnchor: bottomContentRowView.leadingAnchor, bottomAnchor: nil, trailingAnchor: bottomContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 46.0, bottom: 0.0, right: -horizontalPadding))
+        let suggestedKeywordsHeightAnchor = (suggestedKeywordsLabel.text?.heightOfString(usingFont: suggestedKeywordsLabel.font))! + 0.1
+        suggestedKeywordsLabel.anchor(withTopAnchor: bottomContentRowView.topAnchor, leadingAnchor: bottomContentRowView.leadingAnchor, bottomAnchor: nil, trailingAnchor: bottomContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: suggestedKeywordsHeightAnchor, padding: .init(top: 0.0, left: 46.0, bottom: 0.0, right: -horizontalPadding))
         
         /*-- suggested keywords collection view --*/
         bottomContentRowView.addSubview(keywordSuggestionsCollectionView)
@@ -303,7 +305,12 @@ class VideoTagKeywordsNavBar: BaseView {
 }
 
 // text field delegate
-extension VideoTagKeywordsNavBar: UITextFieldDelegate {}
+extension VideoTagKeywordsNavBar: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addKeywordButtonPressed()
+        return true
+    }
+}
 
 // collection view delegate and data source methods
 extension VideoTagKeywordsNavBar: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {

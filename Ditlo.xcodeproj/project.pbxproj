@@ -37,6 +37,8 @@
 		4A717DF1223172B4008DE1F8 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717DF0223172B4008DE1F8 /* UserCell.swift */; };
 		4A717E2B22369141008EED78 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A717E2A22369141008EED78 /* Sizes.swift */; };
 		4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A734B5E222044B7005EE2CC /* MyProfileVC.swift */; };
+		4A799DF2224CF489004EFA90 /* VideoTagLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A799DF1224CF489004EFA90 /* VideoTagLocationVC.swift */; };
+		4A799DF5224CF4D4004EFA90 /* VideoTagLocationNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A799DF4224CF4D4004EFA90 /* VideoTagLocationNavBar.swift */; };
 		4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */; };
 		4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */; };
 		4A8086EC222837AD0007BDEB /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */; };
@@ -160,6 +162,8 @@
 		4A717DF0223172B4008DE1F8 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		4A717E2A22369141008EED78 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		4A734B5E222044B7005EE2CC /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
+		4A799DF1224CF489004EFA90 /* VideoTagLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagLocationVC.swift; sourceTree = "<group>"; };
+		4A799DF4224CF4D4004EFA90 /* VideoTagLocationNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagLocationNavBar.swift; sourceTree = "<group>"; };
 		4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDitloNavBar.swift; sourceTree = "<group>"; };
 		4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCollectionView.swift; sourceTree = "<group>"; };
 		4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 				4AEC5307224A3D8C000AB29D /* VideoTagEventsVC.swift */,
 				4AEC5309224A4362000AB29D /* VideoTagCategoriesVC.swift */,
 				4AABC10A224A626200F250B5 /* VideoTagKeywordsVC.swift */,
+				4A799DF1224CF489004EFA90 /* VideoTagLocationVC.swift */,
 			);
 			path = AddDetailPages;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 		4A3246D4224663FF00E53ABF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A799DF3224CF4A1004EFA90 /* TagLocation */,
 				4AABC109224A622700F250B5 /* TagKeywords */,
 				4AEC530B224A4375000AB29D /* TagCategories */,
 				4AEC5304224A3CFC000AB29D /* TagEvents */,
@@ -461,6 +467,14 @@
 				4A734B5E222044B7005EE2CC /* MyProfileVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4A799DF3224CF4A1004EFA90 /* TagLocation */ = {
+			isa = PBXGroup;
+			children = (
+				4A799DF4224CF4D4004EFA90 /* VideoTagLocationNavBar.swift */,
+			);
+			path = TagLocation;
 			sourceTree = "<group>";
 		};
 		4A8086D72227FE060007BDEB /* Views */ = {
@@ -1380,6 +1394,7 @@
 				4AD034B621F2041100FDA967 /* SelectProfilePictureVC.swift in Sources */,
 				4A3DA28A2200D34F005207D8 /* CustomCalendarModal.swift in Sources */,
 				4A9771082243D5AE00A932DF /* TaggedKeywordNavBar.swift in Sources */,
+				4A799DF5224CF4D4004EFA90 /* VideoTagLocationNavBar.swift in Sources */,
 				4AF3A608223336260084479F /* OtherUserProfileVC.swift in Sources */,
 				4AF3A6052232CEB80084479F /* SectionViewActionDelegate.swift in Sources */,
 				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
@@ -1479,6 +1494,7 @@
 				4A5D45A422411677000AB2D0 /* SettingsHomeNavBar.swift in Sources */,
 				4AD034D421F2523D00FDA967 /* JobModels.swift in Sources */,
 				4A3246D8224664C900E53ABF /* VideoPrivacyNavBar.swift in Sources */,
+				4A799DF2224CF489004EFA90 /* VideoTagLocationVC.swift in Sources */,
 				4AD034A621F1E89F00FDA967 /* UserService.swift in Sources */,
 				4AF3A5F82232AF3A0084479F /* TaggedFriendsSectionView.swift in Sources */,
 				4A9F4B4821F3F5F500EDDE8B /* LoadingContentView.swift in Sources */,

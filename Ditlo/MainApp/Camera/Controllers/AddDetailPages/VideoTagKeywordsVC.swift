@@ -155,11 +155,16 @@ extension VideoTagKeywordsVC: VideoTagKeywordsNavBarDelegate {
     }
     
     func skipButtonPressed() {
-        // do something
+        navigateToLocationVC()
     }
     
     func nextButtonPressed() {
-        // do something
+        navigateToLocationVC()
+    }
+    
+    func navigateToLocationVC() {
+        let tagLocationVC = VideoTagLocationVC()
+        self.navigationController?.pushViewController(tagLocationVC, animated: true)
     }
 }
 
