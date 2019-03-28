@@ -207,9 +207,11 @@ class VideoTagCategoriesVC: UIViewController {
     }
     
     func handleChildCategorySelection(atItemIndex itemIndex: Int, withSearchingCategoriesState isSearchingCategories: Bool) {
-        /*-- what do we need to do --*/
+        /*-- searching --*/
         if isSearchingCategories {
             if remainingNumber > 0 {
+                /*-- if the remaining number is greater than 0 then we need to toggle the value.
+                     we check the value against the selectedCategories array and decide whether or not to append or remove it --*/
                 searchedCategories[itemIndex].isSelected = !searchedCategories[itemIndex].isSelected
                 if searchedCategories[itemIndex].isSelected {
                     selectedCategories.append(searchedCategories[itemIndex])
@@ -219,15 +221,25 @@ class VideoTagCategoriesVC: UIViewController {
                     remainingNumber += 1
                 }
             } else {
+                /*-- if the remaining number is zero, then we need to check that the category being tapped is already
+                     within the selected categories array. If it is not then it is treated as disabled. It cannot be interacted with
+                     until there is available space for it in the selected categories array --*/
                 if selectedCategories.contains(where: { $0.name == searchedCategories[itemIndex].name}) {
                     searchedCategories[itemIndex].isSelected = false
                     selectedCategories = selectedCategories.filter { $0.name != searchedCategories[itemIndex].name }
                     remainingNumber += 1
                 }
             }
+            
+            /*-- update the categories array with the updated corresponsing search value.
+                 we do this so that when search is ended, the selected states are consistent --*/
             updateGeneralCategoryItem(withChildCategory: searchedCategories[itemIndex])
+            
+        /*-- not searching --*/
         } else {
             if remainingNumber > 0 {
+                /*-- if the remaining number is greater than 0 then we need to toggle the value.
+                 we check the value against the selectedCategories array and decide whether or not to append or remove it --*/
                 categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected = !categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected
                 if categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected {
                     selectedCategories.append(categories[selectedParentCategoryIndex].childCategories[itemIndex])
@@ -237,6 +249,9 @@ class VideoTagCategoriesVC: UIViewController {
                     remainingNumber += 1
                 }
             } else {
+                /*-- if the remaining number is zero, then we need to check that the category being tapped is already
+                 within the selected categories array. If it is not then it is treated as disabled. It cannot be interacted with
+                 until there is available space for it in the selected categories array --*/
                 if selectedCategories.contains(where: { $0.name == categories[selectedParentCategoryIndex].childCategories[itemIndex].name }) {
                     categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected = false
                     selectedCategories = selectedCategories.filter { $0.name != categories[selectedParentCategoryIndex].childCategories[itemIndex].name }
@@ -245,7 +260,7 @@ class VideoTagCategoriesVC: UIViewController {
             }
         }
         
-        /*-- update the UI --*/
+        /*-- update the UI to match the new conditions --*/
         updateSelectedCategoriesCount()
         childCategoryCollectionView.reloadData()
     }
