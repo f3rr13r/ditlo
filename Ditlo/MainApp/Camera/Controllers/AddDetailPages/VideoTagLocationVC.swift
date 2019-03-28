@@ -27,44 +27,7 @@ class VideoTagLocationVC: UIViewController {
     }()
     
     // custom switcher
-    let customSwipeContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = ditloVeryLightGrey
-        view.layer.cornerRadius = 12.0
-        return view
-    }()
-    
-    let activeOptionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = ditloGrey
-        view.layer.cornerRadius = 12.0
-        view.isUserInteractionEnabled = false
-        return view
-    }()
-    var activeOptionViewLeftAnchorConstraint: NSLayoutConstraint!
-    var activeOptionViewWidthConstraint: NSLayoutConstraint!
-    
-    let firstOptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Suggestions"
-        label.isUserInteractionEnabled = true
-        label.textColor = .white
-        label.font = smallParagraphFont
-        label.textAlignment = .center
-        return label
-    }()
-    var firstOptionLabelWidthConstraint: NSLayoutConstraint!
-    
-    let secondOptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Current Location"
-        label.isUserInteractionEnabled = true
-        label.textColor = ditloGrey
-        label.font = smallParagraphFont
-        label.textAlignment = .center
-        return label
-    }()
-    var secondOptionLabelWidthConstraint: NSLayoutConstraint!
+    let customSwitcher = CustomSwitcherView(firstOption: "Nearby", secondOption: "Current Location", transitionSpeed: 0.25, startingIndex: 1, defaultColour: ditloVeryLightGrey, selectedColour: ditloDarkBlue)
     
     
     let noLocationPermissionsContainer: UIView = {
@@ -169,6 +132,10 @@ class VideoTagLocationVC: UIViewController {
         self.view.addSubview(mainContentView)
         mainContentView.anchor(withTopAnchor: videoTagLocationNavBar.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
         
+        // custom switcher
+        mainContentView.addSubview(customSwitcher)
+        customSwitcher.anchor(withTopAnchor: mainContentView.topAnchor, leadingAnchor: nil, bottomAnchor: nil, trailingAnchor: mainContentView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 12.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
+        
         // no location permissions view
         mainContentView.addSubview(noLocationPermissionsContainer)
         noLocationPermissionsContainer.anchor(withTopAnchor: nil, leadingAnchor: mainContentView.leadingAnchor, bottomAnchor: nil, trailingAnchor: mainContentView.trailingAnchor, centreXAnchor: nil, centreYAnchor: mainContentView.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
@@ -195,46 +162,6 @@ class VideoTagLocationVC: UIViewController {
     
     func handleLocationGrantedState() {
         noLocationPermissionsContainer.isHidden = true
-    }
-    
-    /*-- custom switcher --*/
-    func setupCustomSwitchGestures() {
-        let firstOptionTap = UITapGestureRecognizer(target: self, action: #selector(firstOptionTapped))
-        firstOptionTap.numberOfTapsRequired = 1
-        firstOptionLabel.addGestureRecognizer(firstOptionTap)
-        
-        let secondOptionTap = UITapGestureRecognizer(target: self, action: #selector(secondOptionTapped))
-        secondOptionTap.numberOfTapsRequired = 1
-        secondOptionLabel.addGestureRecognizer(secondOptionTap)
-    }
-    
-    @objc func firstOptionTapped() {
-        updateCustomSwitch(toIndexPosition: 0)
-    }
-    
-    @objc func secondOptionTapped() {
-        updateCustomSwitch(toIndexPosition: 1)
-    }
-    
-    func updateCustomSwitch(toIndexPosition indexPosition: Int, canPassDelegate: Bool = true) {
-        if indexPosition != currentlySelectedOptionIndex {
-            self.isUserInteractionEnabled = false
-            if canPassDelegate {
-                delegate?.customPickerDidChange(toItemIndexValue: indexPosition)
-            }
-            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseOut, animations: {
-                self.activeOptionViewWidthConstraint.constant = indexPosition == 0 ? self.firstOptionLabel.frame.width : self.secondOptionLabel.frame.width
-                self.activeOptionViewLeftAnchorConstraint.constant = indexPosition == 0 ? 0.0 : self.firstOptionLabel.frame.width
-                self.firstOptionLabel.textColor = indexPosition == 0 ? .white : ditloGrey
-                self.secondOptionLabel.textColor = indexPosition == 0 ? ditloGrey : .white
-                self.layoutIfNeeded()
-            }) { (animationDidFinish) in
-                if animationDidFinish {
-                    self.currentlySelectedOptionIndex = indexPosition
-                    self.isUserInteractionEnabled = true
-                }
-            }
-        }
     }
 }
 

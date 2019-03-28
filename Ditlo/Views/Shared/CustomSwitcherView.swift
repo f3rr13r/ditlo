@@ -8,27 +8,32 @@
 
 import UIKit
 
-protocol CustomSwiperDelegate {
+protocol CustomSwitcherDelegate {
     func customPickerValueDidChange(toIndex index: Int)
 }
 
-class CustomSwiperView: BaseView {
+class CustomSwitcherView: BaseView {
     
-    // initializer
-    convenience init(firstOption: String, secondOption: String, startingIndex: Int = 0, transitionSpeed: Double = 0.25) {
-        self.init()
-        
-        /*-- configure the views --*/
-        firstOptionLabel.text = firstOption
-        secondOptionLabel.text = secondOption
-        currentlySelectedOptionIndex = startingIndex
-    }
-    
-    // injector variables
+    // variables
     var currentlySelectedOptionIndex: Int = 0
     var transitionSpeed: Double = 0.25
-    var needsTitle: Bool = false
-    var title: String = ""
+    
+    // initializer
+    convenience init(firstOption: String, secondOption: String, transitionSpeed: Double = 0.25, startingIndex: Int = 0, defaultColour: UIColor = ditloVeryLightGrey, selectedColour: UIColor = ditloGrey) {
+        self.init()
+        
+        /*-- configure the view colours --*/
+        backgroundColor = defaultColour
+        firstOptionLabel.text = firstOption
+        secondOptionLabel.text = secondOption
+        activeOptionView.backgroundColor = selectedColour
+        currentlySelectedOptionIndex = startingIndex
+        firstOptionLabel.textColor = startingIndex == 0 ? .white : ditloGrey
+        secondOptionLabel.textColor = startingIndex == 0 ? ditloGrey : .white
+        
+        /*-- configure the swiper width constraints --*/
+        configureSwiper()
+    }
     
     // views
     private let activeOptionView: UIView = {
@@ -73,11 +78,11 @@ class CustomSwiperView: BaseView {
     }()
     
     // delegate
-    var delegate: CustomSwiperDelegate?
+    var delegate: CustomSwitcherDelegate?
     
     override func setupViews() {
         super.setupViews()
-        configureSwiper()
+        layer.cornerRadius = 12.0
         addCustomSwiperTapGestureRecognizers()
     }
     
@@ -85,8 +90,6 @@ class CustomSwiperView: BaseView {
         /*-- active option view (this is what moves) --*/
         addSubview(activeOptionView)
         activeOptionView.anchor(withTopAnchor: topAnchor, leadingAnchor: nil, bottomAnchor: bottomAnchor, trailingAnchor: nil, centreXAnchor: nil, centreYAnchor: centerYAnchor, widthAnchor: nil, heightAnchor: 24.0)
-        activeOptionViewLeftAnchorConstraint = NSLayoutConstraint(item: activeOptionView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 0.0)
-        addConstraint(activeOptionViewLeftAnchorConstraint)
         
         /*-- first option view --*/
         addSubview(firstOptionLabel)
@@ -102,7 +105,9 @@ class CustomSwiperView: BaseView {
         secondOptionLabelWidthConstraint = NSLayoutConstraint(item: secondOptionLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: secondOptionWidth)
         
         /*-- calculate the active option view width constraint --*/
-        activeOptionViewWidthConstraint = NSLayoutConstraint(item: activeOptionView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: firstOptionWidth)
+        activeOptionViewLeftAnchorConstraint = NSLayoutConstraint(item: activeOptionView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: currentlySelectedOptionIndex == 0 ? 0.0 : firstOptionWidth)
+        addConstraint(activeOptionViewLeftAnchorConstraint)
+        activeOptionViewWidthConstraint = NSLayoutConstraint(item: activeOptionView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: currentlySelectedOptionIndex == 0 ? firstOptionWidth : secondOptionWidth)
         addConstraints([secondOptionLabelWidthConstraint, activeOptionViewWidthConstraint])
     }
     
@@ -124,13 +129,13 @@ class CustomSwiperView: BaseView {
         updateCustomSwitch(toIndexPosition: 1)
     }
     
-    func updateCustomSwitch(toIndexPosition indexPosition: Int, canPassDelegate: Bool = true) {
+    func updateCustomSwitch(toIndexPosition indexPosition: Int, withAnimation needsAnimation: Bool = true, canPassDelegate: Bool = true) {
         if indexPosition != currentlySelectedOptionIndex {
             self.isUserInteractionEnabled = false
             if canPassDelegate {
                 delegate?.customPickerValueDidChange(toIndex: indexPosition)
             }
-            UIView.animate(withDuration: transitionSpeed, delay: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: needsAnimation ? transitionSpeed : 0.0, delay: 0.0, options: .curveEaseOut, animations: {
                 self.activeOptionViewWidthConstraint.constant = indexPosition == 0 ? self.firstOptionLabel.frame.width : self.secondOptionLabel.frame.width
                 self.activeOptionViewLeftAnchorConstraint.constant = indexPosition == 0 ? 0.0 : self.firstOptionLabel.frame.width
                 self.firstOptionLabel.textColor = indexPosition == 0 ? .white : ditloGrey
