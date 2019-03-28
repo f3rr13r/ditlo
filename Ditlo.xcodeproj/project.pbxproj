@@ -39,6 +39,8 @@
 		4A734B5F222044B7005EE2CC /* MyProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A734B5E222044B7005EE2CC /* MyProfileVC.swift */; };
 		4A799DF2224CF489004EFA90 /* VideoTagLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A799DF1224CF489004EFA90 /* VideoTagLocationVC.swift */; };
 		4A799DF5224CF4D4004EFA90 /* VideoTagLocationNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A799DF4224CF4D4004EFA90 /* VideoTagLocationNavBar.swift */; };
+		4A799DF7224D06C7004EFA90 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A799DF6224D06C7004EFA90 /* NotificationName.swift */; };
+		4A799DF9224D19D2004EFA90 /* CustomSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A799DF8224D19D2004EFA90 /* CustomSwitcherView.swift */; };
 		4A8086D92227FE3E0007BDEB /* HomeDitloNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */; };
 		4A8086DD2227FEFA0007BDEB /* NavigationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */; };
 		4A8086EC222837AD0007BDEB /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */; };
@@ -164,6 +166,8 @@
 		4A734B5E222044B7005EE2CC /* MyProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVC.swift; sourceTree = "<group>"; };
 		4A799DF1224CF489004EFA90 /* VideoTagLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagLocationVC.swift; sourceTree = "<group>"; };
 		4A799DF4224CF4D4004EFA90 /* VideoTagLocationNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTagLocationNavBar.swift; sourceTree = "<group>"; };
+		4A799DF6224D06C7004EFA90 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		4A799DF8224D19D2004EFA90 /* CustomSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitcherView.swift; sourceTree = "<group>"; };
 		4A8086D82227FE3E0007BDEB /* HomeDitloNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDitloNavBar.swift; sourceTree = "<group>"; };
 		4A8086DC2227FEFA0007BDEB /* NavigationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCollectionView.swift; sourceTree = "<group>"; };
 		4A8086EB222837AD0007BDEB /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -739,6 +743,7 @@
 				4AB7AB9722008A1800A2A8DD /* UILabel.swift */,
 				4A3DA292220123BB005207D8 /* Date.swift */,
 				4A8399DE2238780300CDC005 /* UITabBarController.swift */,
+				4A799DF6224D06C7004EFA90 /* NotificationName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -797,6 +802,7 @@
 				4AD0348421F0D82100FDA967 /* CustomInputView.swift */,
 				4A8086ED2228494D0007BDEB /* GradientView.swift */,
 				4A97710F2243EE8300A932DF /* NoDataView.swift */,
+				4A799DF8224D19D2004EFA90 /* CustomSwitcherView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1399,6 +1405,7 @@
 				4AF3A6052232CEB80084479F /* SectionViewActionDelegate.swift in Sources */,
 				4AD0347D21F0C7D000FDA967 /* String.swift in Sources */,
 				4AD0347B21F0C3BC00FDA967 /* RedRoundedButton.swift in Sources */,
+				4A799DF9224D19D2004EFA90 /* CustomSwitcherView.swift in Sources */,
 				4AD034CB21F2258000FDA967 /* SelectJobPositionVC.swift in Sources */,
 				4AD034B421F1F05F00FDA967 /* CustomErrorMessageModal.swift in Sources */,
 				4A57EEEC22258D8D008A96D0 /* NavigationCell.swift in Sources */,
@@ -1450,6 +1457,7 @@
 				4A5D45A922413788000AB2D0 /* EventProfileVC.swift in Sources */,
 				4A8399DD2238167100CDC005 /* CategoriesNavBar.swift in Sources */,
 				4AD0345121F0A7E400FDA967 /* UINavigationController.swift in Sources */,
+				4A799DF7224D06C7004EFA90 /* NotificationName.swift in Sources */,
 				4AD4AF6D21FE435D001F5AEF /* SelectFavouriteCategoriesVC.swift in Sources */,
 				4A3246D62246649D00E53ABF /* VideoPrivacyVC.swift in Sources */,
 				4AF55E20223AA777004AD7BC /* SubCategoryNavBar.swift in Sources */,
