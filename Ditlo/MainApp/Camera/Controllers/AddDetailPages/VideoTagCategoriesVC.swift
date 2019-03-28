@@ -19,6 +19,13 @@ class VideoTagCategoriesVC: UIViewController {
     
     let videoTagCategoriesNavBar = VideoTagCategoriesNavBar()
     
+    let maxLimitLabel: UILabel = {
+        let label = UILabel()
+        label.font = smallParagraphFont
+        label.textAlignment = .right
+        return label
+    }()
+    
     // parent category collection view
     private let parentCategoryCellId = "parentCategoryCellId"
     lazy var parentCategoryCollectionView: UICollectionView = {
@@ -49,6 +56,7 @@ class VideoTagCategoriesVC: UIViewController {
     
     let categoriesListLoadingView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white
         return view
     }()
     
@@ -68,11 +76,20 @@ class VideoTagCategoriesVC: UIViewController {
     }()
     
     // variables
+    var remainingNumber: Int = 5 {
+        didSet {
+            let maxLimitText = "\(remainingNumber) remaining"
+            maxLimitLabel.text = maxLimitText
+            maxLimitLabel.textColor = remainingNumber > 0 ? ditloLightGreen : ditloRed
+        }
+    }
+    
     var isCategoriesDataLoaded: Bool = false
     var categories: [Category] = []
     var selectedParentCategoryIndex: Int = 0
     var isSearchingCategories: Bool = false
     var searchedCategories: [ChildCategory] = []
+    var selectedCategories: [ChildCategory] = []
     var selectedCategoriesCount: Int = 0
     
 
@@ -125,17 +142,14 @@ class VideoTagCategoriesVC: UIViewController {
     
     func updateSelectedCategoriesCount() {
         selectedCategoriesCount = 0
-        for i in 0..<categories.count {
-            if categories[i].allCategoriesSelected {
-                selectedCategoriesCount += categories[i].childCategories.count - 1
-            } else {
-                for a in 0..<categories[i].childCategories.count {
-                    if categories[i].childCategories[a].isSelected && !categories[i].childCategories[a].name.contains(find: "Toggle All") {
-                        selectedCategoriesCount += 1
-                    }
+        categories.forEach { (category) in
+            category.childCategories.forEach({ (childCategory) in
+                if childCategory.isSelected {
+                    selectedCategoriesCount += 1
                 }
-            }
+            })
         }
+        
         updateCustomNavBarButtonState()
     }
     
@@ -164,9 +178,14 @@ class VideoTagCategoriesVC: UIViewController {
         parentCategoryCollectionViewTopAnchorConstraint = NSLayoutConstraint(item: parentCategoryCollectionView, attribute: .top, relatedBy: .equal, toItem: videoTagCategoriesNavBar, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         self.view.addConstraint(parentCategoryCollectionViewTopAnchorConstraint)
         
+        // max limit label - 5 to start
+        remainingNumber = 5
+        self.view.addSubview(maxLimitLabel)
+        maxLimitLabel.anchor(withTopAnchor: parentCategoryCollectionView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: nil, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 12.0, left: horizontalPadding, bottom: 0.0, right: -horizontalPadding))
+        
         // child categories collection view
         self.view.addSubview(childCategoryCollectionView)
-        childCategoryCollectionView.anchor(withTopAnchor: parentCategoryCollectionView.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 24.0, left: 0.0, bottom: 0.0, right: 0.0))
+        childCategoryCollectionView.anchor(withTopAnchor: maxLimitLabel.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 12.0, left: 0.0, bottom: 0.0, right: 0.0))
         
         // loading view
         self.view.addSubview(categoriesListLoadingView)
@@ -180,11 +199,65 @@ class VideoTagCategoriesVC: UIViewController {
         
         // dismiss keyboard view
         self.view.addSubview(dismissKeyboardView)
-        dismissKeyboardView.fillSuperview()
+        dismissKeyboardView.anchor(withTopAnchor: videoTagCategoriesNavBar.bottomAnchor, leadingAnchor: self.view.leadingAnchor, bottomAnchor: self.view.safeAreaLayoutGuide.bottomAnchor, trailingAnchor: self.view.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil)
     }
     
     func setupChildDelegates() {
         videoTagCategoriesNavBar.delegate = self
+    }
+    
+    func handleChildCategorySelection(atItemIndex itemIndex: Int, withSearchingCategoriesState isSearchingCategories: Bool) {
+        /*-- what do we need to do --*/
+        if isSearchingCategories {
+            if remainingNumber > 0 {
+                searchedCategories[itemIndex].isSelected = !searchedCategories[itemIndex].isSelected
+                if searchedCategories[itemIndex].isSelected {
+                    selectedCategories.append(searchedCategories[itemIndex])
+                    remainingNumber -= 1
+                } else {
+                    selectedCategories = selectedCategories.filter { $0.name != searchedCategories[itemIndex].name }
+                    remainingNumber += 1
+                }
+            } else {
+                if selectedCategories.contains(where: { $0.name == searchedCategories[itemIndex].name}) {
+                    searchedCategories[itemIndex].isSelected = false
+                    selectedCategories = selectedCategories.filter { $0.name != searchedCategories[itemIndex].name }
+                    remainingNumber += 1
+                }
+            }
+            updateGeneralCategoryItem(withChildCategory: searchedCategories[itemIndex])
+        } else {
+            if remainingNumber > 0 {
+                categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected = !categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected
+                if categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected {
+                    selectedCategories.append(categories[selectedParentCategoryIndex].childCategories[itemIndex])
+                    remainingNumber -= 1
+                } else {
+                    selectedCategories = selectedCategories.filter { $0.name != categories[selectedParentCategoryIndex].childCategories[itemIndex].name }
+                    remainingNumber += 1
+                }
+            } else {
+                if selectedCategories.contains(where: { $0.name == categories[selectedParentCategoryIndex].childCategories[itemIndex].name }) {
+                    categories[selectedParentCategoryIndex].childCategories[itemIndex].isSelected = false
+                    selectedCategories = selectedCategories.filter { $0.name != categories[selectedParentCategoryIndex].childCategories[itemIndex].name }
+                    remainingNumber += 1
+                }
+            }
+        }
+        
+        /*-- update the UI --*/
+        updateSelectedCategoriesCount()
+        childCategoryCollectionView.reloadData()
+    }
+    
+    func updateGeneralCategoryItem(withChildCategory childCategory: ChildCategory) {
+        for i in 0..<categories.count {
+            for a in 0..<categories[i].childCategories.count {
+                if categories[i].childCategories[a].name == childCategory.name {
+                    categories[i].childCategories[a].isSelected = childCategory.isSelected
+                }
+            }
+        }
     }
 }
 
@@ -195,48 +268,38 @@ extension VideoTagCategoriesVC: VideoTagCategoriesNavBarDelegate {
     }
     
     func searchValueChanged(withValue searchValue: String) {
-        /*-- something funky is happening in here which is causing the
-             keyboard to dismiss and reappear. needs to look into
-             what part is breaking, and how we can solve it, possibly
-             using the Dispatch.main branch from Grand Centre Dispatch --*/
-        
         searchedCategories = []
-        for i in 0..<categories.count {
-            for a in 0..<categories[i].childCategories.count {
-                if categories[i].childCategories[a].name.lowercased().contains(find: searchValue.lowercased()) {
-                    searchedCategories.append(categories[i].childCategories[a])
+        isSearchingCategories = true
+        categories.forEach { (category) in
+            category.childCategories.forEach({ (childCategory) in
+                if childCategory.name.lowercased().contains(find: searchValue.lowercased()) {
+                    searchedCategories.append(childCategory)
+                    print("adding category")
                 }
-            }
+            })
         }
         
         if searchedCategories.count > 0 {
-            noCategoriesDataView.hide()
-            self.view.isUserInteractionEnabled = false
-            UIView.animate(withDuration: 0.2, animations: {
+            self.noCategoriesDataView.hide()
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.parentCategoryCollectionViewTopAnchorConstraint.constant = -56.0
                 self.view.layoutIfNeeded()
-            }) { (animationComplete) in
-                self.view.isUserInteractionEnabled = true
-                self.isSearchingCategories = true
-            }
+            }, completion: nil)
         } else {
-            noCategoriesDataView.show(withMessage: "No categories found matching '\(searchValue)'")
+            self.noCategoriesDataView.show(withMessage: "No categories for containing '\(searchValue)'")
         }
         
         childCategoryCollectionView.reloadData()
     }
     
     func searchValueCleared() {
-        self.view.isUserInteractionEnabled = false
         noCategoriesDataView.hide()
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             self.parentCategoryCollectionViewTopAnchorConstraint.constant = 0.0
-            self.view.layoutIfNeeded()
-        }) { (animationComplete) in
             self.isSearchingCategories = false
             self.childCategoryCollectionView.reloadData()
-            self.view.isUserInteractionEnabled = true
-        }
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     func skipButtonPressed() {
@@ -313,28 +376,7 @@ extension VideoTagCategoriesVC: UICollectionViewDelegate, UICollectionViewDelega
                 childCategoryCollectionView.reloadData()
             }
         } else if collectionView == childCategoryCollectionView {
-            /*-- searching state --*/
-            if isSearchingCategories {
-                searchedCategories[indexPath.item].isSelected = !searchedCategories[indexPath.item].isSelected
-                
-                for i in 0..<categories.count {
-                    for a in 0..<categories[i].childCategories.count {
-                        if categories[i].childCategories[a].name == searchedCategories[indexPath.item].name {
-                            categories[i].childCategories[a].isSelected = searchedCategories[indexPath.item].isSelected
-                        }
-                    }
-                }
-                
-                updateSelectedCategoriesCount()
-                childCategoryCollectionView.reloadData()
-                
-            /*-- not searching state --*/
-            } else {
-                categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected = !categories[selectedParentCategoryIndex].childCategories[indexPath.item].isSelected
-                
-                updateSelectedCategoriesCount()
-                childCategoryCollectionView.reloadData()
-            }
+            handleChildCategorySelection(atItemIndex: indexPath.item, withSearchingCategoriesState: isSearchingCategories)
         }
     }
     

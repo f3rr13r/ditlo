@@ -152,7 +152,8 @@ class VideoTagCategoriesNavBar: BaseView {
         logoLabel.anchor(withTopAnchor: nil, leadingAnchor: logoImageView.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: logoImageView.centerYAnchor, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 0.0, left: 2.0, bottom: 0.0, right: -12.0))
         
         topContentRowView.addSubview(tagCategoriesTitleLabel)
-        tagCategoriesTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: nil, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: -12.0))
+        let categoriesTitleHeightAnchor = (tagCategoriesTitleLabel.text?.heightOfString(usingFont: tagCategoriesTitleLabel.font))! + 0.1
+        tagCategoriesTitleLabel.anchor(withTopAnchor: logoImageView.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: skipButton.leadingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: categoriesTitleHeightAnchor, padding: .init(top: 6.0, left: 0.0, bottom: 0.0, right: -12.0))
         
         topContentRowView.addSubview(searchInputView)
         searchInputView.anchor(withTopAnchor: tagCategoriesTitleLabel.bottomAnchor, leadingAnchor: backButton.trailingAnchor, bottomAnchor: nil, trailingAnchor: topContentRowView.trailingAnchor, centreXAnchor: nil, centreYAnchor: nil, widthAnchor: nil, heightAnchor: 36.0, padding: .init(top: 10.0, left: 0.0, bottom: 0.0, right: -horizontalPadding))
@@ -175,7 +176,6 @@ class VideoTagCategoriesNavBar: BaseView {
     }
     
     func dismissKeyboard() {
-        print("dismiss keyboard")
         if searchInputView.isFirstResponder && searchInputView.canResignFirstResponder {
             searchInputView.resignFirstResponder()
         }
